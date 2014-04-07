@@ -1,0 +1,110 @@
+# AmbDec configuration
+# Written by MakeDec-0.6.0 at Tue Sep 16 01:08:03 2008
+
+/description      Bubble - all 24 spkrs
+
+/version          1
+
+/dec/hor_order    1
+/dec/ver_order    1
+/dec/freq_bands   2
+/dec/speakers     24
+/dec/coeff_scale  fmset
+
+/opt/input_scale  fmset
+/opt/nfeff_comp   output
+/opt/delay_comp   on
+/opt/level_comp   on
+/opt/xover_freq   250
+
+/speakers/{
+#            id      dist     azim     elev     conn
+#-----------------------------------------------------------------------
+add_spkr   S01     3.353   22.500  -30.000    alsa_pcm:playback_1
+add_spkr   S02     3.353  -22.500  -30.000    alsa_pcm:playback_2
+add_spkr   S03     3.353  -67.500  -30.000    alsa_pcm:playback_3
+add_spkr   S04     3.353 -112.500  -30.000    alsa_pcm:playback_4
+add_spkr   S05     3.353 -157.500  -30.000    alsa_pcm:playback_5
+add_spkr   S06     3.353 -202.500  -30.000    alsa_pcm:playback_6
+add_spkr   S07     3.353 -247.500  -30.000    alsa_pcm:playback_7
+add_spkr   S08     3.353 -292.500  -30.000    alsa_pcm:playback_8
+add_spkr   S11     4.220   22.500    0.000    alsa_pcm:playback_9
+add_spkr   S12     4.220  -22.500    0.000    alsa_pcm:playback_10
+add_spkr   S13     3.220  -67.500    0.000    alsa_pcm:playback_11
+add_spkr   S14     3.220 -112.500    0.000    alsa_pcm:playback_12
+add_spkr   S15     3.220 -157.500    0.000    alsa_pcm:playback_13
+add_spkr   S16     3.220 -202.500    0.000    alsa_pcm:playback_14
+add_spkr   S17     3.220 -247.500    0.000    alsa_pcm:playback_15
+add_spkr   S18     3.220 -292.500    0.000    alsa_pcm:playback_16
+add_spkr   S21     3.086   22.500   30.000    alsa_pcm:playback_17
+add_spkr   S22     3.086  -22.500   30.000    alsa_pcm:playback_18
+add_spkr   S23     3.086  -67.500   30.000    alsa_pcm:playback_19
+add_spkr   S24     3.086 -112.500   30.000    alsa_pcm:playback_20
+add_spkr   S25     3.086 -157.500   30.000    alsa_pcm:playback_21
+add_spkr   S26     3.086 -202.500   30.000    alsa_pcm:playback_22
+add_spkr   S27     3.086 -247.500   30.000    alsa_pcm:playback_23
+add_spkr   S28     3.086 -292.500   30.000    alsa_pcm:playback_24
+/}
+
+/lfmatrix/{
+order_gain     1.00000  1.00000
+#            W        X        Y        Z
+#--------------------------------------------
+add_row    0.05893  0.08001  0.03314 -0.12500
+add_row    0.05893  0.08001 -0.03314 -0.12500
+add_row    0.05893  0.03314 -0.08001 -0.12500
+add_row    0.05893 -0.03314 -0.08001 -0.12500
+add_row    0.05893 -0.08001 -0.03314 -0.12500
+add_row    0.05893 -0.08001  0.03314 -0.12500
+add_row    0.05893 -0.03314  0.08001 -0.12500
+add_row    0.05893  0.03314  0.08001 -0.12500
+add_row    0.05893  0.09239  0.03827  0.00000
+add_row    0.05893  0.09239 -0.03827  0.00000
+add_row    0.05893  0.03827 -0.09239 -0.00000
+add_row    0.05893 -0.03827 -0.09239  0.00000
+add_row    0.05893 -0.09239 -0.03827  0.00000
+add_row    0.05893 -0.09239  0.03827 -0.00000
+add_row    0.05893 -0.03827  0.09239  0.00000
+add_row    0.05893  0.03827  0.09239 -0.00000
+add_row    0.05893  0.08001  0.03314  0.12500
+add_row    0.05893  0.08001 -0.03314  0.12500
+add_row    0.05893  0.03314 -0.08001  0.12500
+add_row    0.05893 -0.03314 -0.08001  0.12500
+add_row    0.05893 -0.08001 -0.03314  0.12500
+add_row    0.05893 -0.08001  0.03314  0.12500
+add_row    0.05893 -0.03314  0.08001  0.12500
+add_row    0.05893  0.03314  0.08001  0.12500
+/}
+
+/hfmatrix/{
+order_gain     3.46410  1.60000
+#            W        X        Y        Z
+#--------------------------------------------
+add_row    0.05893  0.09929  0.04113 -0.10889
+add_row    0.05893  0.09929 -0.04113 -0.10889
+add_row    0.05893  0.04140 -0.09995 -0.10819
+add_row    0.05893 -0.04140 -0.09995 -0.10819
+add_row    0.05893 -0.09995 -0.04140 -0.10819
+add_row    0.05893 -0.09995  0.04140 -0.10819
+add_row    0.05893 -0.04140  0.09995 -0.10819
+add_row    0.05893  0.04140  0.09995 -0.10819
+add_row    0.05893  0.09239  0.03827  0.00000
+add_row    0.05893  0.09239 -0.03827  0.00000
+add_row    0.05893  0.03827 -0.09239 -0.00000
+add_row    0.05893 -0.03827 -0.09239  0.00000
+add_row    0.05893 -0.09239 -0.03827  0.00000
+add_row    0.05893 -0.09239  0.03827 -0.00000
+add_row    0.05893 -0.03827  0.09239  0.00000
+add_row    0.05893  0.03827  0.09239 -0.00000
+add_row    0.05893  0.09995  0.04140  0.10819
+add_row    0.05893  0.09995 -0.04140  0.10819
+add_row    0.05893  0.04140 -0.09995  0.10819
+add_row    0.05893 -0.04140 -0.09995  0.10819
+add_row    0.05893 -0.09995 -0.04140  0.10819
+add_row    0.05893 -0.09995  0.04140  0.10819
+add_row    0.05893 -0.04140  0.09995  0.10819
+add_row    0.05893  0.04140  0.09995  0.10819
+/}
+
+
+/end
