@@ -176,13 +176,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     fprintf(fid, '%c,', input_mask(1:end-1));
     fprintf(fid, '%c);\n', input_mask(end));
     
-    [pathstr, name, ext] = fileparts(mfilename('fullpath'));
+    % faust preamble is up and over from this file
+    dirstr = fileparts(mfilename('fullpath'));
+    preamble_file = ...
+        fullfile(dirstr, '..', 'faust', 'ambi-decoder_preamble2.dsp');
+    
     if true
         fprintf(fid, '\n\n%s\n//EOF!\n', ...
-            fileread(fullfile(pathstr, 'faust', 'ambi-decoder_preamble2.dsp')));
+            fileread(preamble_file));
     else
-        fprintf(fid, '\n\n\ninclude(%s);\n',...
-            fullfile(pathstr, 'faust', 'ambi-decoder_preamble2.dsp'));
+        fprintf(fid, '\n\n\ninclude(%s);\n', preamble_file);
     end
     
     
