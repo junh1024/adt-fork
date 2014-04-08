@@ -59,6 +59,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         imag_spkrs = []; %#ok<*NASGU>
     end;
     
+    if ~exist('out_path','var')
+        out_path = [];
+    end
+    
     if ~exist('do_plots','var') || isempty(do_plots)
         do_plots = ~inOctave();
     end;
@@ -107,7 +111,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     %% shelf filter gains
     % Gamma is the per-order gains for max_rE
-    Gamma = ambi_shelf_gains(C, S, 'energy');   % 'amp','rms'
+    Gamma = ambi_shelf_gains(C, S, 'rms'); %'energy');   % 'amp','rms'
     
     %% noops from allrad code
     V = []; V2R = []; Sa = []; H=[];%#ok<NASGU> % no virtual speakers
