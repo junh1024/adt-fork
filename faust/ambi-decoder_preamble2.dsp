@@ -147,7 +147,7 @@ nfc1(r,gain) = svf1(g,d1)  // r in meters
    //  1  1
    b1 = omega/2.0;
    g1 = 1.0 + b1;
-   d1 = 0 - (2.0 * b1) / g1;
+   d1 = 0.0 - (2.0 * b1) / g1;
    g = gain/g1;
 };
 
@@ -160,10 +160,10 @@ nfc2(r,gain) = svf2(g,d1,d2)
    // 1.000000000000000   3.00000000000000   3.00000000000000
    b1 = 3.0 * r1;
    b2 = 3.0 * r2;
-   g2 = 1 + b1 + b2;
+   g2 = 1.0 + b1 + b2;
 
-   d1 = 0 - (2.0 * b1 + 4.0 * b2) / g2;  // fixed
-   d2 = 0 - (4.0 * b2) / g2;
+   d1 = 0.0 - (2.0 * b1 + 4.0 * b2) / g2;  // fixed
+   d2 = 0.0 - (4.0 * b2) / g2;
    g = gain/g2;
 };
 
@@ -177,14 +177,14 @@ nfc3(r,gain) = svf2(g,d1,d2):svf1(1.0,d3)
    // 1.000000000000000   3.677814645373914   6.459432693483369
    b1 = 3.677814645373914 * r1;
    b2 = 6.459432693483369 * r2;         
-   g2 = 1 + b1 + b2;
-   d1 = 0 - (2 * b1 + 4 * b2) / g2;  // fixed
-   d2 = 0 - (4 * b2) / g2;
+   g2 = 1.0 + b1 + b2;
+   d1 = 0.0 - (2.0 * b1 + 4.0 * b2) / g2;  // fixed
+   d2 = 0.0 - (4.0 * b2) / g2;
 
    // 1.000000000000000   2.322185354626086
    b3 = 2.322185354626086 * r1;
-   g3 = 1 + b3;
-   d3 = 0 - (2 * b3) / g3;
+   g3 = 1.0 + b3;
+   d3 = 0.0 - (2.0 * b3) / g3;
 
    g = gain/(g3*g2);
 };
@@ -199,16 +199,16 @@ nfc4(r,gain) = svf2(g,d1,d2):svf2(1.0,d3,d4)
    // 1.000000000000000   4.207578794359250  11.487800476871168
    b1 =  4.207578794359250 * r1;
    b2 = 11.487800476871168 * r2;         
-   g2 = 1 + b1 + b2;
-   d1 = 0 - (2 * b1 + 4 * b2) / g2;  // fixed
-   d2 = 0 - (4 * b2) / g2;
+   g2 = 1.0 + b1 + b2;
+   d1 = 0.0 - (2.0 * b1 + 4.0 * b2) / g2;  // fixed
+   d2 = 0.0 - (4.0 * b2) / g2;
 
    // 1.000000000000000   5.792421205640748   9.140130890277934
    b3 = 5.792421205640748 * r1;
    b4 = 9.140130890277934 * r2;         
-   g3 = 1 + b3 + b4;
-   d3 = 0 - (2 * b3 + 4 * b4) / g3;  // fixed
-   d4 = 0 - (4 * b4) / g3;
+   g3 = 1.0 + b3 + b4;
+   d3 = 0.0 - (2.0 * b3 + 4.0 * b4) / g3;  // fixed
+   d4 = 0.0 - (4.0 * b4) / g3;
    
    g = gain/(g3*g2);
 };
@@ -223,21 +223,21 @@ nfc5(r,gain) = svf2(g,d1,d2):svf2(1.0,d3,d4):svf1(1.0,d5)
    // 1.000000000000000   4.649348606363304  18.156315313452325
    b1 =  4.649348606363304 * r1;
    b2 = 18.156315313452325 * r2;         
-   g2 = 1 + b1 + b2;
-   d1 = 0 - (2 * b1 + 4 * b2) / g2;  // fixed
-   d2 = 0 - (4 * b2) / g2;
+   g2 = 1.0 + b1 + b2;
+   d1 = 0.0 - (2.0 * b1 + 4.0 * b2) / g2;  // fixed
+   d2 = 0.0 - (4.0 * b2) / g2;
 
    // 1.000000000000000   6.703912798306966  14.272480513279568
    b3 =  6.703912798306966 * r1;
    b4 = 14.272480513279568 * r2;         
-   g3 = 1 + b3 + b4;
-   d3 = 0 - (2 * b3 + 4 * b4) / g3;  // fixed
-   d4 = 0 - (4 * b4) / g3;
+   g3 = 1.0 + b3 + b4;
+   d3 = 0.0 - (2.0 * b3 + 4 * b4) / g3;  // fixed
+   d4 = 0.0 - (4.0 * b4) / g3;
 
    // 1.000000000000000   3.646738595329718
    b5 = 3.646738595329718 * r1;
-   g4 = 1 + b5;
-   d5 = 0 - (2 * b5) / g4;
+   g4 = 1.0 + b5;
+   d5 = 0.0 - (2.0 * b5) / g4;
 
    g = gain/(g4*g3*g2);
  };
@@ -305,10 +305,10 @@ deinterleave(n,span) = par(i,n,_) <: par(i,span, par(j,n,gate(%(j,span)==i)));
 
 
 // 1 band speaker chain
-speaker_chain(i) = gain(s(i,0)) <: par(i,no,gate_bus(i,co):>nfc_out(nfc_output,i,m.take(i+1,rs),1)):>_;
+speaker_chain(i) = gain(s(i,0)) <: par(i,no,gate_bus(i,co):>nfc_out(nfc_output,i,m.take(i+1,rs),1.0)):>_;
 
 // near field correction at input, nfc_input = 1
-nfc_input_bus(nc) = par(i,nc, nfc_inp(nfc_input, m.take(i+1,co), r_bar, 1));
+nfc_input_bus(nc) = par(i,nc, nfc_inp(nfc_input, m.take(i+1,co), r_bar, 1.0));
 
 // per order gains
 gamma_bus(n) = par(i,nc, gain( m.take(m.take(i+1,co)+1, gamma(n))));
@@ -351,7 +351,7 @@ decoder(3,nc,ns) = bus(nc)
 // 2 band speaker chain for vienna decoder
 speaker_chain2(i,nc) = gain(s(i,0)), gain(s(i,1))
                        :> bus(nc)
-                       <: par(i,no,gate_bus(i,co):>nfc_out(nfc_output,i,m.take(i+1,rs),1))
+                       <: par(i,no,gate_bus(i,co):>nfc_out(nfc_output,i,m.take(i+1,rs),1.0))
                        :>_ ;
 
 //process = speaker_chain2(1,16); // test
