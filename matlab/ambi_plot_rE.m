@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: ambi_plot_rE.m 26469 2014-03-20 07:16:41Z heller $
+    % $Id$
     
     %% defaults
     if ~exist('fig_title', 'var') || isempty(fig_title)
@@ -99,9 +99,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     [rV, rE, P, E] = ambi_rVrE_Y(M, [S.x, S.y, S.z]', geo.a);
     
     %% grid plots
-    ambi_plot_dir_error_grid([], rE, geo, S, V, 'rE', fig_title_sanitized);
+    ambi_plot_dir_error_grid([], rE, geo, S, V, 'rE', fig_title, fig_title_sanitized);
     
-    ambi_plot_dir_error_grid([], rV, geo, S, V, 'rV', fig_title_sanitized);
+    ambi_plot_dir_error_grid([], rV, geo, S, V, 'rV', fig_title, fig_title_sanitized);
     
     %% decoder energy per Batke
     %    nominally for matching loudness of different decoders
@@ -210,7 +210,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         xlabel('right<--- azimuth (deg) --->left');
         ylabel('elevation (deg)');
         colorbar;
-        %caxis([-6,6]);
+        caxis([-6,6]);
         title_bold18('Energy gain vs. test dir');
         %refresh;
         

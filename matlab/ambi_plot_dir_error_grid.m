@@ -1,4 +1,5 @@
-function [gca] = ambi_plot_dir_error_grid(gca, re, geo, S, V, var_name, fig_title)
+function [gca] = ambi_plot_dir_error_grid(gca, re, geo, S, V, var_name, ...
+                                          fig_title, fig_title_sanitized)
     %%  rE direction error figure
     
     if ~exist('gca', 'var') || isempty(gca)
@@ -7,14 +8,13 @@ function [gca] = ambi_plot_dir_error_grid(gca, re, geo, S, V, var_name, fig_titl
     
     if ~ inOctave()
         set(gca,'units','normalized','outerposition',[0 0 1 1]);
-        set(gca,'numbertitle','on','name',fig_title);
+        set(gca,'numbertitle','on','name',fig_title_sanitized);
         set(gca,'PaperPositionMode', 'auto');
     end
     
 %    set(gca,'XDir','reverse')
     
-    figtitle(strrep(fig_title, '_', '\_'), ...
-        'fontsize', 16, 'fontweight', 'bold');
+    figtitle(fig_title_sanitized, 'fontsize', 16, 'fontweight', 'bold');
     
     [re.az, re.el] = cart2sph(re.u(1,:), re.u(2,:), re.u(3,:));
     

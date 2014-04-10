@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: ambi_run_pinv.m 26470 2014-03-20 07:40:47Z heller $
+    % $Id$
     
     %% fill in defaults
     if ~exist('S','var')
@@ -164,7 +164,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             else
                 pinv_type = sprintf('energy_limit_%03i', round(alpha*100));
             end
-            name = [name, '_pinv_' pinv_type '_rVmax_rE' ];
+            name = [name, '_pinv_' pinv_type '_rV_max_rE' ];
     end
     
     if do_plots

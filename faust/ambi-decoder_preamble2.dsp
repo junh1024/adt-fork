@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 /*
   Author: Aaron J. Heller <heller@ai.sri.com>
-  $Id: ambi-decoder_preamble2.dsp 26474 2014-04-05 18:44:52Z heller $
+  $Id$
 */
 
 m = library("math.lib");
@@ -120,9 +120,6 @@ c = 331.3 * sqrt(1.0 + (temp_celcius/273.15)); // speed of sound m/s
 // ---- NFC filters adapted from Adriaensen's hoafilt library ----
 //  extended to fifth (and beyond) order using reverse_bessel_poly.m
 //  coefficients recalculated to work at Faust double and quad precision
-//
-//  NOTE: Fons' hoafilt implementation has a sign error in the 2nd-order 
-//        sections that is fixed here and in Ambdec.  (see //fixed)
 //
 // [1] J. Daniel, “Spatial Sound Encoding Including Near Field Effect:
 //     Introducing Distance Coding Filters and a Viable, New Ambisonic 

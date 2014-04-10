@@ -7,7 +7,7 @@ The Ambisonic Decoder Toolbox is a collection of MATLAB and GNU Octave
 functions for creating Ambisonic Decoders. Currently, it implements
 1. the AllRAD design technique [1-3],
 2. the inversion or mode-matching Appendix 1 of [14],
-3. truncated mode-matching (poletti aes FIXME).
+3. truncated mode-matching
 4. constant energy [15]
 5. linear combinations of 2 and 3
 6. Slepian function basis.
@@ -64,23 +64,15 @@ http://www.gnu.org/licenses/ for a copy).  If this is an impediment to
 your use of the code, please contact me with details of your
 application.
 
-A few functions have been downloaded from the MATLAB File Exchange and
-are covered by the BSD License:
-  rayTriangleIntersection.m	author: Jesus Mena, 2009
-  ChebyshevPoly.m		author: David Terr, Raytheon, 5-10-04
-  LegendrePoly.m		author: David Terr, Raytheon, 5-10-04
-  figtitle.m			author: Chad A. Greene, July 2013
-  ntitle.m			author: Chad A. Greene, fifth of June, 2013
-
-The spherical t-designs were downloaded from 
-  http://neilsloane.com/sphdesigns/
+Some functions and data were downloaded from other sources and covered
+by other licenses.  These are listened in the AUTHORS file.
 
 Please note that the Faust backend is capable of producing Ambisonic
 decoders that may be covered by US Patent 5,757,927 and possibly
 others. The AllRAD design technque was implemented from published
 descriptions [1,2,3], which do not assert any intellectural property
-rights.  Please consult appropriate legal council for any questions
-about your use is this Toolbox.
+rights.  Please consult your own legal council for any questions about
+your use is this Toolbox.
 
 References
 
