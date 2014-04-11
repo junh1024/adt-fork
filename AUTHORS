@@ -1,0 +1,15 @@
+Aaron J. Heller <heller@ai.sri.com>
+
+These functions were obtained form the MATLAB File Exchange and are
+covered by the BSD License:
+
+  getLebedevSphere.m		author Rob Parrish, 3/24/2010
+  rayTriangleIntersection.m	author: Jesus Mena, 2009
+  ChebyshevPoly.m		author: David Terr, Raytheon, 5-10-04
+  LegendrePoly.m		author: David Terr, Raytheon, 5-10-04
+  figtitle.m			author: Chad A. Greene, July 2013
+  ntitle.m			author: Chad A. Greene, fifth of June, 2013
+
+The spherical designs were downloaded from 
+  http://neilsloane.com/sphdesigns/
+  https://www-user.tu-chemnitz.de/~potts/workgroup/graef/computations/pointsS2?lang=en
