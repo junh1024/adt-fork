@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %}
 
 % Author: Aaron J. Heller <heller@ai.sri.com>
-% $Id: ambi_sample_Y_cart.m 26475 2014-04-07 01:59:31Z heller $
+% $Id$
 
 %%    
     [az, el] = cart2sph(Vx, Vy, Vz);

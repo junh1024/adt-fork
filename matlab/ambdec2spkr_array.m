@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %}
 
 % Author: Aaron J. Heller <heller@ai.sri.com>
-% $Id: ambdec2spkr_array.m 26441 2013-12-17 16:53:03Z heller $
+% $Id$
 
 %% argument defaults
     fid = fopen(configpath,'r');

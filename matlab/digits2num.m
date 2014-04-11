@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: digits2num.m 26285 2013-04-08 00:20:41Z heller $
+    % $Id$
     
     %% defaults
     if ~exist('b','var') || isempty(b), b = 2; end

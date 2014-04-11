@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %}
 
 % Author: Aaron J. Heller <heller@ai.sri.com>
-% $Id: AzElGrid.m 26433 2013-12-11 00:02:26Z heller $
+% $Id$
 
 %% defaults
     if nargin < 2

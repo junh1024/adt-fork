@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %}
 
 % Author: Aaron J. Heller <heller@ai.sri.com>
-% $Id: ambi_rVrE_Y.m 26437 2013-12-11 01:36:37Z heller $
+% $Id$
 
 
     g = M * test_dirs_Y;

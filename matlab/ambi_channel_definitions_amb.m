@@ -41,7 +41,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %}
     
 % Author: Aaron J. Heller <heller@ai.sri.com>
-% $Id: ambi_channel_definitions_amb.m 26441 2013-12-17 16:53:03Z heller $
+% $Id$
     
 %% set up the tables
     n = NaN;

@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: ambi_channel_definitions_fms.m 26469 2014-03-20 07:16:41Z heller $
+    % $Id$
     
     %% defaults
     if ~exist('v_order','var'), v_order=h_order; end

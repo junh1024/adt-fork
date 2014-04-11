@@ -45,7 +45,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %}
 
 % Author: Aaron J. Heller <heller@ai.sri.com>
-% $Id: ambi_SID.m 26435 2013-12-11 01:23:33Z heller $
+% $Id$
 
 %%
     m = degree;

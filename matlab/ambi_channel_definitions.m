@@ -64,7 +64,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: ambi_channel_definitions.m 26471 2014-03-20 22:16:02Z heller $
+    % $Id$
     
     %% defaults
     if ~exist('v_order', 'var') || isempty(v_order)

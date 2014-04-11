@@ -33,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: write_faust_config.m 26470 2014-03-20 07:40:47Z heller $
+    % $Id$
     
     %%
     [fid, msg] = fopen(filename,'w');

@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %}
 
 % Author: Aaron J. Heller <heller@ai.sri.com>
-% $Id: ambi_spkr_array.m 26440 2013-12-11 01:46:32Z heller $
+% $Id$
 
 %%
 

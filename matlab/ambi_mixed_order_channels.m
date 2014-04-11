@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: ambi_mixed_order_channels.m 26442 2014-01-09 23:28:41Z heller $
+    % $Id$
     
     %% defaults
     if ~exist('v_order','var') || isempty(v_order)

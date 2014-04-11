@@ -51,7 +51,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: ambi_allrad_V2R.m 26401 2013-11-26 05:25:50Z heller $
+    % $Id$
     
     %% supply defaults to make it earier to use debugger
     if nargin == 0

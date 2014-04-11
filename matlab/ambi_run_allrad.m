@@ -47,7 +47,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: ambi_run_allrad.m 26470 2014-03-20 07:40:47Z heller $
+    % $Id$
     
     %% fill in defaults
     if ~exist('S','var')

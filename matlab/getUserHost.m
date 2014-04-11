@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: getUserHost.m 26384 2013-08-08 17:49:30Z heller $
+    % $Id$
     
     %%
     if inOctave

@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: inOctave.m 26285 2013-04-08 00:20:41Z heller $
+    % $Id$
     
     %%
     persistent inOct

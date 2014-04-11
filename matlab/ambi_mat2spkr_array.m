@@ -41,7 +41,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: ambi_mat2spkr_array.m 26385 2013-08-18 20:43:22Z heller $
+    % $Id$
     
     %% argument defaults
     if ~exist('coord_code','var'), coord_code = 'AER'; end;

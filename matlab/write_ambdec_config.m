@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: write_ambdec_config.m 26445 2014-01-31 21:26:02Z heller $
+    % $Id$
     
     %%
     [fid, msg] = fopen(filename,'w');

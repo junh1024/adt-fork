@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: spherical_t_design.m 26285 2013-04-08 00:20:41Z heller $
+    % $Id$
     
     %%
     if  exist(sprintf('des_%i_%i_%i.m', dim, np, t),'file')

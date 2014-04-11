@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: ambi_sample_Y_sph.m 26469 2014-03-20 07:16:41Z heller $
+    % $Id$
     
     
     % remember this so we can reshape the result to match the inputs

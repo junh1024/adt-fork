@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: ambi_dir_diff.m 26435 2013-12-11 01:23:33Z heller $
+    % $Id$
     
     % this is faster than MATLAB's dot function (due to less arg checking)
     dot_prod = sum(uvec1 .* uvec2);
