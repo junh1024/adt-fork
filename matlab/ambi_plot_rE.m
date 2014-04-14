@@ -158,7 +158,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         % set up view
         label_cardinal_directions(1.2*max(re.rr(:)));
         
-        title_bold18('mag and dir of rE on the sphere');
+        title_bold18('mag and dir of rE');
         
         set_surface_rendering(sp231,surf_rE, shaded_renderer);
         
@@ -225,7 +225,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             E2pos .* reshape(rE.u(2,:),size(geo.y)), ...
             E2pos .* reshape(rE.u(3,:),size(geo.z)), ...
             E2);
-        %caxis([-6,6]);
+        caxis([-6,6]);
         
         label_cardinal_directions(1.2*max(E2(:)));
         
@@ -349,7 +349,7 @@ function [ ] = ambi_plot_rV( rE, E, geo, fig_title, fig_title_sanitized )
         % set up view
         label_cardinal_directions(1.2*max(re.rr(:)));
         
-        title_bold18('mag and dir of rV on the sphere');
+        title_bold18('mag and dir of rV');
         
         set_surface_rendering(sp231,surf_rE, shaded_renderer);
         
