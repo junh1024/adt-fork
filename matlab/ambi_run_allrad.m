@@ -62,6 +62,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         imag_spkrs = [0 0 -0.5];
     end;
     
+    if ~exist('out_path','var')
+        out_path = [];
+    end
+    
     if ~exist('do_plots','var') || isempty(do_plots)
         do_plots = ~inOctave();
     end;
