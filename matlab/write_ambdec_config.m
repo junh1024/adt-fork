@@ -48,10 +48,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     end
     
     %% header
-    fprintf(fid, '# AmbDec configuration\n# Written by %s %s\n', ...
-        'AmbiToolbox V3.0', datestr(now));
+    fprintf(fid, '# AmbDec configuration\n# Written by %s\n', ...
+        ambi_toolbox_version_string());
     [user, host, host_type] = getUserHost;
-    fprintf(fid, '# run by %s on %s (%s)\n\n', user, host, host_type);
+    fprintf(fid, '# run by %s on %s (%s) at %s\n\n', ...
+            user, host, host_type, datestr(now));
     
     ambdec_file_version = 3;
     
@@ -146,13 +147,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     map = perm;
     
     if iscell(C.names)
-        fprintf(fid, '# channel order: ');
+        fprintf(fid, '# input channel order: ');
         for i = 1:length(C.names(map))
             fprintf(fid, '%s ', C.names{map(i)});
         end
         fprintf(fid, '\n\n');
     else
-        fprintf(fid, '# channel order: %s\n\n', C.names(map));
+        fprintf(fid, '# input channel order: %s\n\n', C.names(map));
     end
     
     

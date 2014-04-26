@@ -45,10 +45,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     [f.dir,f.name,f.type] = fileparts(filename);
     
     fprintf(fid, '// Faust Decoder Configuration File');
-    fprintf(fid, '\n// Written by %s %s', ...
-        'AmbiToolbox V3.1', datestr(now));
+    fprintf(fid, '\n// Written by %s', ...
+        ambi_toolbox_version_string());
     [user, host, host_type] = getUserHost;
-    fprintf(fid, '\n// run by %s on %s (%s)\n', user, host, host_type);
+    fprintf(fid, '\n// run by %s on %s (%s) at %s\n', ...
+        user, host, host_type, datestr(now));
     
     write_faust_decoder_info(fid, filename, S, C, D);
     
@@ -223,30 +224,6 @@ function [] = write_faust_speaker_matrix( M, band, Msym, fid)
     
 end
 
-function [] = write_faust_decoder_info(fid, filename, S, C, D)
-    fprintf(fid, '\n//------- faust decoder information -------');
-    fprintf(fid, '\n// dsp file = %s', filename);
-    fprintf(fid, '\n// speaker array name = %s', S.name);
-    fprintf(fid, '\n// horizontal order   = %d', C.h_order);
-    fprintf(fid, '\n// vertical order     = %d', C.v_order);
-    fprintf(fid, '\n// coefficient order  = %s', D.coeff_order);
-    fprintf(fid, '\n// coefficient scale  = %s', D.coeff_scale);
-    fprintf(fid, '\n// input scale        = %s', D.input_scale);
-    fprintf(fid, '\n// mixed-order scheme = %s', C.scheme);
-    if iscell(C.names)
-        fprintf(fid, '\n// input channel order: ');
-        for i = 1:length(C.names)
-            fprintf(fid, '%s ', C.names{i});
-        end
-    else
-        fprintf(fid, '\n// input channel order: %s', C.names);
-    end
-    fprintf(fid, '\n// output speaker order: ');
-    for i = 1:length(S.id)
-        fprintf(fid, '%s ', S.id{i});
-    end
-    fprintf(fid, '\n//-------\n\n');
-end
 
 
 
