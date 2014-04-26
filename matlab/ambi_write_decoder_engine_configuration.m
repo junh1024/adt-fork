@@ -75,6 +75,11 @@ function [M,D,name,out_path] = ambi_write_decoder_engine_configuration(S,C,M_mm,
             D, S, M, C);
     end
     
+    %% mk_Ambix backend
+    if true
+        write_mk_ambix_config([out_path '.config'], D, S, M, C);
+    end
+    
     %% write coeffs into a CSV file
     if false
         csvwrite(...
