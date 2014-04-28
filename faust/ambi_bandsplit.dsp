@@ -47,4 +47,4 @@ shelf(freq,g_lf,g_hf) = xover(freq,1) : gain(g_lf),gain(g_hf):>_;
 
 //process = par(i,2,shelf(400,2,0.5));
 
-process = xover(4000,1);
+process = xover(400,1);
