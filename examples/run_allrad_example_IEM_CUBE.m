@@ -14,7 +14,8 @@ function run_allrad_example_IEM_CUBE
             ambi_mat2spkr_array(...
             ... % speaker location data starts on row 3, column 2 of file
             ... %  (note DLMREAD is zero based)
-            dlmread('LScoordinates.csv', ',', 2, 1), ...
+            ... % per Matthias Kronlachner +Y points to the right, so fix here
+            dlmread('LScoordinates.csv', ',', 2, 1) * diag([1,-1,1]), ...
             'XYZ',...            % locations are Cartesian X, Y, Z
             'MMM', ...           % in meters
             'IEM_CUBE' ...       % name of array
