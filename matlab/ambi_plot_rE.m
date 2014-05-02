@@ -169,6 +169,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         caxis([0,1]);
         xlabel('right<--- azimuth (deg) --->left');
         ylabel('elevation (deg)');
+        %axis([-180,180-4,-90,90]);  %% FIXME
         %set(sp234,'XDir','reverse')
         colorbar;
         title_bold18('magnitude of rE vs. test direction');
@@ -193,6 +194,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         caxis([0,10]);
         xlabel('right<--- azimuth (deg) --->left');
         ylabel('elevation (deg)');
+        %axis([-180,180-4,-90,90]);  %% FIXME
         colorbar;
         title_bold18('rE angular error (degrees)');
         %refresh;
@@ -209,6 +211,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         imagesc(geo.az(1,:)*180/pi, geo.el(:,1)*180/pi, E2);
         xlabel('right<--- azimuth (deg) --->left');
         ylabel('elevation (deg)');
+        %axis([-180,180-4,-90,90]);  %% FIXME
         colorbar;
         caxis([-6,6]);
         title_bold18('Energy gain vs. test dir');
@@ -360,6 +363,7 @@ function [ ] = ambi_plot_rV( rE, E, geo, fig_title, fig_title_sanitized )
         caxis([0,1]);
         xlabel('right<--- azimuth (deg) --->left');
         ylabel('elevation (deg)');
+        %axis([-180,180-4,-90,90]);  %% FIXME
         %set(sp234,'XDir','reverse')
         colorbar;
         title_bold18('magnitude of rV vs. test direction');
@@ -384,6 +388,7 @@ function [ ] = ambi_plot_rV( rE, E, geo, fig_title, fig_title_sanitized )
         caxis([0,10]);
         xlabel('right<--- azimuth (deg) --->left');
         ylabel('elevation (deg)');
+        axis([-180,180-4,-90,90]);  %% FIXME
         colorbar;
         title_bold18('rV angular error (degrees)');
         %refresh;
@@ -401,6 +406,7 @@ function [ ] = ambi_plot_rV( rE, E, geo, fig_title, fig_title_sanitized )
             imagesc(geo.az(1,:)*180/pi, geo.el(:,1)*180/pi, E2);
             xlabel('right<--- azimuth (deg) --->left');
             ylabel('elevation (deg)');
+            axis([-180,180-4,-90,90]);  %% FIXME
             colorbar;
             caxis([-6,6]);
             title_bold18('Pressure gain vs. test dir');
