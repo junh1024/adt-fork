@@ -43,7 +43,8 @@ function slepian_tests_2 (basis_only)
             elevation.min =   -15;
             elevation.max =  90;
             
-        case 5
+      case 5
+        % same as 2 but with Zotter's limits
             Spkr = SPKR_ARRAY_CCRMA_LISTENING_ROOM('dome');
             ambi_order = 3;
             alpha_min = 1/2;
