@@ -4,7 +4,7 @@ function run_dec_auro3d(r, variant)
     % see also AMBI_SPKR_ARRAY, AMBI_MAT2SPKR_ARRAY, AMBI_RUN_ALLRAD
     
     %% decoder specs
-    decoder_type = 'allrad'; % pinv | allrad
+    decoder_type = 'pinv'; %'allrad'; % pinv | allrad
     
     h_order_range = 1; %1:2;
     v_order_range = 1; %1:min(h_order,2);
@@ -61,7 +61,7 @@ function run_dec_auro3d(r, variant)
                     ambi_run_allrad(...
                         S, ...    % speaker array struct
                         [h_order,v_order], ...  % ambisonic order [h, v]
-                        [0,0,-1; -1,0,0], ... % imaginary speakers
+                        [0,0,-1], ... % imaginary speakers
                         [], ...   % pathname for output, [] = default
                         true, ... % do plots, default is true for MATLAB, false for Octave
                         mixed_order_scheme ... % mixed order scheme HV or HP
