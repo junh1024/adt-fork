@@ -109,11 +109,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         warning('t is less than min_t, t=%i, min_t=%i', t, min_t);
     end
     
-    % load spherical t design
-    %V = spherical_t_design(d,100,t);
-    V = spherical_t_design(d,240,21);
+    %% load spherical t design
     
-    % virtual to real gains matrix
+    % path to data directory
+    [f.path, f.name, f.ext] = fileparts(which(mfilename));
+    
+    % number of virtual speakers
+    switch 5200
+        case {100,1}
+            V = spherical_t_design(d,100,t);
+        case {240,2}
+            V = spherical_t_design(d,240,21);
+        case {5200,3}
+            V = load(fullfile([f.path, '/../data/Design_5200_100_random.mat']));
+    end
+    
+    %% virtual to real gains matrix
     V2R = zeros(size(Sa.x,1),size(V.x,1));
     
     % find triad and gains for each of the virtual speakers
