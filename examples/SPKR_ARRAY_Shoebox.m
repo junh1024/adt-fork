@@ -39,6 +39,21 @@ function [ S ] = SPKR_ARRAY_Shoebox()
         );
 end
 %{
+On Jun 13, 2014, at 2:40 PM, anders.vinjar@bek.no wrote:
+
+Im preparing a series of concerts with electroacoustic music in Bergen,
+Norway.  Much of the music we'll be playing comes in various
+ambisonics-codings, from 1st to 4th order.
+
+We're setting up a fixed rig in the same space to do all these concerts.
+The hall is slightly skewed 'parallellogram' with sides = ca. 5.5 x 9 m.
+
+Were setting up 24 speakers in 3 rings + zenit (9+9+5+1), but have to
+mount these in a slightly irregular shape (see below), because of the
+requirements in the concerts and of the special shape of the room.
+
+Below are the measures for the speaker-rig we've got to work with.
+
 |   N |  Azi | Dist |  Elev |
 |-----+------+------+-------|
 |  1: |    0 |  5.0 |     0 |
@@ -68,4 +83,5 @@ end
 | 23: |  -72 | 3.52 |  49.1 |
 |-----+------+------+-------|
 | 24: |    0 | 2.19 |    90 |
+
 %}
