@@ -136,7 +136,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         %% fill in normalization
         switch upper(encodingConvention)
             case {'SN3D', 'AMBIX', 'AMBIX2011'}
-                norm = 1 ./ SN3D_to_N3D(sh_l);
+                norm = 1 ./ SN3D_to_N3D(sh.l);
                 encodingConvention = 'SN3D';
                 
             case {'N3D', 'AMBIX2009'}
