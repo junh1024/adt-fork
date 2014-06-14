@@ -10,7 +10,7 @@ function slepian_tests_2 (basis_only)
     e_min = [-15 -24 -23 -21 -18 -16 -14];
     
     %%  which example?
-    switch 2
+    switch 10
         
         case 1
             Spkr = SPKR_ARRAY_BING_2013FEB12();
@@ -129,6 +129,14 @@ function slepian_tests_2 (basis_only)
             plot_ele.min = -35;
             plot_ele.max =  85;
             
+        case 10
+            Spkr = speakers_kubus;
+            ambi_order = 3;
+            alpha_min = 1/2;
+            elevation.min = -20;
+            elevation.max =  90 ;
+            plot_ele.min = -20;
+            plot_ele.max =  90;
             
     end
     
