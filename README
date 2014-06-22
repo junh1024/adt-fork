@@ -16,11 +16,18 @@ The toolbox reads loudspeaker locations from CSV files (and other
 formats, including ambdec presets) and writes out presets files for
 the AmbDec decoder [4] and decoders in Faust [5] that can be compiled
 to VST, Supercollider, Pd, MaxDSP, ...  (see http://faust.grame.fr/
-for more about Faust).  By default, decoders are written into the
-directory ../decoders.  This can be changed by editing the file
-ambi_decoders_dir.m.
+for more about Faust), and Matthias Kronlachner's ambiX plugins
+(http://www.matthiaskronlachner.com/?p=2015).  By default, decoders
+are written into the directory ../decoders.  This can be changed by
+editing the file ambi_decoders_dir.m.
 
-See the run_example_*.m files for sample invocations.
+To use the code you will need to add the ./matlab directory to your
+loadpath.  One way to do this is to cd to the matlab directory and
+execute:
+  addpath(pwd)
+the cd to the examples directory
+
+See the files ./examples/run_*.m for sample invocations.
 
 AllRAD is a hybrid ambisonic/vbap technique, especially suited to
 irregular arrays.  The basic idea is to design a decoder for a regular
