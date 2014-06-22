@@ -48,7 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     %% defaults
     if ~exist('do_plots','var') || isempty(do_plots)
-        do_plots = ~inOctave()
+        do_plots = ~inOctave();
     end
     
     %% region limit from Zotter's email.
@@ -80,7 +80,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         %C = ambi_channel_definitions(3,3,'HP','ACN','N3D');
         %C = ambi_channel_definitions(ambi_order,ambi_order,'HP','ACN','N3D');
         
-        C = ambi_channel_definitions(ambi_order,ambi_order,'HP','FUMA');
+        if ambi_order <= 3
+            C = ambi_channel_definitions(ambi_order,ambi_order,'HP','FUMA');
+        else
+            C = ambi_channel_definitions_convention(ambi_order,'AmbiX');
+        end
         %% 'regular' sampling upper hemisphere
         
         %elevation.min = -35;
