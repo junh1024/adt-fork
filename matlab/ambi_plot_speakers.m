@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     % reuse the figures for the speaker plots
     persistent gcaV gcaP
-
+    
     if ~exist('figure_title', 'var') || isempty(figure_title)
         figure_title = sprintf('Speaker Locations for %s', ...
             strrep(S.name, '_', ' '));
@@ -99,15 +99,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     %% if we have virtual speakers plot them and the barycentric coordinates
     if exist('V', 'var') && isstruct(V) && isfield(V,'xyz')
+        
+        % pretty but too busy
         if false
             quiver3(V.x, V.y, V.z, -V.x, -V.y, -V.z, 0.3, ...
                 'bo', 'MarkerFaceColor','b', 'MarkerSize',4);
         end
-        hold on
-        plot3(V.xyz(:,1)*Sr_norm,...
-            V.xyz(:,2)*Sr_norm,...
-            V.xyz(:,3)*Sr_norm,...
-            'g*');
+        
+        % no point in plotting if more than 1000 points
+        if length(V.xyz) < 1000
+            plot3(V.xyz(:,1)*Sr_norm,...
+                V.xyz(:,2)*Sr_norm,...
+                V.xyz(:,3)*Sr_norm,...
+                'g*');
+        end
     end
     
     %% make nice speaker stands the way Furse does.
