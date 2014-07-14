@@ -3,6 +3,8 @@ Aaron J. Heller <heller@ai.sri.com>
 Menlo Park, CA  US
 April 19, 2013
 
+Time-stamp: <2014-07-14 10:18:20 heller>
+
 The Ambisonic Decoder Toolbox is a collection of MATLAB and GNU Octave
 functions for creating Ambisonic Decoders. Currently, it implements
 1. the AllRAD design technique [1-3],
@@ -149,5 +151,3 @@ pp. 504–536.
 [18] A. Heller and E. M. Benjamin, "The Ambisonic Decoder Toolbox:
 Extensions for Partial-Coverage Loudspeaker Arrays," presented at the
 Linux Audio Conference 2014, Karlsruhe, 2014.  
-
-$Id: README 26443 2014-01-10 00:05:16Z heller $
