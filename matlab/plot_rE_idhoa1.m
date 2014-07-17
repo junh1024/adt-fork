@@ -8,8 +8,8 @@ function [ output_args ] = plot_rE_idhoa1( path, S )
     if ~exist('path', 'var') || isempty(path)
         %path = 'rescoeff_LR_Dome_noprune.mat';
         %path = 'CCRMA_LR_DOME.mat';
-        %dec_type = 'wbin_-10deg_nomute_3rd';
-        dec_type = 'wbin_-10deg_yesmute_3rd';
+        dec_type = 'wbin_-10deg_nomute_3rd';
+        %dec_type = 'wbin_-10deg_yesmute_3rd';
         path = fullfile('..', 'decoders', 'CCRMA', ...
             dec_type, ...
             'CCRMA_LR_DOME.mat');
