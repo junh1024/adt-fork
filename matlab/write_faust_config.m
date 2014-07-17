@@ -41,6 +41,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         error([msg ': ' filename]);
     end
     
+    %% check input_scale and coeff_scale
+    if ~strcmpi(D.coeff_scale, D.input_scale)
+        warning(['input scale (%s) not the same as coeff_scale (%s).'...
+            'Faust plugin will use coeff_scaling.'],...
+            D.input_scale, D.coeff_scale);
+        D.input_scale = D.coeff_scale;
+    end
+    %
+    
     %%
     [f.dir,f.name,f.type] = fileparts(filename);
     
@@ -141,8 +150,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %fprintf(fid, '% d);\n', rs(end));
     
     fprintf(fid, ['\n// per order gains, 0 for LF, 1 for HF.' ...
-                  '\n//  Used to implement shelf filters, or to modify velocity matrix'...
-                  '\n//  for max_rE decoding, and so forth.  See Appendix A of BLaH6.\n']);
+        '\n//  Used to implement shelf filters, or to modify velocity matrix'...
+        '\n//  for max_rE decoding, and so forth.  See Appendix A of BLaH6.\n']);
     switch D.decoder_type
         case 1    % one-band rE_max
             write_faust_vector( D.gains, 'gamma(0)', fid);
