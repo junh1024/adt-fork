@@ -7,6 +7,10 @@ function [M,D,name,out_path] = ambi_write_decoder_engine_configuration(S,C,M_mm,
         name = D.description;
     end
     
+    if ~exist('Gamma', 'var') || isempty(Gamma)
+        Gamma = ones(size(0:max(C.v_order,C.h_order)));
+    end
+    
     switch D.decoder_type
         case { 2, 3 }
             D.freq_bands = 2;
