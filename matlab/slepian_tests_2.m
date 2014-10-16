@@ -10,7 +10,7 @@ function slepian_tests_2 (basis_only)
     e_min = [-15 -24 -23 -21 -18 -16 -14];
     
     %%  which example?
-    switch 10
+    switch 5
         
         case 1
             Spkr = SPKR_ARRAY_BING_2013FEB12();
@@ -50,6 +50,9 @@ function slepian_tests_2 (basis_only)
             alpha_min = 1/2;
             elevation.min = e_min(ambi_order);
             elevation.max =  90;
+            plot_ele.min = -35;
+            plot_ele.max =  85;
+            
             
         case 6
             Spkr = ambdec2spkr_array('BingStudio-spkrs.ambdec','BingStudio-Apr2013');

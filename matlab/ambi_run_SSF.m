@@ -51,10 +51,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         do_plots = ~inOctave();
     end
     
+    if ~exist('scheme', 'var') || isempty(scheme)
+        scheme = 'HP';
+    end
+    
+    % FIXME  SSF is not mixed order right now
+    if length(ambi_order) >= 2 && ambi_order(1) ~= ambi_order(2)
+        warning('Mixed order not supported for SSF');
+    end
+    ambi_order = ambi_order([1,1]);
+    
     %% region limit from Zotter's email.
     e_min = [-15 -24 -23 -21 -18 -16 -14];
     
-    elevation.min = e_min(ambi_order);
+    elevation.min = e_min(ambi_order(2));
     elevation.max = 90;
     alpha_min = 1/2;
     basis_only = false;
@@ -71,7 +81,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         end
     end
     
-    for ambi_order = ambi_order
+    for ambi_order = ambi_order(1)
         % elevation.min = e_min(ambi_order);
         
         %% set up channels
@@ -81,7 +91,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         %C = ambi_channel_definitions(ambi_order,ambi_order,'HP','ACN','N3D');
         
         if ambi_order <= 3
-            C = ambi_channel_definitions(ambi_order,ambi_order,'HP','FUMA');
+            C = ambi_channel_definitions(ambi_order(1),ambi_order(2),...
+                scheme,'FUMA');
         else
             C = ambi_channel_definitions_convention(ambi_order,'AmbiX');
         end
@@ -117,7 +128,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         %% svd to find new basis
         
         %[ynU, ynS, ynV] = svd(yn, 'econ');
-        [ynU, ynS, ynV] = svd(yn .* sqrt(V_inR.w(:,ones(1,size(yn,1))))', 'econ');
+        [ynU, ynS, ynV] = svd(yn .* sqrt(V_inR.w(:,ones(1,size(yn,1))))', 'econ'); %#ok<ASGLU>
         %[ynU, ynS, ynV] = svd(yn .* (V_inR.w(:,ones(1,size(yn,1))))', 'econ');
         
         %[ynU,ynS] = eig(yn*(yn' .* V_uh.w(:,ones(1,size(yn,1)))));
@@ -149,7 +160,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     end
     
     %% possibly dive out here
-    if basis_only, return; end
+    if basis_only, return; end %#ok<UNRCH>
     
     %% build decoder
     
