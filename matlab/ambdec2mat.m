@@ -23,6 +23,8 @@ function [ M, D ] = ambdec2mat( configpath )
         end
         %
         switch C{1}
+            case '/description'
+                D.ambdec_description = strtrim(tline(13:end));
             case '/version'
                 D.version = str2double(C(2));
                 
