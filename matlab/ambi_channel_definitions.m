@@ -158,6 +158,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     .* N2D_to_SN2D(sh.l);
                 norm(1) = sqrt(1/2);
                 encodingConvention = 'SN2DxW';
+            case {'FUMA'}
+                % fixme check this
+                fms_norm =  [...
+                    1/sqrt(2), ...                        % W
+                    1/sqrt(3) * [1, 1, 1],...             % X Y Z
+                    1/sqrt(5), ...                        % R
+                    1/sqrt(5) * 2/sqrt(3) * [1,1,1,1],... % S T U V
+                    1/sqrt(7), ...                        % K
+                    1/sqrt(7) * sqrt(45/32) * [1,1], ...  % L M
+                    1/sqrt(7) * 3/sqrt(5) * [1, 1], ...   % N O
+                    1/sqrt(7) * sqrt(8/5) * [1, 1], ...   % P Q
+                    ];
+                %norm = fms_norm(ch);
+                norm = [];  %fixeme check this
         end
         
         %% Condon-Shortly Phase
