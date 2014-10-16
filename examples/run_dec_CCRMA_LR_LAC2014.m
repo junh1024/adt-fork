@@ -14,7 +14,7 @@ function run_dec_CCRMA_LR_LAC2014( order )
     end
     
     order = 3;
-    switch 1
+    switch 5
         case 1 % AllRAD
             ambi_run_allrad(...
                 S,...
@@ -49,6 +49,14 @@ function run_dec_CCRMA_LR_LAC2014( order )
                 [], ...         % default output
                 true, 'HV',...
                 1/2);
+        case 5 % Spherical Slepian
+            ambi_run_SSF(...
+                S, ...
+                order, ...%[order,order], ...      % ambisonic order
+                [0 0 -1], ...  % imaginary speaker at bottom of dome
+                [], ...         % default output
+                true, 'HV',...
+                []);
             
             
     end
