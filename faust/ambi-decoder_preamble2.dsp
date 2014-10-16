@@ -132,9 +132,8 @@ temp_celcius = 20;
 c = 331.3 * sqrt(1.0 + (temp_celcius/273.15)); // speed of sound m/s
 
 
-// ---- NFC filters adapted from Adriaensen's hoafilt library ----
-//  extended to fifth (and beyond) order using reverse_bessel_poly.m
-//  coefficients recalculated to work at Faust double and quad precision
+// ---- NFC filters ----
+//  see BesselPoly.m for coefficient calculations
 //
 // [1] J. Daniel, “Spatial Sound Encoding Including Near Field Effect:
 //     Introducing Distance Coding Filters and a Viable, New Ambisonic 
@@ -147,8 +146,9 @@ c = 331.3 * sqrt(1.0 + (temp_celcius/273.15)); // speed of sound m/s
 // [4] J. O. Smith, “Digital State-Variable Filters,” CCRMA, May 2013.
 
 // first and second order state variable filters see [4]
-//   FIXME FIXME this code needs to be refactored, so that the zeros are 
-//               passed in, or another API layer
+//   FIXME FIXME this code needs to be refactored, so that the roots are 
+//               passed in rather then hardwired in the code, or another 
+//               API layer, or ...
 svf1(g,d1)    = _ : *(g) :       (+      <: +~_, _ ) ~ *(d1)                   : !,_ ;
 svf2(g,d1,d2) = _ : *(g) : (((_,_,_):> _ <: +~_, _ ) ~ *(d1) : +~_, _) ~ *(d2) : !,_ ;
 
@@ -254,7 +254,7 @@ nfc5(r,gain) = svf2(g,d1,d2):svf2(1.0,d3,d4):svf1(1.0,d5)
    g = gain/(g4*g3*g2);
  };
 
-// ---- End NFC filters adapted from Adriaensen's hoafilt library ----
+// ---- End NFC filters ----
 
 nfc(0,r,g) = gain(g);
 nfc(1,r,g) = nfc1(r,g);

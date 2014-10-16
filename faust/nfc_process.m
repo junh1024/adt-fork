@@ -9,7 +9,6 @@ function [ out ] = nfc_process( o, g, d, in )
     
     switch o
         case 1  % first order NFC
-            %z(1) = 0;
             for i = 1:length(in)
                 x = g * in(i);
                 
@@ -21,8 +20,6 @@ function [ out ] = nfc_process( o, g, d, in )
             end
             
         case 2 % second order NFC
-            %z(1) = 0;
-            %z(2) = 0;
             for i = 1:length(in)
                 
                 if 0
@@ -49,7 +46,6 @@ function [ out ] = nfc_process( o, g, d, in )
             end
             
         case 3 % third order NFC
-            %z = zeros(o,1);
             for i = 1:length(in)
                 x = g * in(i);
                 %dx = d(1) * z(1) - d(2) * z(2); % wrong!
@@ -66,7 +62,6 @@ function [ out ] = nfc_process( o, g, d, in )
             end
             
         case 4 % fourth order NFC
-           %z = zeros(o,1);
             for i = 1:length(in)
                 x = g * in(i);
                 dx = d(1)*z(1) + d(2)*z(2);
@@ -83,7 +78,6 @@ function [ out ] = nfc_process( o, g, d, in )
             end
             
         case 5 % fifth order NFC
-            %z = zeros(o,1);
             for i = 1:length(in)
                 x = g * in(i);
                 dx = d(1)*z(1) + d(2)*z(2);
@@ -106,41 +100,3 @@ function [ out ] = nfc_process( o, g, d, in )
     end
 end
 
-%{
-void NF_filt1::process1 (int n, float *ip, float *op, int d)
-{
-    float x, z1;
-
-    z1 = _z1;
-    while (n--)
-    {
-	x = _g * *ip;
-        ip += d;
-        x -= _d1 * z1 + 1e-30f;
-        z1 += x;
-        *op = x;
-        op += d;
-    }
-    _z1 = z1;
-}
-
-void NF_filt2::process1 (int n, float *ip, float *op, int d)
-{
-    float x, z1, z2;
-
-    z1 = _z1;
-    z2 = _z2;
-    while (n--)
-    {
-	x = _g * *ip;
-        ip += d;
-        x -= _d1 * z1 - _d2 * z2 + 1e-30f;
-        z2 += z1;
-        z1 += x;
-        *op = x;
-        op += d;
-    }
-    _z1 = z1;
-    _z2 = z2;
-}
-%}
