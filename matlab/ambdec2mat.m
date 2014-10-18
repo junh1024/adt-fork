@@ -13,7 +13,12 @@ function [ M, D ] = ambdec2mat( configpath )
     
     while true
         tline = fgetl(fid);
-        if ~ischar(tline), break; end
+        if ~ischar(tline), break; end  % end-of-file
+        
+        tline = strtrim(tline);
+        
+        if isempty(tline), continue; end  % empty line
+        if strcmpi(tline(1), '#'), continue; end % comment
         
         if inOctave()
             % Octave is broken here , so we have to resort to sprintf
@@ -28,8 +33,16 @@ function [ M, D ] = ambdec2mat( configpath )
             case '/version'
                 D.version = str2double(C(2));
                 
+                % version 1 and 2 files have these
+            case '/dec/hor_order'
+                D.hor_order = str2double(C(2));
+            case '/dec/ver_order'
+                D.ver_order = str2double(C(2));
+                
+                % version 3 files have this
             case '/dec/chan_mask'
                 D.chan_mask = hex2dec(C(2));
+                
             case '/dec/speakers'
                 D.speakers = str2double(C(2));
             case '/dec/freq_bands'
@@ -48,6 +61,8 @@ function [ M, D ] = ambdec2mat( configpath )
             
             case '/opt/xover_freq'
                 D.xover_freq = str2double(C(2));
+                
+                % version 3 files have this
             case '/opt/xover_ratio'
                 D.xover_ratio = str2double(C(2));
                 
@@ -63,11 +78,13 @@ function [ M, D ] = ambdec2mat( configpath )
                 row_count = 0;
                 
             case 'order_gain'
-                g{matrix_count} = str2double(C(2:end));
+                g{matrix_count} = str2double(C(2:end)); %#ok<AGROW>
                 
             case 'add_row'
                 row_count = row_count + 1;
-                c{matrix_count,row_count} = str2double(C(2:end));
+                c{matrix_count,row_count} = str2double(C(2:end)); %#ok<AGROW>
+            otherwise
+                warning('unparsed line: %s', tline);
         end
     end
     fclose(fid);
@@ -75,13 +92,13 @@ function [ M, D ] = ambdec2mat( configpath )
     %% create matrices
     switch D.freq_bands
         case 1
-            M = cell2mat({c{1,:}}');
+            M = vertcat(c{1,:});
             D.gains = g{1};
             D.type = 1;
             D.decoder_type = D.type;
         case 2
-            M.lf = cell2mat({c{2,:}}');
-            M.hf = cell2mat({c{3,:}}');
+            M.lf = vertcat(c{2,:});
+            M.hf = vertcat(c{3,:});
             D.lf_gains = g{2};
             D.hf_gains = g{3};
             D.type = 3;
@@ -90,9 +107,14 @@ function [ M, D ] = ambdec2mat( configpath )
     
     switch D.version
         case {1,2}
-            error('untested');
+            warning('untested ambdec file version: %d', D.version);
+            % version 1 and 2 use FuMA order
+            D.coeff_order = 'FuMa';
+            D.xover_ratio = 0;
         case 3
+            % version 3 uses ACN order
             D.coeff_order = 'ACN';
+            % todo fill in H and V orders from channel mask
     end
     
     
