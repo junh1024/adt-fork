@@ -40,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     tline = fgetl(fid);
     ns = 0;
     while ischar(tline)
-        if inOctave()
+        if false %inOctave()
             % Octave is broken here , so we have to resort to sprintf
             C = strsplit(tline, sprintf(' \f\n\r\t\v'), true);
         else

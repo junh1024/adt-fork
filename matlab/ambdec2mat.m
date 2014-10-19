@@ -20,13 +20,16 @@ function [ M, D ] = ambdec2mat( configpath )
         if isempty(tline), continue; end  % empty line
         if strcmpi(tline(1), '#'), continue; end % comment
         
-        if inOctave()
+        if false %inOctave()
             % Octave is broken here , so we have to resort to sprintf
             C = strsplit(tline, sprintf(' \f\n\r\t\v'), true);
+            % Octave developers have broken this, see
+            %  http://octave.1599824.n4.nabble.com/Re-new-strsplit-function-td4651374.html
         else
             C = strsplit(tline);
         end
         %
+        %fprintf('...%s...\n', C{1});
         switch C{1}
             case '/description'
                 D.ambdec_description = strtrim(tline(13:end));
@@ -83,6 +86,13 @@ function [ M, D ] = ambdec2mat( configpath )
             case 'add_row'
                 row_count = row_count + 1;
                 c{matrix_count,row_count} = str2double(C(2:end)); %#ok<AGROW>
+            
+            case 'add_spkr'
+                % this is handled by ambdec2spkr_array
+                
+            case '\end'
+                break;
+                
             otherwise
                 warning('unparsed line: %s', tline);
         end
