@@ -9,7 +9,7 @@ Menlo Park, CA US
 
 April 19, 2013
 
-Time-stamp: <2014-07-14 10:18:20 heller>
+Time-stamp: <2014-11-04 10:18:20 heller>
 
 The Ambisonic Decoder Toolbox is a collection of MATLAB and GNU Octave
 functions for creating Ambisonic Decoders. Currently, it implements
