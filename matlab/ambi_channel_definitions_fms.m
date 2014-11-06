@@ -61,7 +61,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     % these produce FMS weighting from N3D
  
     norm =  [...
-        1/sqrt(2), ...                        % W
+        1/sqrt(1) * 1/sqrt(2), ...            % W
         1/sqrt(3) * [1, 1, 1],...             % X Y Z
         1/sqrt(5), ...                        % R
         1/sqrt(5) * 2/sqrt(3) * [1,1,1,1],... % S T U V
