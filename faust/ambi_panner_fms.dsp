@@ -13,12 +13,12 @@ fms_panner(N) = _,test_sig : select2(test_ui) <: gain( par(i,(N+1)^2,fms(i)) )
 with {
 
   // button for pink noise test signal
-  test_ui = button("test");
+  test_ui = button("[99]test");
   test_sig = pink(music.noise):gain(1/4);
 
   // azimuth and elevation panners, smooth to "dezipper" controls.
-  az = (math.PI/180.0)*hslider("azi", 0, -180, 180, 1) : dezipper;
-  el = (math.PI/180.0)*hslider("ele", 0,  -90,  90, 1) : dezipper;
+  az = (math.PI/180.0)*hslider("[1]azi[unit:deg]", 0, -180, 180, 1) : dezipper;
+  el = (math.PI/180.0)*hslider("[2]ele[unit:deg]", 0,  -90,  90, 1) : dezipper;
 
   // spherical to cartesian
   r = 1;
