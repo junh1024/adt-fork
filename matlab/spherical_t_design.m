@@ -27,7 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     %%
     if  exist(sprintf('des_%i_%i_%i.m', dim, np, t),'file')
-        d = des_3_240_21();
+        fh = str2func(sprintf('des_%i_%i_%i', dim, np, t));
+        d = fh(); %des_3_240_21();
     else
         path = fullfile('sphdesigns',...
             sprintf('dim%i', dim),...
