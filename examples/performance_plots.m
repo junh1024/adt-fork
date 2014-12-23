@@ -8,8 +8,7 @@ function [ ] = performance_plots( )
     
     S = SPKR_ARRAY_CCRMA_LISTENING_ROOM();
     
-    gamma = D.hf_gains(C.sh_l+1);
-    MM = M.hf * diag(gamma);
+    MM = ambi_apply_gamma(M.hf, D.hf_gains, C);
     
     ambi_plot_rE(S,[],MM,C);
 end
