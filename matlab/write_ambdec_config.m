@@ -187,8 +187,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         D.xover_freq,...
         D.xover_ratio);
     
-    %'n3d', 'none', 'off', 'off', 300, 0.0);
-    
     %% speakers
     fprintf(fid, ...
         ['/speakers/{\n',...
@@ -197,12 +195,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         ]);
     % check number of speakers, Ambdec requires at least four
     if length(S.id) < 4
-        warning('Ambdec requires at last four speakers, nsprk=%i',length(S.id));
+        warning('Ambdec requires at least four speakers, nsprk=%i',length(S.id));
     end
     %
     for i = 1:length(S.id)
-        fprintf(fid, 'add_spkr \t%s\t% f\t% f\t% f\n', ...
+        % Note: format control '% f' produces a leading space when the
+        % quantity is positive.
+        fprintf(fid, 'add_spkr \t%s\t% f\t% f\t% f', ...
             S.id{i}, S.r(i), S.az(i)*180/pi, S.el(i)*180/pi );
+        % is there a connection for this speaker?
+        if isfield(S, 'conns') && length(S.conns) >= i 
+            fprintf(fid, '\t%s\n', S.conns{i});
+        else
+            fprintf(fid, '\n');
+        end
     end
     fprintf(fid, '/}\n\n');
     

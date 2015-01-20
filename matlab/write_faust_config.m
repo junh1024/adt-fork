@@ -42,7 +42,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     end
     
     %% check input_scale and coeff_scale
-    if ~strcmpi(D.coeff_scale, D.input_scale)
+    if strcmpi(D.coeff_scale, 'N3D') && ...
+            any(strcmpi(D.input_scale, {'fmset', 'FUMA'}))
+        % scaling to convert signal set from FUMA to N3D
+        norm =  1./[...
+            1/sqrt(1) * 1/sqrt(2), ...            % W
+            1/sqrt(3) * [1, 1, 1],...             % X Y Z
+            1/sqrt(5), ...                        % R
+            1/sqrt(5) * 2/sqrt(3) * [1,1,1,1],... % S T U V
+            1/sqrt(7), ...                        % K
+            1/sqrt(7) * sqrt(45/32) * [1,1], ...  % L M
+            1/sqrt(7) * 3/sqrt(5) * [1, 1], ...   % N O
+            1/sqrt(7) * sqrt(8/5) * [1, 1], ...   % P Q
+            ];
+        norm = norm(C.channels);
+        
+        M = M * diag(norm);
+        
+    elseif ~strcmpi(D.coeff_scale, D.input_scale)
         warning(['input scale (%s) not the same as coeff_scale (%s).'...
             'Faust plugin will use coeff_scaling.'],...
             D.input_scale, D.coeff_scale);
@@ -232,7 +249,4 @@ function [] = write_faust_speaker_matrix( M, band, Msym, fid)
     end
     
 end
-
-
-
 

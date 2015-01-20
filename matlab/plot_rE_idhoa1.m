@@ -41,7 +41,9 @@ function [ output_args ] = plot_rE_idhoa1( path, S )
     
     D.decoder_type = 1;
     D.input_scale = 'fuma';
-    D.description = [S.name, '-', dec_type];
+    %D.description = [S.name, '-', dec_type];
+    [fp.dir,fp.name,fp.ext] = fileparts(path);
+    D.description = fp.name;
     
     ambi_write_decoder_engine_configuration(S,C,M,D);
 end
