@@ -21,14 +21,18 @@ functions for creating Ambisonic Decoders. Currently, it implements
 5. linear combinations of 2 and 3
 6. Slepian function basis (EPAD) [16,17]
 
-The toolbox reads loudspeaker locations from CSV files (and other
-formats, including ambdec presets) and writes out presets files for
-the AmbDec decoder [4] and decoders in Faust [5] that can be compiled
-to VST, Supercollider, Pd, MaxDSP, ...  (see http://faust.grame.fr/
-for more about Faust), and Matthias Kronlachner's ambiX plugins
+The toolbox takes loudspeaker locations as input and writes out
+decoders in Faust [5] that can be compiled to VST, Supercollider, Pd,
+MaxDSP, ...  (see http://faust.grame.fr/ for more about Faust), as
+well as presets for Ambdec and Matthias Kronlachner's ambiX plugins
 (http://www.matthiaskronlachner.com/?p=2015).  By default, decoders
 are written into the directory ../decoders.  This can be changed by
 editing the file ambi_decoders_dir.m.
+
+Speaker locations and names can be specified in CSV files, although
+most users specify them directly in a top-level 'run-' file, using the
+toolbox function ambi_spkr_array().  There is
+also code to read them from AmbDec presets.
 
 To use the code you will need to add the ./matlab directory to your
 loadpath.  One way to do this is to cd to the matlab directory and
@@ -40,7 +44,8 @@ then cd to the examples directory
 
 > cd ../examples
 
-See the files examples/run_*.m for sample invocations.
+See the files examples/run_*.m for sample invocations.  Most users
+create a 'run' file for their specific speaker 
 
 AllRAD is a hybrid ambisonic/vbap technique, especially suited to
 irregular arrays.  The basic idea is to design a decoder for a regular
@@ -48,13 +53,12 @@ array with many loudspeakers, in this case a 240 virtual loudspeaker
 spherical design [6,7], and then map those signals to the real array
 using Pulkki's VBAP. [8,9]
 
-Fernando Lopez-Lezcano (at CCRMA) used it recently to generate a
-decoder for a 24-loudspeaker tilted dome at Stanford's new Bing
-Concert Hall, with very good results.  We've also done some listening
-tests, comparing the decoder for CCRMA's Listening Room described in
-our LAC2012 paper to an AllRAD decoder with favorable results.  The
-former took about 2 hours of optimizer time, and the latter a few
-seconds.
+Fernando Lopez-Lezcano (at CCRMA) has used it to generate a decoder
+for a 24-loudspeaker tilted dome at Stanford's new Bing Concert Hall,
+with very good results.  We've also done some listening tests,
+comparing the decoder for CCRMA's Listening Room described in our
+LAC2012 paper to an AllRAD decoder with favorable results.  The former
+took about 2 hours of optimizer time, and the latter a few seconds.
 
 *Note:* There are still a few loose ends -- the performance plots (rE,
 directional error) work well only in MATLAB, and there needs to be bit
