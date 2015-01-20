@@ -17,7 +17,7 @@ function [D, Spkr, M, C] = ambi_run_SSF( Spkr, ambi_order, imag_spkrs, ...
     %       alpha = 0 -> mode matching
     %       alpha = 1 -> even energy
     %       0 < alpha < 1 -> blend of two
-    %  elevation_range (for SSF only)
+    %  elevation_range in degrees (for SSF only)
     %       if empty, assume a hemispherical dome and use min from Zotter's calculations
     %       if a scalar it is the minimum elevation
     %       if a two-element vector, [min, max]
@@ -94,25 +94,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         end
     end
     
-    for ambi_order = ambi_order(1)
+    %for ambi_order = ambi_order(1)
+    if true
         % elevation.min = e_min(ambi_order);
         
         %% set up channels
-        %clear all
-        %close all
-        %C = ambi_channel_definitions(3,3,'HP','ACN','N3D');
-        %C = ambi_channel_definitions(ambi_order,ambi_order,'HP','ACN','N3D');
-        
         if ambi_order <= 3
             C = ambi_channel_definitions(ambi_order(1),ambi_order(2),...
                 scheme,'FUMA');
         else
             C = ambi_channel_definitions_convention(ambi_order,'AmbiX');
         end
-        %% 'regular' sampling upper hemisphere
         
-        %elevation.min = -35;
-        %elevation.max =  90;
+        %% 'regular' sampling upper hemisphere
         
         switch 2
             case 1
@@ -134,8 +128,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         V_inR.w  = V.w(inR);
         
         %% project on to SH basis
-        %  use transpose to be consitent with papers
         
+        % note: have to use N3D here, then fix later.
+        %  use transpose to be consitent with papers
         yn = ambi_sample_Y_sph(V_inR.az(:), V_inR.el(:),C, true)';
         
         %% svd to find new basis
@@ -180,14 +175,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Yspkr = ambi_sample_Y_sph(Spkr.az(:), Spkr.el(:),C, true)';
     
     Ysl = U' * Yspkr;
-    
-    [YslU, YslS, YslV] = svd(Ysl,'econ');
-    
+ 
     %M = pinv(Ysl) * U';
+    % do pseudoinverse by hand, so we can control the largest singular
+    % value used
+    [YslU, YslS, YslV] = svd(Ysl,'econ');
     invYslS = YslS;
     invYslS(YslS > 1e-2) = 1 ./ YslS(YslS > 1e-2);
     %invYslS = eye(size(invYslS));
     
+    % fix normalization here with diagonal matrix
     M =  YslV * invYslS * YslU' * U' * diag(1 ./ C.norm);
     
     Gamma = ambi_shelf_gains(C, Spkr, 'amp');
@@ -212,7 +209,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %  2 for 2 band, shelf filters, one matrix
     %  3 for 2 band, vienna type, two matricies
     D.decoder_type = 1;
-    D.input_scale = 'fuma';
+    
+    D.input_scale = C.encoding_convention;
     
     ambi_write_decoder_engine_configuration(Spkr,C,M,D,Gamma); %,name,out_path);
     
