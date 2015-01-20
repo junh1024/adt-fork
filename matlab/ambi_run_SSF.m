@@ -1,5 +1,5 @@
 function [D, Spkr, M, C] = ambi_run_SSF( Spkr, ambi_order, imag_spkrs, ...
-        out_path, do_plots, scheme, alpha) %#ok<*INUSL>
+        out_path, do_plots, scheme, alpha, elevation_range) %#ok<*INUSL>
 
      %AMBI_RUN_SSF() ambisonic decoder using spherical slepian functions
     %
@@ -13,10 +13,14 @@ function [D, Spkr, M, C] = ambi_run_SSF( Spkr, ambi_order, imag_spkrs, ...
     %  out_path is path for AmbDec config file
     %  do_plots is a boolen that controls the performance plots, default is
     %     to produce plots in MATLAB, no plots in Octave.
-    %  alpha is blend coefficient for inversion variants
+    %  alpha is blend coefficient for inversion variants (pinv only)
     %       alpha = 0 -> mode matching
     %       alpha = 1 -> even energy
     %       0 < alpha < 1 -> blend of two
+    %  elevation_range (for SSF only)
+    %       if empty, assume a hemispherical dome and use min from Zotter's calculations
+    %       if a scalar it is the minimum elevation
+    %       if a two-element vector, [min, max]
     %
     % [1] M. A. Gerzon, "Practical Perphony: The Reproduction of Full-Sphere
     %     Sound," Preprints of the 65th AES Convention,  no. 1571, p. 11, 1980.
@@ -61,11 +65,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     end
     ambi_order = ambi_order([1,1]);
     
-    %% region limit from Zotter's email.
+    %% region limits by ambisonic order from Zotter's email.
     e_min = [-15 -24 -23 -21 -18 -16 -14];
     
-    elevation.min = e_min(ambi_order(2));
-    elevation.max = 90;
+    if ~exist('elevation_range', 'var') || isempty(elevation_range)
+        elevation.min = e_min(ambi_order(2));
+        elevation.max = 90;
+    elseif isscalar(elevation_range)
+        elevation.min = elevation_range;
+        elevation.max = 90;
+    else
+        elevation.min = elevation_range(1);
+        elevation.max = elevation_range(2);
+    end
+    
     alpha_min = 1/2;
     basis_only = false;
     
