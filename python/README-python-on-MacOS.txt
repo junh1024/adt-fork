@@ -9,3 +9,10 @@ I'm using the Anaconda distribution of Python.
    conda install mayavi
 
 4.
+
+
+Getting Mayavi to work from within Spyder:
+
+http://stackoverflow.com/questions/12442938/mayavi-doesnt-run-from-within-spyder-complains-about-valueerror-api-qstring
+
+According to this and this the error can be fixed by activating the Ignore API change errors (sip.setapi) checkbox in Preferences > Console > External Modules.
