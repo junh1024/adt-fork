@@ -34,8 +34,8 @@ c = constants.mach   # speed of sound in m/s at 15 C, 1 atm
 default_tolerance = 1e-16
 
 
-#@jit(complex128(double, double, double, double, double, int32))
-#@jit(nopython=True)
+# jit does not speed this up (why?)
+# @jit(complex128(double, double, double, double, double, int32))
 def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
              tolerance=default_tolerance, iter_max=1000):
     """
@@ -131,6 +131,7 @@ def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
     Qr1 = zr * (1-zr)               # of the spherical Hankel function;
     Qa2 = za                        # "2" means back twice in time, "1" once
     Qa1 = za * (1-za)
+
     P2 = 1.0                        # P is the Legendre polynomial
     P1 = x                          # "2" means back twice in time, "1" once
 
@@ -147,7 +148,7 @@ def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
     oldratio = 1.0
     newratio = abs(term)/abs(Sum)
 
-    m = 2.0                           # Index for the term in the Sum
+    m = 2                           # Index for the term in the Sum
     while oldratio > tolerance or newratio > tolerance:
         if m > iter_max:
             print("""
@@ -267,7 +268,7 @@ def ray_hrir(theta, source_range=None, radius=c/(2*pi),
     if pad < 1:
         raise ValueError('pad must be >=1')
 
-    N = pad * 256                 # Compute H for N/2 positive frequencies
+    N = pad * 256                  # Compute H for N/2 positive frequencies
     t_obs = pad * (4*pi*radius)/c  # Duration of results, twice around the head
 
     fs = N/t_obs                    # Sampling frequency
@@ -297,7 +298,7 @@ def ray_hrir(theta, source_range=None, radius=c/(2*pi),
     # center impulse and advance
     h = np.roll(h, N//2 + int(np.round(advance*fs)))
 
-    # filter IR to make better looking graphs
+    # low-pass filter IR to make better looking graphs
     if False:
         h = sps.lfilter((0.25, 0.5, 0.25), 1.0, h)
 
@@ -333,13 +334,15 @@ def head_to_sphere_radius(half_width, half_height, half_length):
     pp. 472–479, Jun. 2001.
     """
 
+    # cofficients are in paragraph following eqn 3
     w1 = 0.51
     w2 = 0.019
     w3 = 0.18
-    b = 32   # mm.
+    b = 32.0   # mm.
 
     a_e = w1 * half_width + w2 * half_height, w3 * half_length + b
 
+    # return value in meters
     return a_e/1000
 
 
@@ -350,11 +353,14 @@ def abs_sqr(x):
 def random_incidence_response(source_range=2.0, sphere_radius=0.085,
                               low=20, high=20e3):
 
-    def g(th):
-        return np.sin(th) * abs_sqr(ray_hrtf(f, th, source_range, sphere_radius))
-
     freqs = np.logspace(np.log10(low), np.log10(high), 50)
 
+    # normally we'd integrate over the full sphere, but ray_hrtf is radially
+    # symmetric around theta=0, so we just integrate from in zenith angle
+    def g(th):
+        """ integrand """
+        return np.sin(th) * abs_sqr(ray_hrtf(f, th, source_range, sphere_radius))
+    # quad returns a tuple (result, abserr), use [0] to get result
     r = np.array([quad(g, 0, pi)[0] for f in freqs])/2
 
     # plot gain in dB vs freq
@@ -385,7 +391,7 @@ def write_hrirs(hf_cutoff=np.Inf):
         wav.write(path, fs, np.float32(h/4.0))
 
 
-def waterfall_test(thetas=np.linspace(0, 2*pi, 33),
+def waterfall_plot(thetas=np.linspace(0, 2*pi, 33),
                    source_range=2.0,
                    radius=0.085,
                    hf_cutoff=np.Inf,
@@ -395,11 +401,10 @@ def waterfall_test(thetas=np.linspace(0, 2*pi, 33),
         h, t, fs = ray_hrir(theta, source_range, radius,
                             pad=4, advance=0,
                             hf_cutoff=hf_cutoff)
-        if True:
+        if False:
             print(' execution time = %f sec\n' %
                   (timeit.default_timer() - start_time))
         peak_norm = peak_norm or np.max(abs(h))
-        # print(peak_norm)
 
         plt.plot(t*1000, 2*h/peak_norm + theta)
         plt.xlabel("time (ms)")
@@ -409,13 +414,14 @@ def waterfall_test(thetas=np.linspace(0, 2*pi, 33),
         # print("sample rate = %f" % fs)
 
 
-def itd_test(thetas=np.linspace(0, 2*pi, 65),
+def itd_plot(thetas=np.linspace(0, 2*pi, 65),
              source_range=2.0, radius=0.085,
              hf_cutoff=300):
     h_max = np.zeros(np.shape(thetas), dtype=np.integer)
     for i in range(len(thetas)):
         h, t, fs = ray_hrir(thetas[i], source_range, radius, pad=4,
                             advance=0, hf_cutoff=hf_cutoff)
+        # find peak of h
         h_max[i] = np.argmax(abs(h))
 
     times = t[h_max]
@@ -447,9 +453,9 @@ def unit_test(choice=None):
     if choice in {1}:
         write_hrirs()
     elif choice in {2}:
-        waterfall_test()
+        waterfall_plot()
     elif choice in {3}:
-        itd_test()
+        itd_plot()
     elif choice in {4}:
         random_incidence_response()
     else:
