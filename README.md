@@ -31,8 +31,8 @@ editing the file ambi_decoders_dir.m.
 
 Speaker locations and names can be specified in CSV files, although
 most users specify them directly in a top-level 'run-' file, using the
-toolbox function ambi_spkr_array().  There is
-also code to read them from AmbDec presets.
+toolbox function ambi_spkr_array().  There is also code to read them
+from AmbDec presets.
 
 To use the code you will need to add the ./matlab directory to your
 loadpath.  One way to do this is to cd to the matlab directory and
