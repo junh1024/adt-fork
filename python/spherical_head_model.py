@@ -31,7 +31,9 @@ from scipy.integrate import quad
 import matplotlib.pyplot as plt
 
 c = constants.mach   # speed of sound in m/s at 15 C, 1 atm
-default_tolerance = 1e-16
+default_tolerance = 1e-10
+
+DEBUG = False
 
 
 # jit does not speed this up (why?)
@@ -169,6 +171,8 @@ def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
         term = ((2*m+1) * P * Qr) / ((m + 1) * za * Qa - Qa1)
         Sum += term
 
+        if np.isnan(term):
+            print(m, P, Qr, Qa, Qa1)
         # get ready for next iteration
         m += 1
         Qr2, Qr1 = Qr1, Qr
@@ -180,8 +184,8 @@ def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
     if orig_freq > 0:
         H = np.conj(H)                   # convert to EE style
 
-    if False:
-        print(freq, mu, m, newratio, oldratio)
+    if np.isnan(H) :
+        print(freq, theta, mu, m, newratio, oldratio)
     return H
 
 
@@ -352,6 +356,10 @@ def abs_sqr(x):
 
 def random_incidence_response(source_range=2.0, sphere_radius=0.085,
                               low=20, high=20e3):
+    """
+    Compute and plot the random incidence response for the spherical head
+    model.
+    """
 
     freqs = np.logspace(np.log10(low), np.log10(high), 50)
 
@@ -372,6 +380,50 @@ def random_incidence_response(source_range=2.0, sphere_radius=0.085,
                (source_range, sphere_radius*1e3)))
     plt.xlabel('Frequency (Hz)')
     plt.ylabel('Gain (dB)')
+
+    return r, freqs
+
+
+def frequency_response(source_range=2.0, sphere_radius=0.085,
+                       low=20, high=20e3):
+
+    freqs = np.logspace(np.log10(low), np.log10(high), 200)
+
+    thetas = np.linspace(0, pi, 7)
+    r = np.array([[np.abs(ray_hrtf(f, th, source_range, sphere_radius))
+                  for f in freqs]
+                  for th in thetas])
+    plt.semilogx(freqs, 20*np.log10(np.transpose(r)))
+    plt.xlim(low, high)
+    plt.legend(thetas * 180/pi, loc='upper left', bbox_to_anchor = (1.02,1))
+    plt.grid(True, which='both')
+    plt.title("Frequency response for different incident angles\n" +
+              ("range=%4.1f m, radius=%4.1f mm" %
+               (source_range, sphere_radius*1e3)))
+    plt.xlabel('Frequency (Hz)')
+    plt.ylabel('Gain (dB)')
+
+    return r, freqs, thetas
+
+
+def polar_response(source_range=2.0, sphere_radius=0.085,
+                   low=20, high=20e3):
+
+    freqs = np.logspace(np.log10(low), np.log10(high), 7)
+
+    thetas = np.linspace(0, 2*pi, 180)
+    r = np.array([[np.abs(ray_hrtf(f, th, source_range, sphere_radius))
+                  for f in freqs]
+                  for th in thetas])
+
+    plt.polar(thetas, r)
+    plt.legend(["%6.0f" % f for f in freqs], title="Freq. (Hz)", loc=(1.2, 0))
+    plt.title("Polar response for different frequencies\n" +
+              ("range=%4.1f m, radius=%4.1f mm" %
+               (source_range, sphere_radius*1e3)))
+    plt.show()
+
+    #return r, freqs, thetas
 
 
 def write_hrirs(hf_cutoff=np.Inf):
