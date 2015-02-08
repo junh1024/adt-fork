@@ -96,6 +96,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Ac = '   ';
     for iCol = 1:numel(coord_code)
         switch coord_code(iCol)
+            % cartesian
             case {'x', 'X'}  % Cartesian X
                 AA(:,1) = A(:,iCol);
                 Ac(1)='x';
@@ -105,6 +106,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             case {'z', 'Z'}  % Cartesian Z
                 AA(:,3) = A(:,iCol);
                 Ac(3)='z';
+                
+                % cartesian but with negated direction
+                % FIXME: I don't like this, but its the only thing I can
+                %        think of that doesn't potentially break other
+                %        stuff.
+            case {'u', 'U'}  % Cartesian X
+                AA(:,1) = -A(:,iCol);
+                Ac(1)='x';
+            case {'v', 'V'}  % Cartesian Y
+                AA(:,2) = -A(:,iCol);
+                Ac(2)='y';
+            case {'w', 'W'}  % Cartesian Z
+                AA(:,3) = -A(:,iCol);
+                Ac(3)='z';
+                
+                % spherical
             case {'a', 'A'}  % spherical or cylindrical azimuth
                 AA(:,1) = A(:,iCol);
                 Ac(1) = 'a';
