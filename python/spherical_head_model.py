@@ -184,7 +184,7 @@ def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
     if orig_freq > 0:
         H = np.conj(H)                   # convert to EE style
 
-    if np.isnan(H) :
+    if np.isnan(H):
         print(freq, theta, mu, m, newratio, oldratio)
     return H
 
@@ -355,13 +355,13 @@ def abs_sqr(x):
 
 
 def random_incidence_response(source_range=2.0, sphere_radius=0.085,
-                              low=20, high=20e3):
+                              low=20, high=20e3, nfreqs=50, plot=True):
     """
     Compute and plot the random incidence response for the spherical head
     model.
     """
 
-    freqs = np.logspace(np.log10(low), np.log10(high), 50)
+    freqs = np.logspace(np.log10(low), np.log10(high), nfreqs)
 
     # normally we'd integrate over the full sphere, but ray_hrtf is radially
     # symmetric around theta=0, so we just integrate from in zenith angle
@@ -372,30 +372,40 @@ def random_incidence_response(source_range=2.0, sphere_radius=0.085,
     r = np.array([quad(g, 0, pi)[0] for f in freqs])/2
 
     # plot gain in dB vs freq
-    plt.semilogx(freqs, 10*np.log10(r))  # 10 because it is energy (p^2)
-    plt.xlim(low, high)
-    plt.grid(True, which='both')
-    plt.title("Random incidence response of spherical head model\n" +
-              ("range=%4.1f m, radius=%4.1f mm" %
-               (source_range, sphere_radius*1e3)))
-    plt.xlabel('Frequency (Hz)')
-    plt.ylabel('Gain (dB)')
+    if plot:
+        plt.semilogx(freqs, 10*np.log10(r))  # 10 because it is energy (p^2)
+        plt.xlim(low, high)
+        plt.grid(True, which='both')
+        plt.title("Random incidence response of spherical head model\n" +
+                  ("range=%4.1f m, radius=%4.1f mm" %
+                   (source_range, sphere_radius*1e3)))
+        plt.xlabel('Frequency (Hz)')
+        plt.ylabel('Gain (dB)')
 
     return r, freqs
 
 
 def frequency_response(source_range=2.0, sphere_radius=0.085,
-                       low=20, high=20e3):
+                       low=20, high=20e3, nfreqs=200):
 
-    freqs = np.logspace(np.log10(low), np.log10(high), 200)
+    freqs = np.logspace(np.log10(low), np.log10(high), nfreqs)
 
     thetas = np.linspace(0, pi, 7)
+
     r = np.array([[np.abs(ray_hrtf(f, th, source_range, sphere_radius))
                   for f in freqs]
                   for th in thetas])
+
+    (r_diff, f_diff) = random_incidence_response(source_range, sphere_radius,
+                                                 low, high, nfreqs, plot=False)
+    print(np.shape(r_diff), np.shape(freqs))
+
+    fig = plt.figure(figsize=(8,5), dpi=300)
     plt.semilogx(freqs, 20*np.log10(np.transpose(r)))
+    plt.semilogx(freqs, 10*np.log10(r_diff), lw=2, ls='--')
+
     plt.xlim(low, high)
-    plt.legend(thetas * 180/pi, loc='upper left', bbox_to_anchor = (1.02,1))
+    plt.legend(thetas * 180/pi, loc='upper left', bbox_to_anchor=(1.02, 1))
     plt.grid(True, which='both')
     plt.title("Frequency response for different incident angles\n" +
               ("range=%4.1f m, radius=%4.1f mm" %
