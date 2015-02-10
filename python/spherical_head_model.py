@@ -8,7 +8,7 @@ Created on Sat Jan 24 10:10:59 2015
 from __future__ import print_function
 from __future__ import division
 
-from numba import jit, double, complex128, int32
+#from numba import jit, double, complex128, int32
 import timeit   # study optimizations
 
 import numpy as np
@@ -31,15 +31,16 @@ from scipy.integrate import quad
 import matplotlib.pyplot as plt
 
 c = constants.mach   # speed of sound in m/s at 15 C, 1 atm
-default_tolerance = 1e-10
 
-DEBUG = False
+_default_tolerance = 1e-10
+
+_DEBUG = False
 
 
 # jit does not speed this up (why?)
 # @jit(complex128(double, double, double, double, double, int32))
 def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
-             tolerance=default_tolerance, iter_max=1000):
+             tolerance=_default_tolerance, iter_max=1000):
     """
     ray_hrtf(freq, theta, [source_range, radius tolerance, iter_max])
 
@@ -168,11 +169,19 @@ def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
         Qa = -(2*m-1)*za*Qa1+Qa2
         P = ((2*m-1)*x*P1-(m-1)*P2)/m
 
-        term = ((2*m+1) * P * Qr) / ((m + 1) * za * Qa - Qa1)
+        term_num = (2*m+1) * P * Qr
+        term_dem = (m + 1) * za * Qa - Qa1
+
+        # term = ((2*m+1) * P * Qr) / ((m + 1) * za * Qa - Qa1)
+        #term = term_num/term_dem
+        term = cdivs(term_num, term_dem)
+        if np.isnan(term):
+            print("term is nan")
+            print(m, term, P, Qr, za, Qa, Qa1, term_num, term_dem)
+            break
+
         Sum += term
 
-        if np.isnan(term):
-            print(m, P, Qr, Qa, Qa1)
         # get ready for next iteration
         m += 1
         Qr2, Qr1 = Qr1, Qr
@@ -184,10 +193,29 @@ def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
     if orig_freq > 0:
         H = np.conj(H)                   # convert to EE style
 
-    if np.isnan(H):
-        print(freq, theta, mu, m, newratio, oldratio)
     return H
 
+
+def cdiv_wtf():
+    return ((-2.30904201149e+151-1.97596452689e+151j)
+            /
+            (-6.85281000623e+156-3.74972445929e+156j))
+
+def cdiv(a, b):
+    f = 1/np.abs(b)
+    a = a*f
+    b = b*f
+
+    q = a/b
+    if np.isnan(q):
+        print("normalzed NAN!!", q, f, a, b)
+    return q
+
+def cdivs(a,b):
+    q = a/b
+    if np.isnan(q):
+        print("simple NAN!!", q, a, b)
+    return q
 
 def ray_hrir(theta, source_range=None, radius=c/(2*pi),
              pad=1,
@@ -377,16 +405,16 @@ def random_incidence_response(source_range=2.0, sphere_radius=0.085,
         plt.xlim(low, high)
         plt.grid(True, which='both')
         plt.title("Random incidence response of spherical head model\n" +
-                  ("range=%4.1f m, radius=%4.1f mm" %
+                  ("range=%4g m, radius=%4g mm" %
                    (source_range, sphere_radius*1e3)))
         plt.xlabel('Frequency (Hz)')
         plt.ylabel('Gain (dB)')
-
-    return r, freqs
+    else:
+        return r, freqs
 
 
 def frequency_response(source_range=2.0, sphere_radius=0.085,
-                       low=20, high=20e3, nfreqs=200):
+                       low=20, high=20e3, nfreqs=200, plot=True):
 
     freqs = np.logspace(np.log10(low), np.log10(high), nfreqs)
 
@@ -398,22 +426,23 @@ def frequency_response(source_range=2.0, sphere_radius=0.085,
 
     (r_diff, f_diff) = random_incidence_response(source_range, sphere_radius,
                                                  low, high, nfreqs, plot=False)
-    print(np.shape(r_diff), np.shape(freqs))
+    #print(np.shape(r_diff), np.shape(freqs))
 
-    fig = plt.figure(figsize=(8,5), dpi=300)
-    plt.semilogx(freqs, 20*np.log10(np.transpose(r)))
-    plt.semilogx(freqs, 10*np.log10(r_diff), lw=2, ls='--')
+    if plot:
+        fig = plt.figure(figsize=(8,5), dpi=300)
+        plt.semilogx(freqs, 20*np.log10(np.transpose(r)))
+        plt.semilogx(freqs, 10*np.log10(r_diff), lw=2, ls='--')
 
-    plt.xlim(low, high)
-    plt.legend(thetas * 180/pi, loc='upper left', bbox_to_anchor=(1.02, 1))
-    plt.grid(True, which='both')
-    plt.title("Frequency response for different incident angles\n" +
-              ("range=%4.1f m, radius=%4.1f mm" %
-               (source_range, sphere_radius*1e3)))
-    plt.xlabel('Frequency (Hz)')
-    plt.ylabel('Gain (dB)')
-
-    return r, freqs, thetas
+        plt.xlim(low, high)
+        plt.legend(thetas * 180/pi, loc='upper left', bbox_to_anchor=(1.02, 1))
+        plt.grid(True, which='both')
+        plt.title("Frequency response for different incident angles\n" +
+                  ("range=%4g m, radius=%4g mm" %
+                   (source_range, sphere_radius*1e3)))
+        plt.xlabel('Frequency (Hz)')
+        plt.ylabel('Gain (dB)')
+    else:
+        return r, freqs, thetas, r_diff
 
 
 def polar_response(source_range=2.0, sphere_radius=0.085,
@@ -429,7 +458,7 @@ def polar_response(source_range=2.0, sphere_radius=0.085,
     plt.polar(thetas, r)
     plt.legend(["%6.0f" % f for f in freqs], title="Freq. (Hz)", loc=(1.2, 0))
     plt.title("Polar response for different frequencies\n" +
-              ("range=%4.1f m, radius=%4.1f mm" %
+              ("range=%4g m, radius=%4g mm" %
                (source_range, sphere_radius*1e3)))
     plt.show()
 
@@ -463,16 +492,16 @@ def waterfall_plot(thetas=np.linspace(0, 2*pi, 33),
         h, t, fs = ray_hrir(theta, source_range, radius,
                             pad=4, advance=0,
                             hf_cutoff=hf_cutoff)
-        if False:
+        if _DEBUG:
             print(' execution time = %f sec\n' %
                   (timeit.default_timer() - start_time))
         peak_norm = peak_norm or np.max(abs(h))
 
         plt.plot(t*1000, 2*h/peak_norm + theta)
         plt.xlabel("time (ms)")
-        plt.title(("HRIR, range = %4.1f meters, " % source_range) +
-                  ("radius=%4.1f mm, " % (radius*1000)) +
-                  ("HF cut=%4.0f Hz" % hf_cutoff))
+        plt.title(("HRIR, range = %4g meters, " % source_range) +
+                  ("radius=%4g mm, " % (radius*1000)) +
+                  ("HF cut=%5g Hz" % hf_cutoff))
         # print("sample rate = %f" % fs)
 
 
@@ -490,7 +519,7 @@ def itd_plot(thetas=np.linspace(0, 2*pi, 65),
     plt.plot(thetas*180/pi, (times-times[0])*1e6)
     plt.xlabel("theta (deg)")
     plt.ylabel("ITD (usec)")
-    plt.title("ITD (radius=%4.1f mm, range=%4.1f m, HF cut=%4.0f Hz)"
+    plt.title("ITD (radius=%4g mm, range=%4g m, HF cut=%5g Hz)"
               % (radius*1e3, source_range, hf_cutoff))
 
     # return h_max, t[h_max], thetas
@@ -511,6 +540,8 @@ def unit_test(choice=None):
                        "2. waterfall\n" +
                        "3. itd_plot\n" +
                        "4. random incidence response\n" +
+                       "5. free and diffuse response\n" +
+                       "6. complex div test\n" +
                        " Selection: ")
     if choice in {1}:
         write_hrirs()
@@ -520,8 +551,12 @@ def unit_test(choice=None):
         itd_plot()
     elif choice in {4}:
         random_incidence_response()
+    elif choice in {5}:
+        frequency_response(source_range=2)
+    elif choice in {6}:
+        frequency_response(source_range=1.3*0.085)
     else:
-        print("choice should be in {1,2,3} no %s\n!" % choice)
+        print("choice should be in [1..6] not %s\n!" % choice)
 
 
 if __name__ == '__main__':
