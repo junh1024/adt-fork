@@ -5,7 +5,7 @@ function run_dec_Boardroom
     %%
     mixed_order_scheme = 'HV';  % HV or HP
     
-    S = SPKR_ARRAY_Boardroom(29);
+    S = SPKR_ARRAY_Boardroom(32);
     
     imaginary_speakers = [0,0,-1];  % one at bottom, used for AllRAD only
     

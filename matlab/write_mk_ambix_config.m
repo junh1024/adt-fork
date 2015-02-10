@@ -13,6 +13,7 @@ function [] = write_mk_ambix_config( filename, D, S, M, C )
         end
     end
     
+    fprintf('Writing Ambix config to: %s\n', filename);
     %%
     % On Apr 10, 2014, at 9:01 PM, Matthias Kronlachner <m.kronlachner@gmail.com> wrote:
     %
@@ -86,6 +87,8 @@ function [] = write_mk_ambix_config( filename, D, S, M, C )
             fprintf(fid, '#END\n');
         case 2
             fprintf(fid, '\n#DECODERMATRIX\n');
+            % M.hf does not have gamma applied at this point, so we must do
+            % it here.  (FIXME: why is this?)
             write_rows(fid, ambi_apply_gamma(M.hf,D.hf_gains, C), map);
             fprintf(fid, '#END\n');
         otherwise
