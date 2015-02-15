@@ -126,6 +126,11 @@ def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
     x = np.cos(theta)
     mu = (2*pi * freq * radius) / c
     rho = source_range / radius
+
+    if rho < 2:
+        rho = np.longdouble(rho)
+        mu = np.longdouble(mu)
+
     zr = 1 / (1j*mu*rho)
     za = 1 / (1j*mu)
 
@@ -174,7 +179,8 @@ def ray_hrtf(freq, theta, source_range=None, radius=c/(2*pi),
 
         # term = ((2*m+1) * P * Qr) / ((m + 1) * za * Qa - Qa1)
         #term = term_num/term_dem
-        term = cdivs(term_num, term_dem)
+        # print(m, term, P, Qr, za, Qa, Qa1, term_num, term_dem)
+        term = cdiv(term_num, term_dem)
         if np.isnan(term):
             print("term is nan")
             print(m, term, P, Qr, za, Qa, Qa1, term_num, term_dem)
