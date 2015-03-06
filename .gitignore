@@ -1,5 +1,8 @@
 .DS_Store
 *.pyc
 *.vst
+*.dll
+*.so
+*.zip
 *~
 decoders/*
