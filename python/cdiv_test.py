@@ -46,6 +46,8 @@ actually running?  Looks like Harris is unconvinced.
 
   http://mail.scipy.org/pipermail/numpy-discussion/2006-February/018775.html
 
+Lots of variants here:
+  http://forge.scilab.org/index.php/p/compdiv/
 
 NPY_NO_EXPORT void
 @TYPE@_divide(char **args, npy_intp *dimensions, npy_intp *steps, void *NPY_UNUSED(func))
