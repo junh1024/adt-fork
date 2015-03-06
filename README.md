@@ -7,10 +7,6 @@ Aaron J. Heller <heller@ai.sri.com>
 Menlo Park, CA US
 -----------------
 
-April 19, 2013
-
-Time-stamp: <2014-11-04 10:18:20 heller>
-
 The Ambisonic Decoder Toolbox is a collection of MATLAB and GNU Octave
 functions for creating Ambisonic Decoders. Currently, it implements
 
@@ -21,6 +17,8 @@ functions for creating Ambisonic Decoders. Currently, it implements
 5. linear combinations of 2 and 3
 6. Slepian function basis (EPAD) [16,17]
 
+Details of these are described in our LAC2014 paper [20].
+
 The toolbox takes loudspeaker locations as input and writes out
 decoders in Faust [5] that can be compiled to VST, Supercollider, Pd,
 MaxDSP, ...  (see http://faust.grame.fr/ for more about Faust), as
@@ -28,6 +26,20 @@ well as presets for Ambdec and Matthias Kronlachner's ambiX plugins
 (http://www.matthiaskronlachner.com/?p=2015).  By default, decoders
 are written into the directory ../decoders.  This can be changed by
 editing the file ambi_decoders_dir.m.
+
+The Faust implementation supports near-field correction (NFC) up to
+fifth-order (this can be extended, if needed), level and distance
+compensation, and phase-matched bandsplitting filters for two-band
+decoding.  Three decoder topologies are supported, single band,
+single-matrix with shelf filters, and dual-matrix (Vienna).  In the
+two-band decoders, the crossover frequency and low/high frequency
+balance can be adjusted interactively.
+
+The toolbox supports all of the normalization and channel order 
+conventions that we are aware of at the time of this writing. [10,11]. 
+Two mixed-order schemes are supported, the one used in AMB files [12]
+and the newer one proposed by Chris Travis [13] that is used in the 
+preset files that are included with AmbDec. 
 
 Speaker locations and names can be specified in CSV files, although
 most users specify them directly in a top-level 'run-' file, using the
@@ -47,29 +59,10 @@ then cd to the examples directory
 See the files examples/run_*.m for sample invocations.  Most users
 create a 'run' file for their specific speaker 
 
-AllRAD is a hybrid ambisonic/vbap technique, especially suited to
-irregular arrays.  The basic idea is to design a decoder for a regular
-array with many loudspeakers, in this case a 240 virtual loudspeaker
-spherical design [6,7], and then map those signals to the real array
-using Pulkki's VBAP. [8,9]
-
-Fernando Lopez-Lezcano (at CCRMA) has used it to generate a decoder
-for a 24-loudspeaker tilted dome at Stanford's new Bing Concert Hall,
-with very good results.  We've also done some listening tests,
-comparing the decoder for CCRMA's Listening Room described in our
-LAC2012 paper to an AllRAD decoder with favorable results.  The former
-took about 2 hours of optimizer time, and the latter a few seconds.
-
 *Note:* There are still a few loose ends -- the performance plots (rE,
 directional error) work well only in MATLAB, and there needs to be bit
 of sanity checking on the loudspeaker locations, but it is quite
 usable.
-
-The toolbox supports all of the normalization and channel order
-conventions that I am aware of at the time of this writing. [10,11].
-Two mixed-order schemes are supported, the one used in AMB files [12]
-and the newer one proposed by Chris Travis [13] that is used in the
-preset files that are included with AmbDec.
 
 The file format for AmbDec presets was reversed engineered from the
 AmbDec source code and included presets.  If you encounter
@@ -83,6 +76,9 @@ The ./doc directory has our Linux Audio Conference 2014 paper [20] and
 slides from the talk given May 3, 2014.  Video of the talk is archived
 [here](http://lac.linuxaudio.org/2014/video.php?id=12).
 
+We are happy to answer any technical questions about the toolbox or
+Ambisonics in general.
+
 Licenses
 
 The code in the Toolbox that has been written by me is licensed under
@@ -93,15 +89,17 @@ combined with other code without restriction. If these terms are an
 impediment to your use of the toolbox, please contact me with details of
 your application.
 
-Some functions and data were downloaded from other sources and covered
-by other licenses.  These are listened in the AUTHORS file.
+Some functions and data were downloaded from other sources and are
+covered by other licenses.  These are listened in the AUTHORS file.
 
 Please note that the Faust backend is capable of producing Ambisonic
 decoders that may be covered by US Patent 5,757,927 and possibly
 others. The AllRAD and EPAD design techniques were implemented from
 published descriptions [1,2,3,16], which do not assert any
 intellectural property rights.  Please consult your own legal council
-for any questions about your use is this Toolbox.
+with any intellectual property questions about your use is this
+Toolbox.
+
 
 References
 
