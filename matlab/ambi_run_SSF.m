@@ -55,21 +55,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         do_plots = ~inOctave();
     end
     
-    if ~exist('scheme', 'var') || isempty(scheme)
-        scheme = 'HP';
-    end
+    if ~exist('scheme', 'var'), scheme = []; end 
     
     % FIXME  SSF is not mixed order right now
-    if length(ambi_order) >= 2 && ambi_order(1) ~= ambi_order(2)
-        warning('Mixed order not supported for SSF');
-    end
-    ambi_order = ambi_order([1,1]);
+    % if length(ambi_order) >= 2 && ambi_order(1) ~= ambi_order(2)
+    %     warning('Mixed order not supported for SSF');
+    % end
+    % ambi_order = ambi_order([1,1]);
     
+    %% build up description and filename in 'name'
+    name = Spkr.name;
+    
+    %% set up channel definitions
+    
+    C = ambi_channel_definitions_convention( ...
+        ambi_order, [], scheme);
+    
+    switch C.scheme
+        case 'HV'
+            name = [name, sprintf('_%dh%dv', C.h_order, C.v_order)];
+        case 'HP'
+            name = [name, sprintf('_%dh%dp', C.h_order, C.v_order)];
+    end
+    
+
     %% region limits by ambisonic order from Zotter's email.
     e_min = [-15 -24 -23 -21 -18 -16 -14];
     
     if ~exist('elevation_range', 'var') || isempty(elevation_range)
-        elevation.min = e_min(ambi_order(2));
+        elevation.min = e_min(C.v_order);
         elevation.max = 90;
     elseif isscalar(elevation_range)
         elevation.min = elevation_range;
@@ -87,7 +101,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     
     %%
-   if do_plots
+    if do_plots
         if numel(unique(Spkr.z)) > 1
             H = convhulln([Spkr.x,Spkr.y,Spkr.z]);
             ambi_plot_speakers(Spkr,H);
@@ -96,15 +110,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     %for ambi_order = ambi_order(1)
     if true
-        % elevation.min = e_min(ambi_order);
-        
-        %% set up channels
-        if ambi_order <= 3
-            C = ambi_channel_definitions(ambi_order(1),ambi_order(2),...
-                scheme,'FUMA');
-        else
-            C = ambi_channel_definitions_convention(ambi_order,'AmbiX');
-        end
+ 
         
         %% 'regular' sampling upper hemisphere
         
