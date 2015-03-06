@@ -164,10 +164,18 @@ Acustica 98.1, pp. 37–47.
 "Spatiospectral Concentration on a Sphere," in: SIAM review 48.3,
 pp. 504–536.
 
-[18] D. Arteaga, “An Ambisonics Decoder for Irregular 3-D Loudspeaker Arrays,” presented at the AES 134th Convention, Rome, 2013.
+[18] D. Arteaga, “An Ambisonics Decoder for Irregular 3-D Loudspeaker
+Arrays,” presented at the AES 134th Convention, Rome, 2013.
 
-[19] D. Scaini and D. Arteaga, “Decoding of High Order Ambisonics to Irregular Periphonic Loudspeaker Arrays,” presented at the AES 55th Conference, Helsinki, 2014, pp. 1–8.
+[19] D. Scaini and D. Arteaga, “Decoding of High Order Ambisonics to
+Irregular Periphonic Loudspeaker Arrays,” presented at the AES 55th
+Conference, Helsinki, 2014, pp. 1–8.
 
 [20] A. Heller and E. M. Benjamin, "The Ambisonic Decoder Toolbox:
 Extensions for Partial-Coverage Loudspeaker Arrays," presented at the
 Linux Audio Conference 2014, Karlsruhe, 2014.
+
+[21] M. Graf and D. Potts, “On the computation of spherical designs by
+a new optimization approach based on fast spherical Fourier
+transforms,” Numerische Mathematik, vol. 119, no. 4, pp. 699–724,
+Dec. 2011.

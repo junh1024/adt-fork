@@ -65,7 +65,7 @@ function [ret] = interactive
     
     defaults = ret;
     
-    % need -V6 so Octave will write in a format MATLAB, and vice versa.
+    % need -V6 so Octave will write in a format MATLAB can read, and vice versa.
     save('defaults.mat', varname(defaults), '-V6');
 end
 
