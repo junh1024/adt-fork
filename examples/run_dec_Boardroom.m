@@ -1,11 +1,12 @@
 function run_dec_Boardroom
     
-    % how to find the ADT's matlab files
+    %% how to find the ADT's matlab files
+    %   update for your installation
     addpath('/Users/heller/Documents/adt/matlab');
     %%
     mixed_order_scheme = 'HV';  % HV or HP
     
-    S = SPKR_ARRAY_Boardroom(32);
+    S = SPKR_ARRAY_Boardroom(31);
     
     imaginary_speakers = [0,0,-1];  % one at bottom, used for AllRAD only
     
@@ -15,7 +16,7 @@ function run_dec_Boardroom
     
     %decoder_type = 'ssf';
     %decoder_type = 'allrad';
-    decoder_type = 'pinv';
+    %decoder_type = 'pinv';
     
     % alpha can range from 0 to 1, used for PINV only
     %alpha = 0;  % mode matching
