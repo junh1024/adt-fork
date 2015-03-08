@@ -1,7 +1,7 @@
 function [D, Spkr, M, C] = ambi_run_SSF( Spkr, ambi_order, imag_spkrs, ...
         out_path, do_plots, scheme, alpha, elevation_range) %#ok<*INUSL>
 
-     %AMBI_RUN_SSF() ambisonic decoder using spherical slepian functions
+    %AMBI_RUN_SSF() ambisonic decoder using spherical slepian functions
     %
     %  S is speaker array struct
     %  ambi_order is ambisonic order, scalar is full periphonic array,

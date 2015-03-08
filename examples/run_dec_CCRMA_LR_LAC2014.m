@@ -5,16 +5,24 @@ function run_dec_CCRMA_LR_LAC2014( order )
         order = 3;
     end
     
+    if ~exist('ambi_run_pinv', 'file')
+        addpath(fullfile('..', 'matlab'));
+        if ~exist('ambi_run_pinv', 'file')
+            error('Cannot find ADT MATLAB scripts');
+        end
+    end
+    
     %%
-    switch 2 % 'dome'
+    switch 3 % 'dome'
         case 1
             S = SPKR_ARRAY_CCRMA_LISTENING_ROOM('full');
         case 2
             S = SPKR_ARRAY_CCRMA_LISTENING_ROOM('dome');
+        case 3
+            S = ambdec2spkr_array('BingStudio-spkrs.ambdec', 'BingStudio');
     end
     
-    order = 3;
-    switch 7
+    switch 8
         case 1 % AllRAD
             ambi_run_allrad(...
                 S,...
@@ -73,8 +81,18 @@ function run_dec_CCRMA_LR_LAC2014( order )
                 [4,4], ...%[order,order], ...      % ambisonic order
                 [0 0 -1], ...  % imaginary speaker at bottom of dome
                 [], ...         % default output
-                true, 'HV',...
+                [], 'HV',...
                 []);
+        case 8 % Spherical Slepian
+            ambi_run_SSF(...
+                S, ...
+                [4,3], ...%[order,order], ...      % ambisonic order
+                [0 0 -1], ...  % imaginary speaker at bottom of dome
+                [], ...         % default output
+                true, 'HV',...
+                [], ...
+                [-23,90]...
+           );
             
             
     end
