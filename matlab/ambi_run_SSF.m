@@ -64,21 +64,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     % ambi_order = ambi_order([1,1]);
     
     %% build up description and filename in 'name'
-    name = Spkr.name;
+    %name = Spkr.name;
     
     %% set up channel definitions
     
     C = ambi_channel_definitions_convention( ...
         ambi_order, [], scheme);
     
-    switch C.scheme
-        case 'HV'
-            name = [name, sprintf('_%dh%dv', C.h_order, C.v_order)];
-        case 'HP'
-            name = [name, sprintf('_%dh%dp', C.h_order, C.v_order)];
-    end
-    
-
     %% region limits by ambisonic order from Zotter's email.
     e_min = [-15 -24 -23 -21 -18 -16 -14];
     
@@ -148,13 +140,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         %[ynU,ynS] = eig(yn*(yn' .* V_uh.w(:,ones(1,size(yn,1)))));
         
         ynS = diag(ynS);
+        display(ynS);
         
         %[ynS,perm] = sort(ynS, 'descend');
         %ynU = ynU(:,perm);
         %ynS = sqrt(ynS);
         
-        % singular values are the square roots of the eigenvalues of the gram
-        % matrix
+        % The non-zero elements of S (non-zero singular values) are the 
+        % square roots of the non-zero eigenvalues of M?M or MM?.
         lambda = ynS.^2;
         lambda_max = max(lambda);
         
