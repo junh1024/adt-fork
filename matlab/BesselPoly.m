@@ -10,13 +10,18 @@ function [ p, f, r ] = BesselPoly( mm )
     % r the array of the roots
     %
     % See Sec 3.2 of [1] for how this applies to Ambisonic near-field
-    % compensation (NFC) filters.
+    % compensation (NFC) filters.  
+    % NOTE:
+    % There is an error in Daniel's definition of the reverse Bessel
+    % polynomial in Eqn 24, resulting in roots that are twice the
+    % correct value.  The definitino here is correct.  This has been
+    % confirmed with Daniel.
     % 
     %
     % [1]   J. Daniel, "Spatial Sound Encoding Including Near Field Effect: 
     %       Introducing Distance Coding Filters and a Viable, New Ambisonic
     %       Format," Preprints 23rd AES International Conference, 
-    %       Copenhagen, 2003.
+    %       Copenhagen, 2003. (see note above)
     %    
     % [2]   Weisstein, Eric W. "Bessel Polynomial." From MathWorld--A 
     %       Wolfram Web Resource. 
