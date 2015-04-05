@@ -1,4 +1,4 @@
-declare name		"RotateZ";
+declare name		"Rotate";
 declare version 	"1.0";
 declare author 		"AmbisonicDecoderToolkit";
 declare license 	"BSD 3-Clause License";
@@ -43,8 +43,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 m = library("math.lib");
 
-process = roty:rotz;
+// this order corresponds to moving a forward source at along lines of
+// constant longitude (meridians) and latitude (parallels), and
+// finally a twist: roll, pitch, yaw
 
+process = rotx : roty : rotz;
+
+// yaw
 rotz(W,X,Y,Z) = W,
                 cos(th)*X - sin(th)*Y,
                 sin(th)*X + cos(th)*Y,
@@ -53,12 +58,22 @@ rotz(W,X,Y,Z) = W,
   th = hslider("Z Rotation [unit:Degrees]", 0, -180, 180, 1) : deg2rad : dezipper;
 };
 
+// pitch
 roty(W,X,Y,Z) = W,
                 cos(th)*X - sin(th)*Z,
 		Y,
                 sin(th)*X + cos(th)*Z
  with {
   th = vslider("Y Rotation [unit:Degrees]", 0, -90, 90, 1) : deg2rad : dezipper;
+};
+
+// roll
+rotx(W,X,Y,Z) = W,
+		X,
+                cos(th)*Y - sin(th)*Z,
+                sin(th)*Y + cos(th)*Z
+ with {
+  th = vslider("X Rotation [unit:Degrees]", 0, -180, 180, 1) : deg2rad : dezipper;
 };
 
 deg2rad = *(m.PI/180.0);
