@@ -2,10 +2,10 @@ declare name		"Rotate";
 declare version 	"1.0";
 declare author 		"AmbisonicDecoderToolkit";
 declare license 	"BSD 3-Clause License";
-declare copyright	"(c) Aaron J. Heller 2013";
+declare copyright	"(c) Aaron J. Heller 2015";
 
 /*
-Copyright (c) 2013, Aaron J. Heller
+Copyright (c) 2015, Aaron J. Heller
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
