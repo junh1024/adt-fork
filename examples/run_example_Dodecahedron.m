@@ -1,6 +1,9 @@
-function run_example_Doedecahedron
+function run_example_Dodecahedron
     % allrad example specifying speaker locations inline
-    % specifics are for Paul Powers' octagon-cube configuration
+    % specifics are for regular dodecahedron as defined at
+    %    http://en.wikipedia.org/wiki/Dodecahedron#Cartesian_coordinates
+    %     the puts a pentagon at the top and bottom, which is not
+    %     optimal for ambisonic use
     %
     % see also AMBI_MAT2SPKR_ARRAY, AMBI_RUN_ALLRAD
     
