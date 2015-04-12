@@ -1,6 +1,8 @@
 function run_dec_Fliege49
     % allrad example specifying speaker locations inline
-    % specifics are for Paul Powers' octagon-cube configuration
+    % 49 Fliege points on sphere, see:
+    %  http://www.personal.soton.ac.uk/jf1w07/nodes/nodes.html
+    %  the columns are X, Y, Z and weight (weight is ignored)
     %
     % see also AMBI_MAT2SPKR_ARRAY, AMBI_RUN_ALLRAD_AMBDEC
     

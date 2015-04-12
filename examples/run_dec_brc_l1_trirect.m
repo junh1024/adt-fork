@@ -1,6 +1,6 @@
 function run_dec_brc_l1_trirect
     % allrad example specifying speaker locations inline
-    % specifics are for Paul Powers' octagon-cube configuration
+    % specifics are for BRC installation in NYC
     %
     % see also AMBI_MAT2SPKR_ARRAY, AMBI_RUN_ALLRAD
     

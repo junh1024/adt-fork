@@ -1,6 +1,6 @@
 function run_dec_pubw
     % allrad example specifying speaker locations inline
-    % specifics are for Paul Powers' octagon-cube configuration
+    % specifics are for Public Works, SF configuration
     %
     % see also ADT_MAT2SPKR_ARRAY, ADT_RUN_ALLRAD_AMBDEC
     

@@ -1,6 +1,6 @@
 function run_dec_t48
     % allrad example specifying speaker locations inline
-    % specifics are for Paul Powers' octagon-cube configuration
+    % specifics are for 48 point spherical t-design
     %
     % see also AMBI_MAT2SPKR_ARRAY, AMBI_RUN_ALLRAD_AMBDEC
     

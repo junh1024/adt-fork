@@ -1,6 +1,6 @@
 function run_example_octagon
     % example specifying speaker locations inline
-    % specifics are for Paul Power's octagon-cube configuration
+    % specifics are for horizontal constant-radius octagon configuration
     %
     % see also AMBI_MAT2SPKR_ARRAY, AMBI_RUN_ALLRAD
     
