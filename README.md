@@ -171,7 +171,7 @@ Conference, Helsinki, 2014, pp. 1–8.
 
 [20] A. Heller and E. M. Benjamin, "The Ambisonic Decoder Toolbox:
 Extensions for Partial-Coverage Loudspeaker Arrays," presented at the
-Linux Audio Conference 2014, Karlsruhe, 2014.
+Linux Audio Conference 2014, Karlsruhe, 2014.  http://lac.linuxaudio.org/2014/papers/17.pdf
 
 [21] M. Graf and D. Potts, “On the computation of spherical designs by
 a new optimization approach based on fast spherical Fourier
