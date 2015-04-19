@@ -6,13 +6,13 @@ function [D, Spkr, M, C] = ambi_run_SSF( Spkr, ambi_order, imag_spkrs, ...
     %  S is speaker array struct
     %  ambi_order is ambisonic order, scalar is full periphonic array,
     %     vector specified mixed order array.
-    %  scheme is HP or AMB for conventional mixed orders used in AMB files,
-    %     HV for newer scheme from [3]
     %  imag_spkrs is not used here, but kept so that the arglist is the
     %     same as for AllRad.
     %  out_path is path for AmbDec config file
     %  do_plots is a boolen that controls the performance plots, default is
     %     to produce plots in MATLAB, no plots in Octave.
+    %  scheme is HP or AMB for conventional mixed orders used in AMB files,
+    %     HV for newer scheme from [3]
     %  alpha is blend coefficient for inversion variants (pinv only)
     %       alpha = 0 -> mode matching
     %       alpha = 1 -> even energy
