@@ -58,7 +58,7 @@ fd(W,X,Y,Z) = (1/2*a*W + sqrt(1/8)*b*X),  // new W
 // +/- 12 dB slider with dezipping
 fLsqr = hslider("Forward Dom [unit:dB]", 0, -12, +12, 0.1) : mu.db2linear : dezipper;
 
-vd(W,X,Y,Z) = (1/2*a*W + sqrt(1/8)*b*Y),  // new W
+vd(W,X,Y,Z) = (1/2*a*W + sqrt(1/8)*b*Z),  // new W
 	      X,                          // same X
 	      Y,                          // same Y
 	      (1/2*a*Z + sqrt(1/2)*b*W)   // new Z
