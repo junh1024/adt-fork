@@ -1,9 +1,13 @@
-function [ out ] = nfc_process( o, g, d, in )
+function [ out ] = nfc_process( o, g, d, in, reset)
     %UNTITLED3 Summary of this function goes here
     %   Detailed explanation goes here
     out = zeros(size(in));
     
     persistent z
+    
+    if exist('z', 'var') && reset
+        z= [];
+    end
     
     if isempty(z), z = zeros(o,1); end
     

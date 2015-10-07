@@ -71,7 +71,7 @@ fout5 = fft(out);
 semilogx(1:(Fs/2), abs(fout5(1:Fs/2)));
 hold off
 
-%%
+%% plot frequency response for different sample rates (should be identical)
 
 close all;
 clear all;
@@ -88,7 +88,7 @@ for f = 1:4
     
     for o = 1:5
         nfc = nfc_init(Fs, o , 0.0, r, 1);
-        out(:,o) = nfc_process(o, nfc(1), nfc(2:end), in);
+        out(:,o) = nfc_process(o, nfc(1), nfc(2:end), in, true);
     end
     
     fout = fft(out);
@@ -101,5 +101,40 @@ for f = 1:4
     ylabel('Gain', 'FontSize', 14);
     axis([1, 24000, 0, 1.1]);
     grid on
+end
+
+%% plot frequency response for different radii
+close all;
+clear all;
+
+Fs_r = 48000; %[44100,48000,96000,192000];
+r_f = [1,2,4,6];
+
+
+for f = 1:4
+    Fs = Fs_r;
+    r = r_f(f);
+    in = zeros(Fs,1);
+    in(1) = 1;
+    
+    out = zeros(Fs,5);
+    
+    for o = 1:5
+        nfc = nfc_init(Fs, o , 0.0, r, 1);
+        out(:,o) = nfc_process(o, nfc(1), nfc(2:end), in, true);
+    end
+    
+    fout = fft(out);
+    
+    figure(3)
+    subplot(2,2,f)
+    semilogx(1:(Fs/2), abs(fout(1:(Fs/2),:)), 'linewidth', 3);
+    title(sprintf('Fs=%d Hz, r=%d meters', Fs, r), 'FontSize', 16);
+    xlabel('Frequency (Hz)', 'FontSize', 14);
+    ylabel('Gain', 'FontSize', 14);
+    axis([1, 24000, 0, 1.1]);
+    grid on
+    
+    legend({'order 1', 'order 2', 'order 3', 'order 4', 'order 5'});
 end
 
