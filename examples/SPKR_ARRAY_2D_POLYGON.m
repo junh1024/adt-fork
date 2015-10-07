@@ -16,5 +16,7 @@ function [ val ] = SPKR_ARRAY_2D_POLYGON( N, r, type )
     for i=1:size(thetas)
         val.id{i}=sprintf('S%02d', round(thetas(i)/10'));
     end
+    
+    val.name = sprintf('sa_%d_gon_%d', N, type);
 end
 
