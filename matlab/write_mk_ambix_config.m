@@ -69,10 +69,29 @@ function [] = write_mk_ambix_config( filename, D, S, M, C )
         0, ...  % flip
         1  ...  % dec_mat_gain
         );
+ 
+
+    %% SPEAKERS
+    fprintf(fid, '\n#SPEAKERS spkrNr spkrLabel Radius Azimut Elevation x y z\n');
+    for i = 1:length(S.id)
+        % Note: format control '% f' produces a leading space when the
+        % quantity is positive.
+        fprintf(fid, '% i\t% s\t% f\t% f\t% f\t% f\t% f\t% f', ...
+            i, S.id{i}, S.r(i), S.az(i)*180/pi, S.el(i)*180/pi, ...
+            ... % multiply radius to get positions of speakers
+            S.r(i).*S.x(i), S.r(i).*S.y(i), S.r(i).*S.z(i) );
+        % is there a connection for this speaker?
+        if false %isfield(S, 'conns') && length(S.conns) >= i
+            fprintf(fid, '\t%s\n', S.conns{i});
+        else
+            fprintf(fid, '\n');
+        end
+    end
+    fprintf(fid, '#END\n');
     
     %% HRTF
     % leave in as place holder, insert speaker HRTFs here
-    fprintf(fid, [...
+    fprintf(fid, [ ...
         '\n', ...
         '#HRTF\n', ...
         '#END\n']);
