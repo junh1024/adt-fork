@@ -6,7 +6,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
     %   Detailed explanation goes here
     %% defaults
     
-    if ~exist('mixed_order_scheme','var') 
+    if ~exist('mixed_order_scheme','var')
         mixed_order_scheme = [];
     end
     
@@ -42,7 +42,9 @@ function [ C ] = ambi_channel_definitions_convention( ...
     
     %% map convention_name to details
     switch lower(convention_name)
-        case {'fuma', 'fms', 'amb'}
+        case {'fuma', 'fms', 'amb', 'icst2'}
+            % ICST Externals for Ambisonics use FuMa since 2010 according to
+            %    http://www.jasch.ch/pub/Ambisym10_ICST_report_final.pdf
             if isempty(mixed_order_scheme)
                 mixed_order_scheme = 'HP';
             end
@@ -65,7 +67,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
             end
             C = ambi_channel_definitions(...
                 ambi_order(1),ambi_order(2),...
-                mixed_order_scheme, ...  
+                mixed_order_scheme, ...
                 'ACN', ... % ordering rule
                 'N3D' ... % normalization
                 );
@@ -80,7 +82,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
                 error('%s not defined for greater than 5,1',...
                     convention_name);
             end
-        case {'icst'}
+        case {'cicm'}
             if ambi_order(2) <= 0
                 C = ambi_channel_definitions(...
                     ambi_order(1),0, ...
@@ -98,7 +100,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
                 'HP', ...
                 'SID', ...
                 'N3D');
-
+            
         otherwise
             error('unknown convention: %s', convention_name);
             
