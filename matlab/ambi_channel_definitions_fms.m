@@ -15,7 +15,9 @@ function [ C ] = ambi_channel_definitions_fms( h_order, v_order, scheme )
     %  [1] D. G. Malham, "Higher order Ambisonic systems," Mphil Thesis,
     %  University at York, 2003.
     %
-    %  [2] http://www.muse.demon.co.uk/3daudio.html
+    %  [2] http://www.muse.demon.co.uk/3daudio.html (dead 11/30/2015)
+    % 
+    %  [3] http://www.blueripplesound.com/b-format
     
     
     %{
