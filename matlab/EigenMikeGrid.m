@@ -1,5 +1,5 @@
-function [ a ] = EigenMikeGrid( )
-    %UNTITLED Summary of this function goes here
+function [ a ] = EigenmikeGrid( )
+    %EigenMicGrid capsule locations for em32 Eigenmike
     %   Detailed explanation goes here
     
     % References:
