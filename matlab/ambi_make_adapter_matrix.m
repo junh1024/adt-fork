@@ -33,8 +33,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     A = zeros(n_Cout, n_Cin);
     
     for i_in = 1:n_Cin
-        i_out = find((Cout.sh_l == Cin.sh_l(i_in)) & (Cout.sh_m == Cin.sh_m(i_in)));
-        if ~isempty(i_in)
+        i_out = find((Cout.sh_l == Cin.sh_l(i_in)) & ...
+                     (Cout.sh_m == Cin.sh_m(i_in)));
+        if ~isempty(i_out)
             A(i_out, i_in) = Cout.norm(i_out)/Cin.norm(i_in) * ...
                 Cout.sh_cs_phase(i_out)*Cin.sh_cs_phase(i_in);
         end
