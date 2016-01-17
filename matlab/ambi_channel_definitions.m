@@ -71,19 +71,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         v_order = h_order;
     end
     
+    max_order = max(h_order,v_order);
+    
     if ~exist('mixed_order_scheme','var') || isempty(mixed_order_scheme)
         mixed_order_scheme = 'HP';
     end
     
     if ~exist('orderingRule','var') || isempty(orderingRule)
-        orderingRule = 'FuMa';
+        if max_order <= 3
+            orderingRule = 'FuMa';
+        else
+            orderingRule = 'Ambix'
+        end
     end
     
     if ~exist('encodingConvention','var') || isempty(encodingConvention)
-        encodingConvention = 'FuMa';
+        if max_order <=3
+            encodingConvention = 'FuMa';
+        else
+            encodingConvention = 'Ambix';
+        end
     end
-    
-    max_order = max(h_order,v_order);
     
     sh.index = 0:((max_order+1)^2-1);
     sh.l = zeros(size(sh.index));
@@ -92,9 +100,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     orderingRule = lower(orderingRule);
     encodingConvention = upper(encodingConvention);
     
-    if ismember(orderingRule, {'amb', 'fuma'})
+    if ismember(orderingRule, {'amb', 'fuma'}) && ...
+       ismember(encodingConvention, {'amb', 'fuma'})
         if max_order <= 3
-            C = ambi_channel_definitions_fms(h_order,v_order,mixed_order_scheme);
+            C = ambi_channel_definitions_fms(h_order,v_order, ...
+                mixed_order_scheme);
         else
             error('%s not defined for order > 3', orderingRule);
         end
@@ -102,6 +112,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         
         %% fill in channel index, degree, order
         switch lower(orderingRule)
+            case {'fuma', 'amb'}
+                C_temp = ambi_channel_definitions_fms(h_order,v_order, ...
+                    mixed_order_scheme);
+                orderingRule = C_temp.ordering_rule;
+                sh.l = C_temp.sh_l;
+                sh.m = C_temp.sh_m;
+
             case {'acn','ambix2009', 'ambix'}
                 orderingRule = 'acn';
                 sh.l = floor(sqrt(sh.index));
