@@ -1,11 +1,9 @@
 # Ambisonic Decoder Toolbox #
-=============================
+### Aaron J. Heller <heller@ai.sri.com> ###
+-------------------------------------------
 
-Aaron J. Heller <heller@ai.sri.com>
------------------------------------
 
-Menlo Park, CA US
------------------
+
 
 The Ambisonic Decoder Toolbox is a collection of MATLAB and GNU Octave
 functions for creating Ambisonic Decoders. Currently, it implements
