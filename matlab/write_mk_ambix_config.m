@@ -13,7 +13,10 @@ function [] = write_mk_ambix_config( filename, D, S, M, C )
         end
     end
     
-    if C.h_order >= 3 || C.v_order >= 3
+    % update per email from Matthias
+    % On Feb 7, 2016, at 8:32 AM, Matthias Kronlachner <m.kronlachner@gmail.com> wrote:
+    % I have binaries for download up to 5th order, and you can compile it for any order.
+    if false %C.h_order >= 3 || C.v_order >= 3
         warning('The ambiX decoder plugin is limited to 3rd order');
     end
     
