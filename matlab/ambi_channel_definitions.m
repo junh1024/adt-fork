@@ -81,7 +81,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         if max_order <= 3
             orderingRule = 'FuMa';
         else
-            orderingRule = 'Ambix'
+            orderingRule = 'Ambix';
         end
     end
     
@@ -101,10 +101,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     encodingConvention = upper(encodingConvention);
     
     if ismember(orderingRule, {'amb', 'fuma'}) && ...
-       ismember(encodingConvention, {'amb', 'fuma'})
+       ismember(encodingConvention, {'AMB', 'FUMA'})
         if max_order <= 3
             C = ambi_channel_definitions_fms(h_order,v_order, ...
                 mixed_order_scheme);
+            norm = C.norm;
         else
             error('%s not defined for order > 3', orderingRule);
         end
@@ -118,6 +119,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 orderingRule = C_temp.ordering_rule;
                 sh.l = C_temp.sh_l;
                 sh.m = C_temp.sh_m;
+                
 
             case {'acn','ambix2009', 'ambix'}
                 orderingRule = 'acn';
@@ -188,7 +190,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     1/sqrt(7) * sqrt(8/5) * [1, 1], ...   % P Q
                     ];
                 %norm = fms_norm(ch);
-                norm = [];  %fixeme check this
+                %norm = [];  %fixeme check this
         end
         
         %% Condon-Shortly Phase
