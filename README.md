@@ -55,7 +55,7 @@ then cd to the examples directory
 > cd ../examples
 
 See the files examples/run_*.m for sample invocations.  Most users
-create a 'run' file for their specific speaker 
+create a 'run' file for their specific speaker array.
 
 *Note:* There are still a few loose ends -- the performance plots (rE,
 directional error) work well only in MATLAB, and there needs to be bit
