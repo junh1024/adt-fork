@@ -6,7 +6,12 @@ function [ S ] = ambi_mat2spkr_array(A, coord_code, unit_code, name, ids, origin
     %   coord_code identifies each coordinate (default: AER)
     %     A, E, R = azimuth, elevation, radius
     %     N = zeNith angle, angle fron North pole (can't use Z)
-    %     X, Y, Z = cartesian coordinates
+    %     X, Y, Z = cartesian coordinates in Ambisonic convention:
+    %                  +/- X = front/back
+    %                  +/- Y = left/right
+    %                  +/- Z = up/down
+    %     U, V, W = cartesian coordinates, but with sign negated
+    %               (see SPKR_ARRAY_Boardroom for example)
     %     can be in any order and mixed, e.g. ARZ for cylindrical.
     %
     %   unit_code indentifes units for each coordinate (default: DDM)
@@ -55,7 +60,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     % when A is a string, read coordinates from file
     if ischar(A)
-        if ~exist('name','var')
+        if ~exist('name','var') || isempty(name)
             [junk1, name, junk2] = fileparts(A); 
         end
         A = importdata(A);
