@@ -42,7 +42,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
     
     %% map convention_name to details
     switch lower(convention_name)
-        case {'fuma', 'fms', 'amb', 'icst2'}
+        case {'fuma', 'fms', 'amb', 'icst2', 1}
             % ICST Externals for Ambisonics use FuMa since 2010 according to
             %    http://www.jasch.ch/pub/Ambisym10_ICST_report_final.pdf
             if isempty(mixed_order_scheme)
@@ -51,7 +51,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
             C = ambi_channel_definitions_fms(...
                 ambi_order(1),ambi_order(2), ...
                 mixed_order_scheme);
-        case {'ambix', 'ambix2011'}
+        case {'ambix', 'ambix2011', 2}
             if isempty(mixed_order_scheme)
                 mixed_order_scheme = 'HV';
             end
@@ -61,7 +61,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
                 'ACN', ... % ordering rule
                 'SN3D' ... % normalization
                 );
-        case {'ambix2009'}
+        case {'ambix2009', 'n3d', 3}
             if isempty(mixed_order_scheme)
                 mixed_order_scheme = 'HV';
             end
@@ -71,7 +71,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
                 'ACN', ... % ordering rule
                 'N3D' ... % normalization
                 );
-        case {'sn2dx2', 'courville', 'b2x'}
+        case {'sn2dx2', 'courville', 'b2x', 4}
             if all( ambi_order <= [5;1] )
                 C = ambi_channel_definitions(...
                     ambi_order(1),ambi_order(2), ...
@@ -82,7 +82,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
                 error('%s not defined for greater than 5,1',...
                     convention_name);
             end
-        case {'cicm'}
+        case {'cicm', 5}
             if ambi_order(2) <= 0
                 C = ambi_channel_definitions(...
                     ambi_order(1),0, ...
@@ -93,7 +93,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
                 error('%s not defined for greater v_order > 0',...
                     convention_name);
             end
-        case {'mpeg', 'mpegh'}
+        case {'mpeg', 'mpegh', 6}
             % TODO: check these
             C = ambi_channel_definitions(...
                 ambi_order(1), ambi_order(2),...
