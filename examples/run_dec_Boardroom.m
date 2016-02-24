@@ -10,11 +10,11 @@ function run_dec_Boardroom
     
     imaginary_speakers = [0,0,-1];  % one at bottom, used for AllRAD only
     
-    % do_plots = [];  % default is true for MATLAB, false for Octave
-    do_plots = true;  % default is true for MATLAB, false for Octave
+    do_plots = [];  % default is true for MATLAB, false for Octave
+    %do_plots = true;  % default is true for MATLAB, false for Octave
     output_path = [];  % pathname for output, [] = default
     
-    %decoder_type = 'ssf';
+    decoder_type = 'ssf';
     %decoder_type = 'allrad';
     %decoder_type = 'pinv';
     
