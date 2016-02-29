@@ -1,18 +1,43 @@
-function [ D ] = run_dec_interactive( name )
+function [ D, S, C ] = run_dec_interactive( name )
     %UNTITLED Summary of this function goes here
     %   Detailed explanation goes here
     
     load('defaults.mat')
     
-    if ~exist('name', 'var'), name = []; end;
+    if ~exist('name', 'var'), 
+        [~, name, ~] = fileparts(defaults.csv_path); 
+    end;
+    
+    try
+        A = txt2mat(defaults.csv_path);
+        Smat = A(:,end-2:end);
+    catch err1
+        fprintf('%s\n', 'falling back to importdata()');
+        
+        try
+            A = importdata(defaults.csv_path);
+            if isstruct(A)
+                Smat = A.data(:,end-2:end);
+            elseif isnumeric(A)
+                Smat = A(:,end-2:end);
+            else
+                error('importdata returned unknown data type %s', class(A))
+            end
+        catch err2
+            fprintf('%s\n', 'WARNING: falling back to csvread()\ncheck that data is read correctly.');
+            A = csvread(defaults.csv_path);
+            Smat = A(:,end-2,end);
+        end
+    end
+    
+    % assume the coordinate are last three columns
+    
     
     S = ambi_mat2spkr_array(...
-        defaults.csv_path, ...
+        Smat, ...
         defaults.coord_code, ...
         defaults.units_code, ...
         name);
-    
-    %convention_codes = {'fuma', 'ambix', 'ambix2009'};
     
     C = ambi_channel_definitions_convention(...
         [defaults.order_h, defaults.order_v], ...
