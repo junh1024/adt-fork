@@ -4,8 +4,12 @@ function [ D, S, C ] = run_dec_interactive( name )
     
     load('defaults.mat')
     
-    if ~exist('name', 'var'), 
-        [~, name, ~] = fileparts(defaults.csv_path); 
+    if ~exist('name', 'var')
+        if isfield(defaults, 'spkr_array_name')
+            name = defaults.spkr_array_name
+        else
+            [~, name, ~] = fileparts(defaults.csv_path); 
+        end
     end;
     
     try
