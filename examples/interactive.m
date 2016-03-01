@@ -7,8 +7,13 @@ function [ret] = interactive
         end
     end
     
+    defaults_file = 'adt_defaults.mat';
+    
+    fprintf('%s\n', ['ADT Interactive.  Default value shown in brackets []. ' ...
+             '<cr> to accept defaults. ? for help.']);
+    
     try
-        load('defaults.mat');
+        load(defaults_file);
     catch e
         %display(e)
         defaults.csv_path = 'example.csv';
@@ -137,22 +142,34 @@ function [ret] = interactive
     defaults = ret;
     
     % need -V6 so Octave will write in a format MATLAB can read, and vice versa.
-    save('defaults.mat', varname(defaults), '-V6');
+    save(defaults_file, varname(defaults), '-V6');
+    fprintf(['\nChoices written to %s.  Use run_dec_interactive to ' ...
+             'create decoders.\n\n'], defaults_file);
 end
 
-function [ret] = prompt_and_check(prompt, def, ret_type, check, error_msg)
+function [ret] = prompt_and_check(prompt, def, ret_type, check, ...
+                                  error_msg, help_msg)
+    
+    if ~exist('help_msg', 'var'), help_msg = 'No help yet.'; end
+    
     while true
         ret_str = input(sprintf(prompt,def), 's');
+        err_check = true;
         if isempty(ret_str)
             ret = def;
+        elseif strcmpi(ret_str, '?')
+            fprintf('%s\n', help_msg);
+            err_check = false;
         else
             f = str2func(ret_type);
             ret = f(ret_str);
         end
-        if check(ret)
-            break
-        else
-            fprintf(error_msg, ret);
+        if err_check
+            if check(ret)
+                break
+            else
+                fprintf(error_msg, ret);
+            end
         end
     end
 end

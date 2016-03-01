@@ -2,7 +2,7 @@ function [ D, S, C ] = run_dec_interactive( name )
     %UNTITLED Summary of this function goes here
     %   Detailed explanation goes here
     
-    load('defaults.mat')
+    load('adt_defaults.mat')
     
     if ~exist('name', 'var')
         if isfield(defaults, 'spkr_array_name')
