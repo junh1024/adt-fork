@@ -1,7 +1,7 @@
 Aaron J. Heller <heller@ai.sri.com>
 
 These functions were downloaded from the MATLAB File Exchange and are
-covered by the BSD License:
+covered by the BSD-3-Clause License:
 
   getLebedevSphere.m		author: Rob Parrish, 3/24/2010
   rayTriangleIntersection.m	author: Jesus Mena, 2009
@@ -9,6 +9,7 @@ covered by the BSD License:
   LegendrePoly.m		author: David Terr, Raytheon, 5-10-04
   figtitle.m			author: Chad A. Greene, July 2013
   ntitle.m			author: Chad A. Greene, fifth of June, 2013
+  txt2mat.m			author: Andres, 2007
 
 The spherical designs were downloaded from 
   http://neilsloane.com/sphdesigns/
