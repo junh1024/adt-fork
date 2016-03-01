@@ -1,4 +1,23 @@
+Update 29-Feb-2016
 
+There is now a binary installer for Octave 3.8.0 for OSX 10.9.1 or
+later (Mavericks).  See the following URL for details.  I have tested
+the ADT with this version.  The  
+
+  http://wiki.octave.org/Octave_for_MacOS_X#Binary_installer_for_OSX_10.9.1
+
+The GUI version complains that it can't find the binary for fig2dev.
+This can be installed from MacPorts by doing
+
+ sudo port install xfig +universal
+
+(see below for installing MacPorts)
+
+
+
+
+
+------
 There are no pre-built binaries for Gnu Octave 3.6 on MacOS.  
 Here are the steps I used to build, install, and test it on MacOS 10.8
 ("Mountain Lion"). 
@@ -28,12 +47,17 @@ sudo rm -rf \
   > install ghostscript +cups
   > install arpack +atlas  
 //  > install octave-devel +fltk +atlas +gcc47
-  > install octave-devel +fltk +atlas +gcc48
+//  > install octave-devel +fltk +atlas +gcc48 
+  > install octave-devel +fltk +atlas +gcc5
 
 or
 
   > install SuiteSparse +metis
   > install octave-devel +atlas +fltk +gcc48 +metis +x11
+
+This works as of 23 Feb 2016:
+
+  > install octave-devel
 
 4. Start Octave, select fltk for graphics, and run example 
 
