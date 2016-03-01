@@ -1,6 +1,9 @@
 function [ S ] = SPKR_ARRAY_Boardroom(c)
     
     % Speaker array definition for the Boardroom, 3 variants.
+        
+%% defaults
+    if ~exist('c','var'), c=1; end;
     
     coord_code = 'VZX';  % V means negative Y.  
                          % This is standard computer graphics convention
