@@ -77,7 +77,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %  1 for 1 band, rE max
     %  2 for 2 band, shelf filters, one matrix
     %  3 for 2 band, vienna type, two matricies
-    D.decoder_type = 1;
+    D.decoder_type = 2; %1;
     
     %% build up description and filename in 'name'
     name = S.name;
