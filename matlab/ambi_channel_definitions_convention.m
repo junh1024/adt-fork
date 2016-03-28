@@ -43,17 +43,26 @@ function [ C ] = ambi_channel_definitions_convention( ...
     %% map convention_name to details
     switch lower(convention_name)
         
-        case {'fuma', 'fms', 'amb', 'icst2', 1}
+        case {'fuma', 'fms', 'amb', 'icst', 1}
             % References:
             % D. G. Malham, "Higher order Ambisonic systems," Mphil Thesis,
             %   2003.
             %
-            % J. C. Schacher, “Seven Years of ICST Ambisonics Tools
-            % for MaxMSP - A Brief Report,” Paris, 2010, pp. 1–4.
             % ICST Externals for Ambisonics use FuMa since 2010
-            % according to this, with options for ACN with SN3D ot N3D 
-            % (no support in ADT for pre-2010 "seminormalized"
-            % convention)
+            % with options for ACN with SN3D or N3D.  See Section
+            % 8.1 of
+            % J. C. Schacher, “Seven Years of ICST Ambisonics Tools
+            %   for MaxMSP - A Brief Report,” Paris, 2010, pp. 1–4.
+            %   Available from http://ambisonics10.ircam.fr/drupal/index7522.html?q=proceedings/p1
+            %
+            % No support in ADT for pre-2010 ICST
+            % "seminormalized semi-normalized form of the
+            % Furse-Malham set."  See section 2.1 of
+            % J. C. Schacher and P. Kocher, “Ambisonics Spatialization Tools for
+            %   Max/MSP,” presented at the Proceedings of the 2006
+            %   International Computer Music Conference, New Orleans,
+            %   2006, pp. 274–277.  Available from
+            %   http://hdl.handle.net/2027/spo.bbp2372.2006.057
             
             if isempty(mixed_order_scheme)
                 mixed_order_scheme = 'HP';
@@ -62,7 +71,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
                 ambi_order(1),ambi_order(2), ...
                 mixed_order_scheme);
             
-        case {'ambix', 'ambix2011', 'mpeg2015', 2}
+        case {'ambix', 'ambix2011', 2}
             % Reference:
             % C. Nachbar, F. Zotter, E. Deleflie, and A. Sontacchi, "Ambix
             %   - A Suggested Ambisonics Format," presented at the 3rd
@@ -71,8 +80,8 @@ function [ C ] = ambi_channel_definitions_convention( ...
             %
             % ISO/IEC JTC1/SC29/WG11 MPEG2015//N15268 "Encoder Input Format
             %   for MPEG-H 3D Audio" (w15268, dated 2/2015; see
-            %   Section 4.2)
-            % http://mpeg.chiariglione.org/standards/mpeg-h/3d-audio/n15268-encoder-input-format-mpeg-h-3d-audio
+            %   Section 4.2).  Available from:
+            %   http://mpeg.chiariglione.org/standards/mpeg-h/3d-audio/n15268-encoder-input-format-mpeg-h-3d-audio
             
             if isempty(mixed_order_scheme)
                 mixed_order_scheme = 'HV';
@@ -84,7 +93,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
                 'SN3D' ... % normalization
                 );
             
-        case {'ambix2009', 'n3d', 3}
+        case {'ambix2009', 'n3d', 'mpegh', 3}
             % Reference: 
             % M. Chapman, W. Ritsch, T. Musil, I. Zmölnig, H.
             %   Pomberger, F. Zotter, and A. Sontacchi, "A standard for
@@ -132,18 +141,19 @@ function [ C ] = ambi_channel_definitions_convention( ...
                     convention_name);
             end
             
-        case {'mpeg', 'mpegh', 6}
+        case {'mpeg4', 'mpegh2013', 6}
             % References:
             %
             % ISO/IEC 14496-11 "Information technology -- Coding of
             %   audio-visual objects -- Part 11: Scene description and
             %   application engine" (second edition, dated 11/2013; see 
-            %   Table 9 in page 36)
+            %   Table 9 in page 36).  Also known as MPEG-4, Part 11. 
+            %   https://en.wikipedia.org/wiki/MPEG-4_Part_11
             %
             % ISO/IEC JTC1/SC29/WG11 WG11/N13412 "Encoder Input Format
             %   for MPEG-H 3D Audio" (w13412, dated 1/2013; see
-            %   Table 3)
-            % http://mpeg.chiariglione.org/standards/mpeg-h/3d-audio/encoder-input-format-mpeg-h-3d-audio
+            %   Table 3).  Available from
+            %   http://mpeg.chiariglione.org/standards/mpeg-h/3d-audio/encoder-input-format-mpeg-h-3d-audio
             
             C = ambi_channel_definitions(...
                 ambi_order(1), ambi_order(2),...
