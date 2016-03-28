@@ -52,16 +52,17 @@ function [ C ] = ambi_channel_definitions_convention( ...
             % with options for ACN with SN3D or N3D.  See Section
             % 8.1 of
             % J. C. Schacher, “Seven Years of ICST Ambisonics Tools
-            %   for MaxMSP - A Brief Report,” Paris, 2010, pp. 1–4.
+            %   for MaxMSP - A Brief Report,” Paris, 2010, pp. 1-4.
             %   Available from http://ambisonics10.ircam.fr/drupal/index7522.html?q=proceedings/p1
             %
             % No support in ADT for pre-2010 ICST
             % "seminormalized semi-normalized form of the
             % Furse-Malham set."  See section 2.1 of
-            % J. C. Schacher and P. Kocher, “Ambisonics Spatialization Tools for
-            %   Max/MSP,” presented at the Proceedings of the 2006
-            %   International Computer Music Conference, New Orleans,
-            %   2006, pp. 274–277.  Available from
+            %
+            % J. C. Schacher and P. Kocher, "Ambisonics Spatialization
+            %   Tools for Max/MSP," presented at the Proceedings of the 2006
+            %   International Computer Music Conference, New Orleans, 2006,
+            %   pp. 274–277.  Available from
             %   http://hdl.handle.net/2027/spo.bbp2372.2006.057
             
             if isempty(mixed_order_scheme)
@@ -71,17 +72,12 @@ function [ C ] = ambi_channel_definitions_convention( ...
                 ambi_order(1),ambi_order(2), ...
                 mixed_order_scheme);
             
-        case {'ambix', 'ambix2011', 2}
+        case {'ambix', 'ambix2011', 'sn3d', 2}
             % Reference:
-            % C. Nachbar, F. Zotter, E. Deleflie, and A. Sontacchi, "Ambix
+            % C. Nachbar, F. Zotter, E. Deleflie, and A. Sontacchi, "AmbiX
             %   - A Suggested Ambisonics Format," presented at the 3rd
             %   International Symposium on Ambisonics and Spherical
             %   Acoustics, Lexington, KY, 2011.
-            %
-            % ISO/IEC JTC1/SC29/WG11 MPEG2015//N15268 "Encoder Input Format
-            %   for MPEG-H 3D Audio" (w15268, dated 2/2015; see
-            %   Section 4.2).  Available from:
-            %   http://mpeg.chiariglione.org/standards/mpeg-h/3d-audio/n15268-encoder-input-format-mpeg-h-3d-audio
             
             if isempty(mixed_order_scheme)
                 mixed_order_scheme = 'HV';
@@ -100,6 +96,11 @@ function [ C ] = ambi_channel_definitions_convention( ...
             %   interchange of Ambisonic signal sets including a file
             %   standard with metadata," presented at the Proc. of the
             %   Ambisonics Symposium, Graz, 2009.
+            %
+            % ISO/IEC JTC1/SC29/WG11 MPEG2015//N15268 "Encoder Input Format
+            %   for MPEG-H 3D Audio" (w15268, dated 2/2015; see
+            %   Section 4.2).  Available from:
+            %   http://mpeg.chiariglione.org/standards/mpeg-h/3d-audio/n15268-encoder-input-format-mpeg-h-3d-audio
             
             if isempty(mixed_order_scheme)
                 mixed_order_scheme = 'HV';
@@ -152,7 +153,7 @@ function [ C ] = ambi_channel_definitions_convention( ...
             %
             % ISO/IEC JTC1/SC29/WG11 WG11/N13412 "Encoder Input Format
             %   for MPEG-H 3D Audio" (w13412, dated 1/2013; see
-            %   Table 3).  Available from
+            %   Table 3). Available from
             %   http://mpeg.chiariglione.org/standards/mpeg-h/3d-audio/encoder-input-format-mpeg-h-3d-audio
             
             C = ambi_channel_definitions(...
