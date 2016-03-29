@@ -7,7 +7,10 @@ function [ ] = write_faust_adapter_matrix( A, fid )
     end
     s = num2str(A, '%0.10g, ');
     for row = 1:(size(A,1)) 
-        fprintf(fid, 'A(%02d) = (%s);\n', row-1, s(row,1:end-1));
+        % workaround for gnu octave padding behavior
+        ss = strtrim(s(row, :));
+        % end-1 to get rid of trailing comma
+        fprintf(fid, 'A(%02d) = (%s);\n', row-1, ss(1:end-1));
     end
 end
 
