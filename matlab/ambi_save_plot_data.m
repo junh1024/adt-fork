@@ -1,5 +1,5 @@
 function [ output_args ] = ambi_save_plot_data(S, V, M, C, ...
-        fig_title, ele_min, ele_max )
+        fig_title, mode, ele_min, ele_max )
     %UNTITLED Summary of this function goes here
     %   Detailed explanation goes here
     
