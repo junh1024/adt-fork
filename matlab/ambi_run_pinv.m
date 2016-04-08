@@ -169,6 +169,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     if do_plots
         ambi_plot_rE(S, V, ambi_apply_gamma(M_mm, Gamma, C), C, name);
+    else
+        ambi_save_plot_data(S, V, ambi_apply_gamma(M_mm, Gamma, C), C, name);
     end
     
     %%
