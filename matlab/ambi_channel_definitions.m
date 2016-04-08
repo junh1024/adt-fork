@@ -178,18 +178,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 norm(1) = sqrt(1/2);
                 encodingConvention = 'SN2DxW';
             case {'FUMA'}
+                % if were here, it's because we're using FuMa normalization
+                % with some other ordering_rule.
+                fuma = ambi_channel_definitions_fms(h_order,v_order, scheme);
+                norm = zeros(size(sh.l));
+                for i = 1:length(sh.l)
+                    norm(i)=fuma.norm(sh.l(i)==fuma.sh_l & sh.m(i)==fuma.sh_m);
+                end
+                
                 % fixme check this
-                fms_norm =  [...
-                    1/sqrt(2), ...                        % W
-                    1/sqrt(3) * [1, 1, 1],...             % X Y Z
-                    1/sqrt(5), ...                        % R
-                    1/sqrt(5) * 2/sqrt(3) * [1,1,1,1],... % S T U V
-                    1/sqrt(7), ...                        % K
-                    1/sqrt(7) * sqrt(45/32) * [1,1], ...  % L M
-                    1/sqrt(7) * 3/sqrt(5) * [1, 1], ...   % N O
-                    1/sqrt(7) * sqrt(8/5) * [1, 1], ...   % P Q
-                    ];
-                %norm = fms_norm(ch);
+%                 fms_norm =  [...
+%                     1/sqrt(2), ...                        % W
+%                     1/sqrt(3) * [1, 1, 1],...             % X Y Z
+%                     1/sqrt(5), ...                        % R
+%                     1/sqrt(5) * 2/sqrt(3) * [1,1,1,1],... % S T U V
+%                     1/sqrt(7), ...                        % K
+%                     1/sqrt(7) * sqrt(45/32) * [1,1], ...  % L M
+%                     1/sqrt(7) * 3/sqrt(5) * [1, 1], ...   % N O
+%                     1/sqrt(7) * sqrt(8/5) * [1, 1], ...   % P Q
+%                     ];
+%                 norm = fms_norm(ch);
                 %norm = [];  %fixeme check this
         end
         
