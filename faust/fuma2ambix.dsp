@@ -61,19 +61,20 @@ order_out(1) = (_,_,_,_,!,!,!,!,!,!,!,!,!,!,!,!);
 order_out(2) = (_,_,_,_,_,_,_,_,_,!,!,!,!,!,!,!);
 order_out(3) = (_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_);
 
-//process = order_in(ambi_order):F2A_matrix(n_inputs, n_outputs):order_out(ambi_order);
-process = order_in(ambi_order):A2F_matrix(n_inputs, n_outputs):order_out(ambi_order);
+process = order_in(ambi_order):F2A_matrix(n_inputs, n_outputs):order_out(ambi_order);
+//process = order_in(ambi_order):A2F_matrix(n_inputs, n_outputs):order_out(ambi_order);
 
 // ==== no user servicible parts above here =====
 
-declare name		"ambix2fuma";
-//declare name		"fuma2ambix";
+//declare name		"ambix2fuma";
+declare name		"fuma2ambix";
 
 ambi_order = 3;
 
 n_inputs = 16;
 n_outputs = 16;
 
+// AmbiX -> FuMa adapter matrix
 A2F(00) = (0.7071067812,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0);
 A2F(01) = (           0,            0,            0,            1,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0);
 A2F(02) = (           0,            1,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0);
@@ -91,7 +92,7 @@ A2F(13) = (           0,            0,            0,            0,            0,
 A2F(14) = (           0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,  1.264911064);
 A2F(15) = (           0,            0,            0,            0,            0,            0,            0,            0,            0,  1.264911064,            0,            0,            0,            0,            0,            0);
 
-
+// FuMa -> AmbiX adapter matrix
 F2A(00) = (1.414213562,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0);
 F2A(01) = (0,            1,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0);
 F2A(02) = (0,            0,            1,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0,            0);
