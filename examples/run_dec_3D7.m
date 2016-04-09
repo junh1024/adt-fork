@@ -4,10 +4,10 @@ function run_dec_3D7(r, noCenter)
     % see also AMBI_SPKR_ARRAY, AMBI_MAT2SPKR_ARRAY, AMBI_RUN_ALLRAD
     
     %% decoder specs
-    decoder_type = 'allrad'; % pinv | allrad
+    decoder_type = 'pinv'; % pinv | allrad
     
     h_order_range = 2; %1:2;
-    v_order_range = 1; %1:min(h_order,2);
+    v_order_range = 2; %1:min(h_order,2);
     
     mixed_order_scheme = 'HV';
     
@@ -78,8 +78,22 @@ function run_dec_3D7(r, noCenter)
                         [], ... % imaginary speakers, none in this case
                         [], ... % pathname for output, [] = default
                         true, ... % do plots, default is true for MATLAB, false for Octave
-                        mixed_order_scheme ... % mixed order scheme HV or HP
+                        mixed_order_scheme, ... % mixed order scheme HV or HP
+                        1 ... % alpha
                         );
+                case 'SSF'
+                    ambi_run_SSF(...
+                        S, ...  % speaker array struct
+                        [h_order,v_order], ...  % ambisonic order [h, v]
+                        [], ... % imaginary speakers, none in this case
+                        [], ... % pathname for output, [] = default
+                        true, ... % do plots, default is true for MATLAB, false for Octave
+                        mixed_order_scheme, ... % mixed order scheme HV or HP
+                        [], ... % alpha ignored
+                        [-60,+60] ... % elevation range for SSF 
+                        );
+                otherwise
+                    error('Unknown decoder_type %s.', decoder_type);
             end
         end
     end
