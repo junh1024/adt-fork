@@ -1,9 +1,5 @@
-# Ambisonic Decoder Toolbox #
-### Aaron J. Heller <heller@ai.sri.com> ###
--------------------------------------------
-
-
-
+Ambisonic Decoder Toolbox
+=========================
 
 The Ambisonic Decoder Toolbox is a collection of MATLAB and GNU Octave
 functions for creating Ambisonic Decoders. Currently, it implements
@@ -23,7 +19,7 @@ MaxDSP, ...  (see http://faust.grame.fr/ for more about Faust), as
 well as presets for Ambdec and Matthias Kronlachner's ambiX plugins
 (http://www.matthiaskronlachner.com/?p=2015).  By default, decoders
 are written into the directory ../decoders.  This can be changed by
-editing the file ambi_decoders_dir.m.
+editing the file `ambi_decoders_dir.m.`
 
 The Faust implementation supports near-field correction (NFC) up to
 fifth-order (this can be extended, if needed), level and distance
@@ -41,18 +37,18 @@ preset files that are included with AmbDec.
 
 Speaker locations and names can be specified in CSV files, although
 most users specify them directly in a top-level 'run-' file, using the
-toolbox function ambi_spkr_array().  There is also code to read them
+toolbox function `ambi_spkr_array()`.  There is also code to read them
 from AmbDec presets.
 
 To use the code you will need to add the ./matlab directory to your
 loadpath.  One way to do this is to cd to the matlab directory and
 execute:
 
-  > addpath(pwd)
+    > addpath(pwd)
    
 then cd to the examples directory
 
-  > cd ../examples
+    > cd ../examples
 
 See the files examples/run_*.m for sample invocations.  Most users
 create a 'run' file for their specific speaker array.
@@ -77,12 +73,13 @@ slides from the talk given May 3, 2014.  Video of the talk is archived
 We are happy to answer any technical questions about the toolbox or
 Ambisonics in general.
 
-Please consult the FAQ for specific questions I have answered from
+Please consult the FAQ for answers to questions I have received from
 users.
 
 
 
 Licenses
+--------
 
 The code in the Toolbox that has been written by me is licensed under
 the Gnu Affero General Public License (see LICENSE or
@@ -103,8 +100,13 @@ intellectural property rights.  Please consult your own legal council
 with any intellectual property questions about your use is this
 Toolbox.
 
+Author
+------
+Aaron J. Heller <heller@ai.sri.com>
+
 
 References
+----------
 
 [1] F. Zotter, M. Frank, and A. Sontacchi, "The Virtual T-Design
 Ambisonics-Rig Using VBAP," presented at the 1st EAA-EuoRegio 2010
