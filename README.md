@@ -48,11 +48,11 @@ To use the code you will need to add the ./matlab directory to your
 loadpath.  One way to do this is to cd to the matlab directory and
 execute:
 
-> addpath(pwd)
+  > addpath(pwd)
    
 then cd to the examples directory
 
-> cd ../examples
+  > cd ../examples
 
 See the files examples/run_*.m for sample invocations.  Most users
 create a 'run' file for their specific speaker array.
@@ -76,6 +76,11 @@ slides from the talk given May 3, 2014.  Video of the talk is archived
 
 We are happy to answer any technical questions about the toolbox or
 Ambisonics in general.
+
+Please consult the FAQ for specific questions I have answered from
+users.
+
+
 
 Licenses
 
