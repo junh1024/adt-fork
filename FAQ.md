@@ -1,6 +1,64 @@
 Ambisonic Decoder Toolbox Frequently Asked Questions (and answers!)
-=================================================================
+===================================================================
 
+**Q) Can I use the ADT to create my own presets for AmbDec / Ambix
+  with Matlab, based on specific azimuth, elevation and distance from
+  the center to each of the speakers in a custom speakers layout?**
+
+A) Yes, that is exactly what it was designed to do.  Besides Ambdec
+and AmbiX presets, it also creates decoders in the Faust DSP language
+that can be compiled into a number of different plugin formats and
+OSes.  But... it can't work miracles -- the speaker layout needs to be
+reasonable; the more uniform the better.  It produces a number of
+performance plots that can be used to get a quick idea of how well a
+particular design technique works for a given speaker layout.
+
+Note that Fons Adriaensen (author of AmbDec) will make Ambdec presets
+for custom loudspeaker layouts.  He says that the decoder design
+techniques he uses are superior to what is available in the ADT.
+Consult the Ambdec document for contact information.
+
+---
+
+**Q) How do I interpret the performance plots?  What can I adjust?**
+
+A) The key thing I look at are the grid plots and the direction
+difference between rE and rV, as well as performance at the horizon
+for partial coverage arrays, such as domes.
+
+As for adjustments...
+
+* with the PINV decoders, you can adjust ‘alpha’ which trades between
+  directional accuracy and uniform loudness.
+
+* with the AllRAD, you can play with the location of the virtual
+  speaker(s).
+
+* with SSF, you can adjust how far the region of interest extends
+  beyond the speaker area.  The defaults are values computed by Franz
+  Zotter.
+
+Some further details...the grid plots show the directional fidelity
+of the decoder.  A perfect decoder would have evenly-spaced horizontal
+and vertical lines.  The velocity localization vector (rV) is for low
+frequencies (< ~800Hz), the energy localization vector (rE) is for mid
+and high frequencies (> ~1200 Hz).  If the lines pull together around
+the loudspeakers, that shows a "speaker detent" effect, which is often
+due to using an ambisonic order higher than the array will support.
+The 2x3 array of plots show the same vectors but both magnitude and
+direction.  The lefthand column shows the magnitude of the vector,
+which indicated the quality or compactness of the phantom images in a
+particular direction.  The middle column shows angular error;
+basically the same information and the grid plots, and the righthand
+column shows the Pressure and Energy gains, which correspond to
+perceived loudness at low and mid/high frequencies.
+
+
+
+
+
+
+---
 **Q) Is it possible to create a decoder that takes N3D or SN3D input?**
 
 A) The toolbox defaults to Furse-Malham (aka FuMa) order and
