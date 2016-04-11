@@ -201,7 +201,7 @@ can change decoders directory by editing `ambi_decoders_dir.m`
 **Q) How do you I make an offline command line version of one of the
 decoders in Faust that the ADT produces?**
 
-A) Instructins for creating offline processing programs from Faust dsp
+A) Instructions for creating offline processing programs from Faust dsp
 files can be found at
 
    <https://ccrma.stanford.edu/~jos/aspf/Offline_Processing_Soundfiles_FAUST.html>
