@@ -263,6 +263,9 @@ nfc(3,r,g) = nfc3(r,g);
 nfc(4,r,g) = nfc4(r,g);
 nfc(5,r,g) = nfc5(r,g);
 
+// null NFC filters to allow very high order decoders. FIXME!
+nfc(o,r,g) = gain(g);
+
 //declare name "nfctest";
 //process = bus(6):(nfc(0,2,1),nfc(1,2,1),nfc(2,2,1),nfc(3,2,1),nfc(4,2,1),nfc(5,2,1)):bus(6);
 
