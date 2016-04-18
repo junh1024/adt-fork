@@ -1,0 +1,15 @@
+Here's what I do to compile Faust to Win32 VSTs on my mac:
+
+. install mingw for MacOSX from:  
+ http://crossgcc.rts-software.org/doku.php?id=compiling_for_win32
+
+ (NOTE: macports mingw-binutils would not compile)
+
+. add the location of the mingw executables to the PATH, in bash
+ PATH=/usr/local/gcc-4.8.0-qt-4.8.4-for-mingw32/win32-gcc/bin:$PATH; export PATH
+
+. modify the script faust2w32au
+ - location of VST SDK, on my machine
+   VST=/usr/local/include/vstsdk2.4
+ - mingw prefix for executables
+   : ${MINGWPREFIX="i586-mingw32-"}
