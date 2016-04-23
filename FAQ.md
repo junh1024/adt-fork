@@ -89,7 +89,7 @@ Some of these are synonyms, like amb and fuma, sid and daniel
 
 
 There is also a function, `ambi_channel_definitions_convention()`, that
-has the names of the form conventions I'm aware of (and a few I made
+has the names of the format conventions I'm aware of (and a few I made
 up).
 
     C = ambi_channel_definitions_convention(ambi_order, 'ambix')
