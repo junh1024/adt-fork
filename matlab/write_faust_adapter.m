@@ -27,4 +27,3 @@ function [] = write_faust_adapter( C_in, C_out, ...
     
     fclose(fid);
 end
-
