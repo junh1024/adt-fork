@@ -130,8 +130,10 @@ If you're willing to edit some MATLAB code, look in
     ambi_run_allrad.m and ambi_run_SSF.m
 
 and change 
+
     D.decoder_type = 1;
 to 
+
     D.decoder_type = 2;
 
 As for the crossover frequency...
