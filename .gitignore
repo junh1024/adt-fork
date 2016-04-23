@@ -4,5 +4,7 @@
 *.dll
 *.so
 *.zip
+*-svg
 *~
 decoders/*
+local/*
