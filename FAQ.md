@@ -89,7 +89,7 @@ Some of these are synonyms, like amb and fuma, sid and daniel
 
 
 There is also a function, `ambi_channel_definitions_convention()`, that
-has the names of the form conventions I'm aware of (and a few I made
+has the names of the format conventions I'm aware of (and a few I made
 up).
 
     C = ambi_channel_definitions_convention(ambi_order, 'ambix')
@@ -130,8 +130,10 @@ If you're willing to edit some MATLAB code, look in
     ambi_run_allrad.m and ambi_run_SSF.m
 
 and change 
+
     D.decoder_type = 1;
 to 
+
     D.decoder_type = 2;
 
 As for the crossover frequency...

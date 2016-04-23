@@ -73,7 +73,7 @@ slides from the talk given May 3, 2014.  Video of the talk is archived
 We are happy to answer any technical questions about the toolbox or
 Ambisonics in general.
 
-Please consult the FAQ for answers to questions I have received from
+Please consult the [FAQ](https://bitbucket.org/ambidecodertoolbox/adt/src/master/FAQ.md) for answers to questions I have received from
 users.
 
 
