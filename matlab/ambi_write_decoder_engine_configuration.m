@@ -85,10 +85,22 @@ function [M,D,name,out_path] = ambi_write_decoder_engine_configuration(S,C,M_mm,
     end
     
     %% write coeffs into a CSV file
-    if false
-        csvwrite(...
-            [out_path '.csv'], ...
-            ambi_apply_gamma(M, Gamma, C)); %#ok<UNRCH>
+    if true
+        switch D.decoder_type  %#ok<UNRCH>
+            case { 2, 3 }
+                csvwrite(...
+                    [out_path '-hf.csv'], ...
+                    ambi_apply_gamma(M.hf, Gamma, C)); 
+                csvwrite(...
+                    [out_path '-lf.csv'], ...
+                    M.lf);
+            case {1}
+                csvwrite(...
+                    [out_path '.csv'], ...
+                    ambi_apply_gamma(M, Gamma, C));
+            otherwise
+                error('unknown decoder type %d', D.decoder_type)
+        end
     end
     
     %% Fini!
