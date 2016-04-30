@@ -95,11 +95,17 @@ for f = 1:4
     
     figure(2)
     subplot(2,2,f)
-    semilogx(1:(Fs/2), abs(fout(1:(Fs/2),:)), 'linewidth', 3);
+    if true % gain in linear units
+        semilogx(1:(Fs/2), abs(fout(1:(Fs/2),:)), 'linewidth', 3);
+        axis([1, 24000, 0, 1.1]);
+        ylabel('Gain', 'FontSize', 14);
+    else  % gain dB
+        semilogx(1:(Fs/2), 20*log10(abs(fout(1:(Fs/2),:))), 'linewidth', 3);
+        axis([10, 24000, -80, 5]);
+        ylabel('Gain (dB)', 'FontSize', 14);
+    end
     title(sprintf('Fs=%d Hz, r=%d meters', Fs, r), 'FontSize', 16);
     xlabel('Frequency (Hz)', 'FontSize', 14);
-    ylabel('Gain', 'FontSize', 14);
-    axis([1, 24000, 0, 1.1]);
     grid on
 end
 
@@ -127,12 +133,18 @@ for f = 1:4
     fout = fft(out);
     
     figure(3)
-    subplot(2,2,f)
-    semilogx(1:(Fs/2), abs(fout(1:(Fs/2),:)), 'linewidth', 3);
+        subplot(2,2,f)
+    if false
+        semilogx(1:(Fs/2), abs(fout(1:(Fs/2),:)), 'linewidth', 3);
+        axis([1, 24000, 0, 1.1]);
+        ylabel('Gain', 'FontSize', 14);
+    else
+        semilogx(1:(Fs/2), 20*log10(abs(fout(1:(Fs/2),:))), 'linewidth', 3);
+        axis([10, 24000, -80, 5]);
+        ylabel('Gain (dB)', 'FontSize', 14);
+    end
     title(sprintf('Fs=%d Hz, r=%d meters', Fs, r), 'FontSize', 16);
     xlabel('Frequency (Hz)', 'FontSize', 14);
-    ylabel('Gain', 'FontSize', 14);
-    axis([1, 24000, 0, 1.1]);
     grid on
     
     legend({'order 1', 'order 2', 'order 3', 'order 4', 'order 5'});
