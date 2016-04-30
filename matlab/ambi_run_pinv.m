@@ -114,7 +114,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Gamma = ambi_shelf_gains(C, S, 'energy');   % 'amp','rms'
     
     %% noops from allrad code
-    V = []; V2R = []; Sa = []; H=[];%#ok<NASGU> % no virtual speakers
+    V = []; V2R = []; Sa = []; H=[]; % no virtual speakers
     
     %% conventional mode matching
     Y = ambi_sample_Y_cart(S.x, S.y, S.z, C);
@@ -174,12 +174,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     end
     
     %%
-    [M,D,name,out_path] = ...
-        ambi_write_decoder_engine_configuration(S,C,M_mm,D,Gamma,name,out_path);
+    [M, D, name, out_path] = ...
+        ambi_write_decoder_engine_configuration(S, C, M_mm, D, Gamma,...
+                                                name, out_path);
     
     %% save run for posterity
     save([out_path '-' datestr(clock,30) '.mat'], ...
-        'S', 'C', 'M', 'V', 'H', 'V2R', 'Sa', 'D', 'Gamma', 'sysver');
+        'S', 'C', 'M', 'V', 'H', 'V2R', 'Sa', 'D', 'Gamma', 'name', 'sysver');
     
     %% Fini!
     
