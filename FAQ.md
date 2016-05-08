@@ -207,3 +207,17 @@ A) Instructions for creating offline processing programs from Faust dsp
 files can be found at
 
    <https://ccrma.stanford.edu/~jos/aspf/Offline_Processing_Soundfiles_FAUST.html>
+
+---
+**Q) I made an AllRAD decoder for a symetrical speaker array, but
+the decoder coefficients and performance plots are not symetrical.
+What did I do wrong?**
+
+A) Nothing. AllRAD works by starting with a regular array with a large
+number of virtual speakers (like 5000) and then mapping those to the
+real array using Vector-Based Amplitude Panning (VBAP).  To compute
+the VBAP gains, we compute a triangular tesselation of the real
+speaker array.  Even though the speaker array is symetrical, the
+triangular tesselation might not be, hence the resulting decoder
+matrix is not symetrical.  See references [1-3,20] in README.md for
+further details about AllRAD decoding.
