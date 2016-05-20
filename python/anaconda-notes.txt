@@ -1,0 +1,1 @@
+conda install -c spyder-ide spyder==3.0.0b2
