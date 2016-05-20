@@ -1,4 +1,4 @@
-function [D, S, M, C] = ambi_run_pinv( S, ambi_order, imag_spkrs, ...
+function [D, S, M, C, out_path] = ambi_run_pinv( S, ambi_order, imag_spkrs, ...
         out_path, do_plots, scheme, alpha) %#ok<*INUSL>
     %AMBI_RUN_PINV() ambisonic decoder using pseudoinverse (aka mode matching).
     %   top-level function to design a decoder using inversion [1,2]
@@ -174,14 +174,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     end
     
     %%
-    [M, D, name, out_path] = ...
-        ambi_write_decoder_engine_configuration(S, C, M_mm, D, Gamma,...
-                                                name, out_path);
-    
-    %% save run for posterity
-    save([out_path '-' datestr(clock,30) '.mat'], ...
-        'S', 'C', 'M', 'V', 'H', 'V2R', 'Sa', 'D', 'Gamma', 'name', 'sysver');
-    
+    if out_path ~= false
+        [M, D, name, out_path] = ...
+            ambi_write_decoder_engine_configuration(S, C, M_mm, D, Gamma,...
+            name, out_path);
+        
+        %% save run for posterity
+        save([out_path '-' datestr(clock,30) '.mat'], ...
+            'S', 'C', 'M', 'V', 'H', 'V2R', 'Sa', 'D', 'Gamma', 'name', 'sysver');
+    else
+        M = M_mm;
+    end
     %% Fini!
     
 end
