@@ -25,11 +25,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 % $Id$
 
 
+% I did some simple speed tests of alternative ways to do the 
+% calculation inspired by Loren's blog post:
+%  http://blogs.mathworks.com/loren/2008/08/04/comparing-repmat-and-bsxfun-performance/
+
     g = M * test_dirs_Y;
+    
+    % this is faster than abs(g).^2
     g2 = g.*conj(g);
 
     P = sum(g, 1);
-    rV.xyz = (Su * g)  ./ P([1 1 1], :);
+    
+    % this is faster than bsxfun(@rdivide, (Su * g), P);
+    rV.xyz = real((Su * g)  ./ P([1 1 1], :));
 
     rV.r = sqrt( dot(rV.xyz, rV.xyz ));
     rV.u = rV.xyz ./ rV.r([1 1 1], :);
@@ -37,7 +45,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     E = sum(g2, 1);
     rE.xyz = (Su * g2) ./ E([1 1 1], :);
 
-    rE.r = sqrt( dot(rE.xyz, rE.xyz ));
+    % dot(x,x) is the same speed at sum(x.^2)
+    rE.r = sqrt( dot(rE.xyz, rE.xyz) );
     rE.u = rE.xyz ./ rE.r([1 1 1], :);
 
 end
