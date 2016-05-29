@@ -73,8 +73,9 @@ slides from the talk given May 3, 2014.  Video of the talk is archived
 We are happy to answer any technical questions about the toolbox or
 Ambisonics in general.
 
-Please consult the [FAQ](https://bitbucket.org/ambidecodertoolbox/adt/src/master/FAQ.md) for answers to questions I have received from
-users.
+Please consult the
+[FAQ](https://bitbucket.org/ambidecodertoolbox/adt/src/master/FAQ.md)
+for answers to questions I have received from users.
 
 
 
@@ -182,3 +183,7 @@ Linux Audio Conference 2014, Karlsruhe, 2014.  http://lac.linuxaudio.org/2014/pa
 a new optimization approach based on fast spherical Fourier
 transforms,” Numerische Mathematik, vol. 119, no. 4, pp. 699–724,
 Dec. 2011.
+
+[22] D. M. Murillo, F. M. Fazi, and M. Shin, "Evaluation of Ambisonics
+Decoding Methods with Experimental Measurements," presented at the
+The EAA Joint Symposium on Auralization and Ambisonics, Berlin, 2014.
