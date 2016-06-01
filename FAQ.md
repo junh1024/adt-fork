@@ -1,11 +1,11 @@
 Ambisonic Decoder Toolbox Frequently Asked Questions (and answers!)
 ===================================================================
 
-**Q) Can I use the ADT to create my own presets for AmbDec / Ambix
+**Q1) Can I use the ADT to create my own presets for AmbDec / Ambix
   with Matlab, based on specific azimuth, elevation and distance from
   the center to each of the speakers in a custom speakers layout?**
 
-A) Yes, that is exactly what it was designed to do.  Besides Ambdec
+A1) Yes, that is exactly what it was designed to do.  Besides Ambdec
 and AmbiX presets, it also creates decoders in the Faust DSP language
 that can be compiled into a number of different plugin formats and
 OSes.  But... it can't work miracles -- the speaker layout needs to be
@@ -20,9 +20,9 @@ Consult the Ambdec document for contact information.
 
 ---
 
-**Q) How do I interpret the performance plots?  What can I adjust?**
+**Q2) How do I interpret the performance plots?  What can I adjust?**
 
-A) The key thing I look at are the grid plots and the direction
+A2) The key thing I look at are the grid plots and the direction
 difference between rE and rV, as well as performance at the horizon
 for partial coverage arrays, such as domes.
 
@@ -53,15 +53,10 @@ basically the same information and the grid plots, and the righthand
 column shows the Pressure and Energy gains, which correspond to
 perceived loudness at low and mid/high frequencies.
 
-
-
-
-
-
 ---
-**Q) Is it possible to create a decoder that takes N3D or SN3D input?**
+**Q3) Is it possible to create a decoder that takes N3D or SN3D input?**
 
-A) The toolbox defaults to Furse-Malham (aka FuMa) order and
+A3) The toolbox defaults to Furse-Malham (aka FuMa) order and
 normalization for 3rd-order or less, and AmbiX (ACN/SN3D) for 4th and
 above.  To make other combinations, pass a full channel struct as the
 `order` argument to the `ambi_run*` function, for example, a channel
@@ -100,10 +95,10 @@ references.
 
 ---
 
-**Q) I'm using the AmbiX plugins, how do I create a dual band decoder
+**Q4) I'm using the AmbiX plugins, how do I create a dual band decoder
 (rV/rE) and set the cross over frequency?**
 
-A) The Ambix plugins do not support dual-band decoding (or NFC), just
+A4) The Ambix plugins do not support dual-band decoding (or NFC), just
 a single decoder matrix.  The IEM folks do everything single band and
 without NFC.  All the config files I generate for the AmbiX plugins
 are $$rE_max$$.
@@ -163,9 +158,9 @@ Or the MATLAB file that creates the DSP file, `write_faust_config.m`
 
 ---
 
-**Q) How do I make a format adapter plugin?**
+**Q5) How do I make a format adapter plugin?**
 
-A) Use the function `write_faust_adapter()`, with channel stucts for
+A5) Use the function `write_faust_adapter()`, with channel stucts for
 the desired input and output format, for example
 
     C_in = ambi_channel_definitions(3,3,'HV','FuMa','FuMa')
@@ -173,7 +168,7 @@ the desired input and output format, for example
     write_faust_adapter(C_in, C_out, 'fuma2ambix3.dsp', 'fuma2ambix3')
 
 ---
-**Q) I get the follwing error when running the ADT.  What does it mean?**
+**Q6) I get the follwing error when running the ADT.  What does it mean?**
 
     Error using mkdir
     Permission denied
@@ -193,27 +188,27 @@ the desired input and output format, for example
     Error in run_dec_interactive (line 58)
        D = ambi_run_allrad(...
 
-A) The ADT tries to make a directory to hold the decoders, plots, and
+A7) The ADT tries to make a directory to hold the decoders, plots, and
 other files.  By default, it is called 'decoders' and will be created
 in the directory above where you are invoking `run_dec_*`.  The error is
 because you don't have permission to create a directory there.  You
 can change decoders directory by editing `ambi_decoders_dir.m`
 
 ---
-**Q) How do you I make an offline command line version of one of the
+**Q8) How do you I make an offline command line version of one of the
 decoders in Faust that the ADT produces?**
 
-A) Instructions for creating offline processing programs from Faust dsp
+A8) Instructions for creating offline processing programs from Faust dsp
 files can be found at
 
    <https://ccrma.stanford.edu/~jos/aspf/Offline_Processing_Soundfiles_FAUST.html>
 
 ---
-**Q) I made an AllRAD decoder for a symetrical speaker array, but
+**Q10) I made an AllRAD decoder for a symetrical speaker array, but
 the decoder coefficients and performance plots are not symetrical.
 What did I do wrong?**
 
-A) Nothing. AllRAD works by starting with a regular array with a large
+A10) Nothing. AllRAD works by starting with a regular array with a large
 number of virtual speakers (like 5000) and then mapping those to the
 real array using Vector-Based Amplitude Panning (VBAP).  To compute
 the VBAP gains, we compute a triangular tesselation of the real
