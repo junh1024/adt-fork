@@ -1,6 +1,7 @@
 function [ S ] = ambi_spkr_array( name, coord_code, unit_code, varargin )
 %AMBI_SPKR_ARRAY instantiate speaker array struct
 %   see run_dec_3D7 for an example
+%   see ambi_mat2spkr_array for an explanation of coord and unit codes
 
 %{
 This file is part of the Ambisonic Decoder Toolbox (ADT).
