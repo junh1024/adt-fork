@@ -11,16 +11,15 @@ function run_2D_octagon
     mixed_order_scheme = 'HP';
     channel_order = 'fuma';
     channel_normalization = 'fuma';
-    do_plots = false;  % take default
+    do_plots = [];  % take default
     out_path = [];  % take default
     
+    % used by AllRAD only
     imaginary_speakers = [ ...
         0, 0,  1; % one at the top
         0, 0, -1  % one at the bottom
         ];
     
-    
-    % their argument is the start angle
     S = SPKR_ARRAY_2D_POLYGON(num_speakers, radius, start_angle, ...
         array_name, speaker_ids);
     
@@ -29,8 +28,8 @@ function run_2D_octagon
         for v_order = 0
             
             C = ambi_channel_definitions(h_order,v_order,...
-                                         mixed_order_scheme, ...
-                                         channel_order, channel_normalization);
+                mixed_order_scheme, ...
+                channel_order, channel_normalization);
             
             fprintf('h_order = %d, v_order = %d\n', h_order, v_order);
             switch decoder_type
