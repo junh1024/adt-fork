@@ -1,6 +1,6 @@
 function run_dec_Fliege16
-    % allrad example specifying speaker locations inline
-    % 49 Fliege points on sphere, see:
+    % allrad and pinv example specifying speaker locations inline
+    % 16 Fliege nodes on sphere, see:
     %  http://www.personal.soton.ac.uk/jf1w07/nodes/nodes.html
     %  the columns are X, Y, Z and weight (weight is ignored)
     %
@@ -18,9 +18,10 @@ function run_dec_Fliege16
     S = ambi_mat2spkr_array(...
         ... % adjust args according to data read from import file
         ... %   see ambi_mat2spkr_array for coord and unit codes
-        ... %ID	r (m)	a (deg) e (deg) // Speaker Name
+        ... %	x (m)  y (m)  z (m) weight (ignored)
         ... %-----------------------------------------------
         [ ...
+        ... from http://www.personal.soton.ac.uk/jf1w07/nodes/16.txt
  0.00000000000000e+00   0.00000000000000e+00   1.00000000000000e+00   7.55674118356721e-01
  7.53978824073000e-01   0.00000000000000e+00   6.56898723434000e-01   7.55673975187776e-01
  3.90242135404000e-01   8.06032074954000e-01  -4.44998168424000e-01   7.55674013381465e-01
@@ -59,7 +60,7 @@ function run_dec_Fliege16
                 [h_order,v_order], ...  % ambisonic order [h, v]
                 [], ... % imaginary speakers, none in this case
                 [], ... % pathname for output, [] = default
-                true, ... % do plots, default is true for MATLAB, false for Octave
+                [], ... % do plots, default is true for MATLAB, false for Octave
                 mixed_order_scheme ... % mixed order scheme HV or HP
                 );
     end

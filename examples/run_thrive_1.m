@@ -26,7 +26,7 @@ function run_thrive_1
     do_plots = [];
     out_path = [];
     
-    if true
+    if false
         % read from listing of HRIR files
         fid= fopen('thrive_v1.0/thrive-sphere-hrirs.txt');
         spkr_dirs = textscan(fid, 'E%f_A%f_D%f.wav', 'CollectOutput', true);
