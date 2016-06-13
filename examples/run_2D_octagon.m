@@ -3,8 +3,8 @@ function run_2D_octagon
     
     num_speakers = 8;
     radius = 2; % meters
-    start_angle = 'auto';  % put 'auto' for half the separation angle
-    array_name = 'Octagon1';
+    start_angle = 0;  % put 'auto' for half the separation angle
+    array_name = 'Octagon0';
     speaker_ids = [];  % gensym speaker names
     
     decoder_type = 'pinv'; % 'allrad'
