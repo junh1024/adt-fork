@@ -136,7 +136,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             case {'n', 'N'}  % spherical zenith angle
                 AA(:,3) = pi/2 - A(:,iCol);
                 Ac(3) = 'e';
-            case {'r', 'R'}; % spherical radius
+            case {'r', 'R'}  % spherical radius
                 AA(:,2) = A(:,iCol);
                 Ac(2) = 'r';
             otherwise
