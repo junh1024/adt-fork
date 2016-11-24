@@ -46,8 +46,29 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   $Id$
 */
 
-m = library("math.lib");
-mu = library("music.lib");
+// remove dependancies on Faust Libraries 
+//   m = library("math.lib");
+//   mu = library("music.lib");
+
+// from the old math.lib
+m = environment {
+  take (1, (xs, xxs)) = xs;
+  take (1, xs) = xs;
+  take (nn, (xs, xxs)) = take (nn-1, xxs);
+
+  bus(2) = _,_; // avoids a lot of "bus(1)" labels in block diagrams
+  bus(n) = par(i, n, _);
+
+  SR = min(192000, max(1, fconstant(int fSamplingFreq, <math.h>)));
+  PI = 3.1415926535897932385;
+};
+
+// from the old music.lib
+mu = environment {
+   db2linear(x)	= pow(10, x/20.0);
+};
+
+
 
 // m.SR from math.lib is an integer, we need a float
 SR = float(m.SR);
