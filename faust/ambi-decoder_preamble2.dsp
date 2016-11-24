@@ -4,7 +4,7 @@
 //------------------------------------------------------------------------------
 
 //declare name		"Fill in name in configuration section below";
-declare version 	"1.0";
+declare version 	"1.1";
 declare author 		"AmbisonicDecoderToolkit";
 declare license 	"BSD 3-Clause License";
 declare copyright	"(c) Aaron J. Heller 2013";
@@ -46,12 +46,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   $Id$
 */
 
-// remove dependancies on Faust Libraries 
+// v 1.1 remove dependancies on Faust Libraries, 23-Nov-2016 ajh
 //   m = library("math.lib");
 //   mu = library("music.lib");
 
-// from the old math.lib
 m = environment {
+  // from the old math.lib
   take (1, (xs, xxs)) = xs;
   take (1, xs) = xs;
   take (nn, (xs, xxs)) = take (nn-1, xxs);
@@ -60,11 +60,13 @@ m = environment {
   bus(n) = par(i, n, _);
 
   SR = min(192000, max(1, fconstant(int fSamplingFreq, <math.h>)));
-  PI = 3.1415926535897932385;
+  //PI = 3.1415926535897932385;
+  // quad precision value
+  PI = 3.14159265358979323846264338327950288;
 };
 
-// from the old music.lib
 mu = environment {
+   // from the old music.lib
    db2linear(x)	= pow(10, x/20.0);
 };
 
