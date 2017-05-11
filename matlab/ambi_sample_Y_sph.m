@@ -34,6 +34,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         n3d_flag = false;
     end
     
+    az_size = size(az);
+    el_size = size(el);
+    
+    if ~all(az_size(:) == el_size(:))
+        error('az and el arrays must be the same size')
+    end
+    
     az = az(:);
     z = sin(el(:));
     
