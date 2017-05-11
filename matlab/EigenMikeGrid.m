@@ -1,4 +1,4 @@
-function [ a ] = EigenmikeGrid( )
+function [ a ] = EigenMikeGrid( )
     %EigenMicGrid capsule locations for em32 Eigenmike
     %   Detailed explanation goes here
     
@@ -8,8 +8,9 @@ function [ a ] = EigenmikeGrid( )
     %  http://www.mhacoustics.com/sites/default/files/ReleaseNotes.pdf
     radius = 4.2; % cm
     
-    % theta and phi in degrees
-    % zenith angle and azimuth (determined from photos in release notes)
+    % theta and phi in degrees from Table 1 in Appendix (p. 28)
+    % theta is zenith angle and phi is azimuth (determined from
+    % Figs 2 & 3 in release notes)
     zen_azi = pi/180 * ...
     [ 69 0
         90 32
