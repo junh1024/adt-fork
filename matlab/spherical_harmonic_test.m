@@ -56,7 +56,7 @@ function [ g, b1, b2 ] = spherical_harmonic_test( order )
 
    %% check that the N3D spherical harmonics are orthonormal
   
-   % apply by Lebedev quadrature weights
+   % apply Lebedev quadrature weights
    Y_w = Y .* sqrt(a.w(:,ones(1,length(C_n3d.channels))));
    
    % calculate gramian matrix
