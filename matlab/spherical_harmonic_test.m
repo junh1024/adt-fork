@@ -1,4 +1,4 @@
-function [ o, b1, b2 ] = spherical_harmonic_test( order )
+function [ g, b1, b2 ] = spherical_harmonic_test( order )
     %SPHERICAL_HARMONIC_TEST spherical harmonics sampled on Lebedev grid 
     %   This function produce two CSV files:
     %   . a file of the Lebedev grid points and weights for a given order
@@ -21,7 +21,7 @@ function [ o, b1, b2 ] = spherical_harmonic_test( order )
         'precision', 10);
        
     
-    % ambix
+    %% ambix
     ordering_rule = 'acn';
     encoding_convention = 'sn3d';
     
@@ -39,6 +39,7 @@ function [ o, b1, b2 ] = spherical_harmonic_test( order )
         Y,...
         'precision', 10);
     
+    %% N3D
     encoding_convention = 'n3d';
     C_n3d = ambi_channel_definitions(order, order, [], ...
         ordering_rule, encoding_convention);
@@ -53,14 +54,16 @@ function [ o, b1, b2 ] = spherical_harmonic_test( order )
         Y,...
         'precision', 10);
 
-   % check that the N3D spherical harmonics are orthonormal
-   n_ch = length(C_n3d.channels);
-   o = zeros(length(n_ch), length(n_ch));
+   %% check that the N3D spherical harmonics are orthonormal
+  
+   % apply by Lebedev quadrature weights
+   Y_w = Y .* sqrt(a.w(:,ones(1,length(C_n3d.channels))));
    
-   Y_w = Y .* sqrt(a.w(:,ones(1,n_ch)));
-   o = Y_w' * Y_w;
+   % calculate gramian matrix
+   g = Y_w' * Y_w;
 
-   t = (o - eye(length(n_ch))) > eps*1e2;
+   % g should be ones on the diagonal, zeros elsewhere
+   t = (g - eye(size(g))) > eps*1e2;
    if any(t(:))
        disp('FAIL')
        [b1, b2] = ind2sub(size(t), find(t));
