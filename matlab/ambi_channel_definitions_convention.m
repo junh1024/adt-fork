@@ -142,6 +142,41 @@ function [ C ] = ambi_channel_definitions_convention( ...
                     convention_name);
             end
             
+        case {'hoalib-broken'}
+            % as of May 2017, plugins based on HOAlib use a broken
+            % definition of the spherical harmonics. The three specific
+            % errors are:
+            %
+            % 1. bad computation of the zenith angle from elevation... 
+            %    + instead of -, which explains the Z inversion
+            %    https://github.com/CICM/HoaLibrary-Light/blob/dev/correct-std/Sources/Encoder.hpp#L921
+            %
+            % 2. use of condon-shortley phase... recursive form of Legendre 
+            %    polys has C-S, I see no code that removes it, e.g.,
+            %    (-1)^(order)
+            %
+            % 3. order 0 spherical harmonics omit sqrt(1/(4pi)) scaling, 
+            %    other orders have it... that accounts for W and Z agreeing
+            %    and X and Y being lower, by about 3.5... looks like this 
+            %    has been fixed in the current version.
+            %
+            % These were identified by Mathias Kronlachner, see
+            % https://github.com/CICM/HoaLibrary-Light/issues/3
+            % (sheesh!)
+            
+            % claims to be ACN and SN3D
+            C = ambi_channel_definitions(...
+                ambi_order(1), ambi_order(2), ...
+                mixed_order_scheme, 'ACN', 'SN3D');
+            % but ...
+            % fix #1
+            C.invert_Z = true;
+            % fix #2
+            C.sh_cs_phase = (-1).^abs(C.sh_m);
+            % fix #3
+            C.norm(C.sh_m~=0) = C.norm(C.sh_m~=0) / sqrt(4*pi);
+
+
         case {'mpeg4', 'mpegh2013', 6}
             % References:
             %

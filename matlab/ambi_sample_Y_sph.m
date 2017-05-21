@@ -44,6 +44,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     az = az(:);
     z = sin(el(:));
     
+    if isfield(C,'invert_Z') && C.invert_Z
+        z = -z;
+    end
+    
     Y = zeros(length(az),length(C.sh_l));
     
     n3d_norm = sqrt(2*C.sh_l + 1);
