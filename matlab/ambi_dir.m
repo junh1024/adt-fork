@@ -9,6 +9,8 @@ function [ outdir ] = ambi_dir( dir_name, create )
             outdir = fullfile('..','examples');
         case 'python'
             outdir = fullfile('..','python');
+        case 'matlab'
+            outdir = fullfile('..','matlab');
     end
     
     if ~exist(outdir,'dir')
