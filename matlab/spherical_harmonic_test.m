@@ -1,14 +1,16 @@
 function [ g, b1, b2 ] = spherical_harmonic_test( order )
     %SPHERICAL_HARMONIC_TEST spherical harmonics sampled on Lebedev grid 
-    %   This function produce two CSV files:
-    %   . a file of the Lebedev grid points and weights for a given order
+    %   This function produces two CSV files:
+    %   . a file of the Lebedev grid points and quadrature weights for a 
+    %     given order
     %   . the real apherical harmonics sampled at those points
     %
     %   The intent is to use this to test implementations the spherical 
     %   harmonics for interoperability with the ADT (and other libraries
     %   with correct definitions).
     %
-    %   We also check that the N3D spherical harmonics are orthonormal.
+    %   We also show how to check that the N3D spherical harmonics are 
+    %   orthonormal.
     
     
     a = LebedevGrid(order);
