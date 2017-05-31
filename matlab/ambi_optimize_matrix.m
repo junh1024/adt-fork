@@ -28,8 +28,8 @@ function [ x ] = ambi_optimize_matrix( M, C, S, test_dirs )
     b = [];
     Aeq = [];
     beq = [];
-    lb = zeros(size(M))-2;
-    ub = zeros(size(M))+2;
+    lb = zeros(size(M))-1;
+    ub = zeros(size(M))+1;
     
     % fix M(1,1)
     lb(1,1) = M(1,1);
@@ -50,7 +50,7 @@ function [ x ] = ambi_optimize_matrix( M, C, S, test_dirs )
     function fom = compute_fom(M)
         
         g = M * test_dirs.Y;
-
+        
         % velocity localization vector, rV
         if false
             P = sum(g,1);
@@ -70,31 +70,34 @@ function [ x ] = ambi_optimize_matrix( M, C, S, test_dirs )
         E = sum(g2, 1);
         rE.xyz = (Su * g2) ./ E([1 1 1], :);
         
-        % only give credit for rE in the test direction
-        rE.rt = vector_dot( rE.xyz, test_dirs.u );
+        % magnitude of rE
+        % ... but only give credit for rE in the test direction
+        rE.rt = vector_dot(rE.xyz, test_dirs.u );
         % mean magnitude, max is around 0.8611
         mean_rE_mag = sum(rE.rt, 2) ./ n_test_dirs;
         
         % 3rd order max for |rE| is 0.8611 (largest root of Legendre poly)
         fom = 0.8611 - mean_rE_mag;
         
-        if true % gets error during DDAG 
-            rE.r2 = vector_dot( rE.xyz, rE.xyz);
-            rE.r = rE.r2 .^ 0.5;
-            rE.u = rE.xyz ./ rE.r([1 1 1], :);
-            mean_dir_error = sum(vector_dot(rE.u, test_dirs.u), 2) ...
-                ./ n_test_dirs;
-            fom = fom + (1 - mean_dir_error);
-        end
+        % directional error
+        rE.r = sum(rE.xyz.^2, 1).^ 0.5;
+        rE.u = rE.xyz ./ rE.r([1 1 1], :);
+        %mean_dir_error = sum(vector_dot(rE.u, test_dirs.u), 2) ...
+        %    ./ n_test_dirs;
+        mean_dir_error = ...
+            sum((1 - vector_dot(rE.u, test_dirs.u).^2).^0.5, 2) ...
+            ./ n_test_dirs;
+        fom = fom + mean_dir_error;
+        
     end
     
     
 end
 
 function val = vector_dot( A, B )
-    val = sum( A .* B, 1);
+    val = sum(A .* B, 1);
 end
-    
+
 function [DAG,DDAG] = generate_dags(fn)
     % function [DAG,DDAG] = generate_dags(fn)
     
