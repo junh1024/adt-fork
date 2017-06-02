@@ -56,7 +56,7 @@ function [ x ] = ambi_optimize_matrix( M, C, S, test_dirs )
             P = sum(g,1);
             %rV.xyz = real((Su * g) ./ P([1 1 1], :)); % assume g is real
             rV.xyz = ((Su * g) ./ P([1 1 1], :)); % assume g is real
-            rV.r = sqrt( sum(rV.xyz.^2, 1) );
+            rV.r = vector_magnitude(rV.xyz.^2);
             rV.u = rV.xyz ./ rV.r([1 1 1], :);
         end
         
@@ -67,27 +67,36 @@ function [ x ] = ambi_optimize_matrix( M, C, S, test_dirs )
             g2 = g.^2;
         end
         
+        fom = 0;
         E = sum(g2, 1);
         rE.xyz = (Su * g2) ./ E([1 1 1], :);
+        rE.r2 = sum(rE.xyz.^2, 1);
+        rE.r = sqrt(rE.r2);
         
         % magnitude of rE
-        % ... but only give credit for rE in the test direction
-        rE.rt = vector_dot(rE.xyz, test_dirs.u );
-        % mean magnitude, max is around 0.8611
-        mean_rE_mag = sum(rE.rt, 2) ./ n_test_dirs;
+        rmsd_rE = sqrt(sum((0.87-rE.r).^2, 2));
+        fom = fom + 0*rmsd_rE;
         
-        % 3rd order max for |rE| is 0.8611 (largest root of Legendre poly)
-        fom = 0.8611 - mean_rE_mag;
+        % magnitude of rE
+        if true
+            % ... but only give credit for rE in the test direction
+            rE.rt = vector_dot(rE.xyz, test_dirs.u );
+            % mean magnitude, max is around 0.8611
+            mean_rE_mag = sum(0.8661-rE.rt, 2) ./ n_test_dirs;
+            
+            % 3rd order max for |rE| is 0.8611 (largest root of Legendre poly)
+            fom = fom + 10 * mean_rE_mag;
+        end
         
         % directional error
-        rE.r = sum(rE.xyz.^2, 1).^ 0.5;
+        
         rE.u = rE.xyz ./ rE.r([1 1 1], :);
         %mean_dir_error = sum(vector_dot(rE.u, test_dirs.u), 2) ...
         %    ./ n_test_dirs;
         mean_dir_error = ...
-            sum((1 - vector_dot(rE.u, test_dirs.u).^2).^0.5, 2) ...
+            sum(sqrt(1 - vector_dot(rE.u, test_dirs.u).^2), 2) ...
             ./ n_test_dirs;
-        fom = fom + mean_dir_error;
+        fom = fom + 0 * mean_dir_error;
         
     end
     
@@ -96,6 +105,10 @@ end
 
 function val = vector_dot( A, B )
     val = sum(A .* B, 1);
+end
+
+function val = vector_magnitude(A)
+    val = sqrt( sum(A.^2, 1) );
 end
 
 function [DAG,DDAG] = generate_dags(fn)
