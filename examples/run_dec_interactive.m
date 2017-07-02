@@ -10,7 +10,7 @@ function [ D, S, C ] = run_dec_interactive( name )
         else
             [~, name, ~] = fileparts(defaults.csv_path); 
         end
-    end;
+    end
     
     try
         A = txt2mat(defaults.csv_path);
@@ -30,7 +30,7 @@ function [ D, S, C ] = run_dec_interactive( name )
         catch err2
             fprintf('%s\n', 'WARNING: falling back to csvread()\ncheck that data is read correctly.');
             A = csvread(defaults.csv_path);
-            Smat = A(:,end-2,end);
+            Smat = A(:,end-2:end);
         end
     end
     
