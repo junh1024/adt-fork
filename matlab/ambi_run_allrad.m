@@ -47,7 +47,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id$
+    % $Id: 01c2daa29b210fb29a8c6a0ecbde86c1a48202fd $
     
     %% fill in defaults
     if ~exist('S','var')
@@ -66,9 +66,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         out_path = [];
     end
     
-    if ~exist('do_plots','var') || isempty(do_plots)
-        do_plots = ~inOctave();
-    end
+    % if ~exist('do_plots','var') || isempty(do_plots)
+        % do_plots = ~inOctave();
+    % end
     
     if ~exist('scheme', 'var'), scheme = 'amb'; end;
     
@@ -111,9 +111,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     [V, V2R, Sa, H] = ambi_allrad_V2R(S, C, imag_spkrs);
     
-    if do_plots
-        ambi_plot_speakers(Sa, H, V);
-    end
+    % if do_plots
+        % ambi_plot_speakers(Sa, H, V);
+    % end
     
     name = [name, sprintf('_allrad_%d', length(V.x))];
     
@@ -131,11 +131,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     name = [name, '_rE_max'];
     
-    if do_plots
-        ambi_plot_rE(S, V, ambi_apply_gamma(M_mm, Gamma, C), C, name);
-    else
-        ambi_save_plot_data(S, V, ambi_apply_gamma(M_mm, Gamma, C), C, name);
-    end
+    % if do_plots
+        % ambi_plot_rE(S, V, ambi_apply_gamma(M_mm, Gamma, C), C, name);
+    % else
+        % ambi_save_plot_data(S, V, ambi_apply_gamma(M_mm, Gamma, C), C, name);
+    % end
     
     %%
     [M,D,name,out_path] = ...

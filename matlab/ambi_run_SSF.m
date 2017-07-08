@@ -48,12 +48,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id$
+    % $Id: b346424ff4dd2b25859036b45e3ccfb1d2de5c6d $
     
     %% defaults
-    if ~exist('do_plots','var') || isempty(do_plots)
-        do_plots = ~inOctave();
-    end
+    % if ~exist('do_plots','var') || isempty(do_plots)
+        % do_plots = ~inOctave();
+    % end
     
     if ~exist('scheme', 'var'), scheme = []; end 
     
@@ -93,12 +93,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     
     %%
-    if do_plots
-        if numel(unique(Spkr.z)) > 1
-            H = convhulln([Spkr.x,Spkr.y,Spkr.z]);
-            ambi_plot_speakers(Spkr,H);
-        end
-    end
+    % if do_plots
+        % if numel(unique(Spkr.z)) > 1
+            % H = convhulln([Spkr.x,Spkr.y,Spkr.z]);
+            % ambi_plot_speakers(Spkr,H);
+        % end
+    % end
     
     %for ambi_order = ambi_order(1)
     if true
@@ -161,9 +161,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         
         %% plot some of these
         
-        if do_plots
-            ambi_plot_basis_functions(U, S, C);
-        end
+        % if do_plots
+            % ambi_plot_basis_functions(U, S, C);
+        % end
     end
     
     %% possibly dive out here
@@ -189,21 +189,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Gamma = ambi_shelf_gains(C, Spkr, 'amp');
     
     %%
-    if do_plots
-        ambi_plot_rE(Spkr, [], ambi_apply_gamma(M,Gamma,C), C,...
-            ambi_make_description_string(Spkr,C, ['Slepian', num2str(sum(Sbig))],' '),...
-            [],...
-            ... %elevation.min, elevation.max);
-            plot_ele.min, plot_ele.max );
-    else
-        ambi_save_plot_data(...
-            Spkr, [], ambi_apply_gamma(M,Gamma,C), C,...
-            ambi_make_description_string(Spkr,C, ['Slepian', num2str(sum(Sbig))],' '),...
-            [],...
-            ... %elevation.min, elevation.max);
-            plot_ele.min, plot_ele.max );
+    % if do_plots
+        % ambi_plot_rE(Spkr, [], ambi_apply_gamma(M,Gamma,C), C,...
+            % ambi_make_description_string(Spkr,C, ['Slepian', num2str(sum(Sbig))],' '),...
+            % [],...
+            % ... %elevation.min, elevation.max);
+            % plot_ele.min, plot_ele.max );
+    % else
+        % ambi_save_plot_data(...
+            % Spkr, [], ambi_apply_gamma(M,Gamma,C), C,...
+            % ambi_make_description_string(Spkr,C, ['Slepian', num2str(sum(Sbig))],' '),...
+            % [],...
+            % ... %elevation.min, elevation.max);
+            % plot_ele.min, plot_ele.max );
         
-    end
+    % end
     
     %%
     D.description = ...

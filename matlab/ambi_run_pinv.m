@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id$
+    % $Id: b89d09424357c05fd6b444756516e39e2979b92c $
     
     %% fill in defaults
     if ~exist('S','var')
@@ -63,9 +63,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         out_path = [];
     end
     
-    if ~exist('do_plots','var') || isempty(do_plots)
-        do_plots = ~inOctave();
-    end;
+    % if ~exist('do_plots','var') || isempty(do_plots)
+        % do_plots = ~inOctave();
+    % end;
     
     if ~exist('scheme', 'var'), scheme = []; end;
     
@@ -102,12 +102,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     end
     disp(sysver);
     
-    if do_plots
-        if numel(unique(S.z)) > 1
-            H = convhulln([S.x,S.y,S.z]);
-            ambi_plot_speakers(S,H);
-        end
-    end
+    % if do_plots
+        % if numel(unique(S.z)) > 1
+            % H = convhulln([S.x,S.y,S.z]);
+            % ambi_plot_speakers(S,H);
+        % end
+    % end
     
     %% shelf filter gains
     % Gamma is the per-order gains for max_rE
@@ -167,11 +167,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             name = [name, '_pinv_' pinv_type '_rV_max_rE' ];
     end
     
-    if do_plots
-        ambi_plot_rE(S, V, ambi_apply_gamma(M_mm, Gamma, C), C, name);
-    else
-        ambi_save_plot_data(S, V, ambi_apply_gamma(M_mm, Gamma, C), C, name);
-    end
+    % if do_plots
+        % ambi_plot_rE(S, V, ambi_apply_gamma(M_mm, Gamma, C), C, name);
+    % else
+        % ambi_save_plot_data(S, V, ambi_apply_gamma(M_mm, Gamma, C), C, name);
+    % end
     
     %%
     if ~islogical(out_path)
