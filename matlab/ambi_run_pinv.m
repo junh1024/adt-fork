@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     %}
     
     % Author: Aaron J. Heller <heller@ai.sri.com>
-    % $Id: b89d09424357c05fd6b444756516e39e2979b92c $
+    % $Id: 49b378709086be1071afb6f2a38a5d5690acc5a5 $
     
     %% fill in defaults
     if ~exist('S','var')
@@ -122,12 +122,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     if true
         gramian = Y'*Y;
         fprintf('det(gramian) = %d\n\n',det(gramian));
-        if do_plots
-            figure();
-            imagesc(Y'*Y);
-            title('Gramian Matrix -- spherical harmonic aliasing');
-            colorbar;
-        end
+        % if do_plots
+            % figure();
+            % imagesc(Y'*Y);
+            % title('Gramian Matrix -- spherical harmonic aliasing');
+            % colorbar;
+        % end
     end
     
     switch 2
