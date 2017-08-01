@@ -1,7 +1,9 @@
 function run_dec_auro3d(r, variant)
     % example specifying speaker locations inline
-    %
     % see also AMBI_SPKR_ARRAY, AMBI_MAT2SPKR_ARRAY, AMBI_RUN_ALLRAD
+    
+    % Originally, this was for an Auro 10.1 (TC) layout, but that's not really a standard Auro layout
+    % so I changed it to a base 9.1 layout, which is also compatible with Sennheiser's Ambeo 9.1 layout - junh1024
     
     %% decoder specs
     decoder_type = 'pinv'; %'allrad'; % pinv | allrad
