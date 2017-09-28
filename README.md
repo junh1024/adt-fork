@@ -5,10 +5,20 @@ This is my fork of the "Ambisonic Decoder Toolbox" found at https://bitbucket.or
 
 This fork is intended to be for practical audio use, not for academic use.
 
-Aim is to make it more usable & compact by:
+Aim is to make it more usable & compact.
 
-* removing large uneeded files
-* disabling plots (plots take up time to generate, and result in OOM errors on PCs with low RAM. Disabling them makes generation much faster & less errors) 
-* compressing PDFs
+Changes so far
+----
+* Space reductions: removing large uneeded files & compressing PDFs (The upshot is that it is now only takes up ~10M.)
+* Auro & ITU decoder channels are now in SMPTE-ish order
+* 7.0 ITU decoder completed, with implementable info for additional ITU configs
+* Auro decoder is 9.0 instead of 10.1 to support AMBEO
+* Removed some info during config generation
+* Plots off by default for faster, error-free generation
 
-The upshot is that it is now only takes up ~10M.
+Useful info
+----
+If you're hacking/building your own decoders, if your vertical plane is irregular, say, Auro 3D 9.0, the height later takes from expected, but the ELL layer is partway between ELL & bottom to take the sound of ELL & the non-existent bottom layer.
+
+Tips
+----
