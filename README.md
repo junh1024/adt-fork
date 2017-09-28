@@ -22,3 +22,7 @@ If you're hacking/building your own decoders, if your vertical plane is irregula
 
 Tips
 ----
+* If you have >2 vertical speaker layers, you should use 2oA+ v
+* If you have >4 horizontal speakers, you should use 2oA+ h
+* You should be using >1oA anyway, as 1oA is blurry.
+* If you're playing back 2D 1oA or 1oA mixes with major content on the horizontal plane on >2 vertical speaker layers, the R channel from 2oA is important for Z resolution, otherwise ELL will be smeared over the height
