@@ -18,7 +18,7 @@ Changes so far
 
 Useful info
 ----
-If you're hacking/building your own decoders, if your vertical plane is irregular, say, Auro 3D 9.0, the height later takes from expected, but the ELL layer is partway between ELL & bottom to take the sound of ELL & the non-existent bottom layer.
+If you're hacking/building your own decoders, if your vertical plane is irregular, say, Auro 3D 9.0, the height later takes from expected, but the ELL layer is partway between ELL & bottom to take the sound of ELL & the non-existent bottom layer. If you're making oA *encoders* instead, the coefficients can be very different to decoders, especially for irregular configs. Try to pad to regular shapes, make a decoder, then base your encoder off that.
 
 Tips
 ----
