@@ -359,7 +359,7 @@ function [ output_args ] = run_dec_cine(n_spkrs)
 		
 		for h_order = h_order_range
 			for v_order = v_order_range
-				% ambi_run_allrad(S, [h_order,v_order], invisible_speakers_allrad);
+				ambi_run_allrad(S, [h_order,v_order], invisible_speakers_allrad);
 				ambi_run_pinv(S, [h_order,v_order], []);
 			end
 		end
