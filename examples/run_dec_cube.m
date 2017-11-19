@@ -5,5 +5,7 @@ function [ output_args ] = run_dec_cube( )
     S = SPKR_ARRAY_CUBE();
     
     ambi_run_pinv(S,1);
+    ambi_run_pinv(S,2);
+    ambi_run_pinv(S,3);
 end
 

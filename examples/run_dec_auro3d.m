@@ -13,8 +13,8 @@ function run_dec_auro3d(r, variant)
     %% decoder specs
     decoder_type = 'pinv'; %'allrad'; % pinv | allrad
     
-    h_order_range = 1; %1:2;
-    v_order_range = 1; %1:min(h_order,2);
+    h_order_range = 1:3; %1:2;
+    v_order_range = 1:3; %1:min(h_order,2);
     
     mixed_order_scheme = 'HV';
     
@@ -51,8 +51,8 @@ function run_dec_auro3d(r, variant)
                 ... % 'Height'  Auro 3D 9.0
                 'HL',  [  30, r, hz], ...
                 'HR',  [ -30, r, hz], ...
-                'HLS', [ 110, r, hz] ...
-                'HRS', [-110, r, hz], ...
+                'HLS', [ 110, r, hz], ...
+                'HRS', [-110, r, hz] ...
 				...
                 );
         
@@ -62,8 +62,8 @@ function run_dec_auro3d(r, variant)
     %% do it
     for h_order = h_order_range
         for v_order = v_order_range
-            switch decoder_type
-                case 'allrad'
+            % switch decoder_type
+                % case 'allrad'
                     ambi_run_allrad(...
                         S, ...    % speaker array struct
                         [h_order,v_order], ...  % ambisonic order [h, v]
@@ -72,7 +72,7 @@ function run_dec_auro3d(r, variant)
                         true, ... % do plots, default is true for MATLAB, false for Octave
                         mixed_order_scheme ... % mixed order scheme HV or HP
                         );
-                case 'pinv'
+                % case 'pinv'
                     ambi_run_pinv(...
                         S, ...  % speaker array struct
                         [h_order,v_order], ...  % ambisonic order [h, v]
@@ -81,7 +81,7 @@ function run_dec_auro3d(r, variant)
                         true, ... % do plots, default is true for MATLAB, false for Octave
                         mixed_order_scheme ... % mixed order scheme HV or HP
                         );
-            end
+            % end
         end
     end
     
