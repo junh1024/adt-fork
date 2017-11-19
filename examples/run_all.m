@@ -9,6 +9,7 @@ run_dec_151(1);
 run_dec_cube;
 run_dec_71x(2);
 run_dec_71x(4);
+run_dec_cine(4)    ;
 run_dec_cine(5)    ;
 run_dec_cine(6)    ;
 run_dec_cine(7)    ;
